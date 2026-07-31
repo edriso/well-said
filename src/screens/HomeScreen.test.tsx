@@ -22,4 +22,16 @@ describe('HomeScreen', () => {
     const results = await axe.run(container, { rules: { 'color-contrast': { enabled: false } } });
     expect(results.violations).toEqual([]);
   });
+
+  it('searches and filters the extended workout library', async () => {
+    const user = userEvent.setup();
+    render(<HomeScreen progress={emptyProgress} onOpenLesson={vi.fn()} />);
+
+    await user.selectOptions(screen.getByLabelText(/filter by category/i), 'Travel');
+    expect(screen.getByText('18 workouts')).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/search workouts/i), 'rideshare');
+    expect(screen.getByRole('button', { name: /finding the rideshare pickup/i })).toBeInTheDocument();
+    expect(screen.getByText('1 workout')).toBeInTheDocument();
+  });
 });

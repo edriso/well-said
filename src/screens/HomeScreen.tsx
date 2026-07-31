@@ -1,6 +1,7 @@
-import { ArrowRight, Check, Clock3, Headphones, Sparkles, Volume2 } from 'lucide-react';
+import { ArrowRight, Check, Clock3, Headphones, Search, Sparkles, Volume2 } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { getTodaysLesson, lessons } from '../content/lessons';
-import type { Lesson, ProgressState } from '../content/types';
+import { LESSON_CATEGORIES, type Lesson, type ProgressState } from '../content/types';
 import { Brand } from '../components/Brand';
 
 type Props = {
@@ -11,6 +12,18 @@ type Props = {
 export function HomeScreen({ progress, onOpenLesson }: Props) {
   const today = getTodaysLesson();
   const completedToday = Boolean(progress.lessons[today.id]?.completedAt);
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('All');
+  const [visibleCount, setVisibleCount] = useState(12);
+  const filteredLessons = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase();
+    return lessons.filter((lesson) => {
+      const matchesCategory = category === 'All' || lesson.category === category;
+      const matchesQuery = !normalizedQuery || [lesson.title, lesson.situation, lesson.focus, lesson.category].some((value) => value.toLocaleLowerCase().includes(normalizedQuery));
+      return matchesCategory && matchesQuery;
+    });
+  }, [category, query]);
+  const visibleLessons = filteredLessons.slice(0, visibleCount);
 
   return (
     <main className="home-shell">
@@ -41,6 +54,7 @@ export function HomeScreen({ progress, onOpenLesson }: Props) {
           <div className="lesson-meta" aria-label="Workout details">
             <span><Clock3 size={16} /> {today.estimatedMinutes} min</span>
             <span>{today.level}</span>
+            <span>{today.category}</span>
             <span><Sparkles size={16} /> {today.focus}</span>
           </div>
           <blockquote>“{today.intention}”</blockquote>
@@ -60,20 +74,27 @@ export function HomeScreen({ progress, onOpenLesson }: Props) {
       <section className="library page-width" aria-labelledby="library-title">
         <div className="section-heading">
           <div><p className="eyebrow">Keep exploring</p><h2 id="library-title">Workout library</h2></div>
-          <p>Short conversations for moments that happen in real life.</p>
+          <p>{lessons.length} short conversations—more than six months of daily practice without a repeat.</p>
+        </div>
+        <div className="library-tools">
+          <label className="search-field"><Search aria-hidden="true" /><span className="sr-only">Search workouts</span><input value={query} onChange={(event) => { setQuery(event.target.value); setVisibleCount(12); }} placeholder="Search situations or skills" /></label>
+          <label className="category-field"><span className="sr-only">Filter by category</span><select value={category} onChange={(event) => { setCategory(event.target.value); setVisibleCount(12); }}><option>All</option>{LESSON_CATEGORIES.map((item) => <option key={item}>{item}</option>)}</select></label>
+          <span className="result-count" aria-live="polite">{filteredLessons.length} {filteredLessons.length === 1 ? 'workout' : 'workouts'}</span>
         </div>
         <div className="lesson-grid">
-          {lessons.map((lesson) => {
+          {visibleLessons.map((lesson) => {
             const complete = Boolean(progress.lessons[lesson.id]?.completedAt);
             return (
               <button className="lesson-card" key={lesson.id} onClick={() => onOpenLesson(lesson)}>
                 <span className="lesson-card-index">{complete ? <Check size={17} /> : String(lesson.number).padStart(2, '0')}</span>
-                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.focus} · {lesson.estimatedMinutes} min</small></span>
+                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.category} · {lesson.focus} · {lesson.estimatedMinutes} min</small></span>
                 <ArrowRight className="card-arrow" size={19} />
               </button>
             );
           })}
         </div>
+        {filteredLessons.length === 0 && <div className="empty-library"><strong>No workouts found.</strong><p>Try a broader situation, skill, or category.</p></div>}
+        {visibleCount < filteredLessons.length && <button className="secondary-button load-more" onClick={() => setVisibleCount((count) => count + 12)}>Show 12 more <ArrowRight /></button>}
       </section>
 
       <footer className="page-width"><Brand /><p>Show up. Speak out. Leave a little clearer.</p></footer>
