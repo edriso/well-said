@@ -4,7 +4,8 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 
 ## What is included
 
-- One uncluttered daily workout plus a small lesson library
+- One uncluttered daily workout plus a searchable library of 184 distinct workouts
+- More than six calendar months of daily practice without a repeated workout
 - Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
@@ -12,7 +13,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - Static, explainable Stress Mode—no fake AI scoring
 - Versioned local progress with lifetime sentences and speaking reps
 - Responsive WCAG-conscious UI, reduced-motion support, and an installable web manifest
-- Typed lesson content, tests, CI, Pages deployment, and per-lesson audio briefs
+- Typed lesson content, tests, CI, Pages deployment, and audio-production guidance
 
 The current model audio is a clearly labeled browser speech placeholder. Studio files can be dropped in later without changing the lesson UI.
 
@@ -40,7 +41,7 @@ npm run check
 src/
   app/          Application shell and URL state
   components/   Reusable presentation components
-  content/      Typed curriculum and content validation
+  content/      Typed core lessons, seed-driven catalog, and validation
   hooks/        Audio, recording, and local progress adapters
   screens/      Home and workout screen composition
   workout/      The five workout steps
@@ -49,7 +50,7 @@ content/        Human/AI production briefs for lesson audio
 public/audio/   Final audio target (placeholder documentation only)
 ```
 
-Read [Architecture](docs/ARCHITECTURE.md), [lesson authoring](docs/CONTENT_GUIDE.md), [audio production](docs/AUDIO_PRODUCTION.md), and [deployment](docs/DEPLOYMENT.md) before making substantial changes.
+Read [Architecture](docs/ARCHITECTURE.md), [curriculum design](docs/CURRICULUM.md), [lesson authoring](docs/CONTENT_GUIDE.md), [audio production](docs/AUDIO_PRODUCTION.md), and [deployment](docs/DEPLOYMENT.md) before making substantial changes.
 
 ## Product principles
 
