@@ -1,3 +1,7 @@
+export const LESSON_CATEGORIES = ['Everyday', 'Work', 'Social', 'Travel', 'Food', 'Home', 'Services', 'Community', 'Wellbeing', 'Ideas'] as const;
+
+export type LessonCategory = (typeof LESSON_CATEGORIES)[number];
+
 export type Speaker = {
   id: string;
   name: string;
@@ -44,6 +48,7 @@ export type Lesson = {
   durationSeconds: number;
   estimatedMinutes: number;
   level: 'A2–B1' | 'B1–B2' | 'B2–C1';
+  category: LessonCategory;
   focus: string;
   intention: string;
   speakers: Speaker[];

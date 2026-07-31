@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { getTodaysLesson } from '../content/lessons';
 import { App } from './App';
 
 beforeEach(() => {
@@ -24,7 +25,7 @@ describe('App workout flow', () => {
     expect(screen.queryByText(/use it when you need support/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /reveal transcript/i }));
-    expect(screen.getAllByText(/Maya|Noah|Alex|Sam|Lina|Omar|June|Daniel/).length).toBeGreaterThan(0);
+    expect(screen.getByText(getTodaysLesson().lines[0]!.text)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /practice the lines/i }));
     expect(screen.getByRole('heading', { name: /one line at a time/i })).toBeInTheDocument();
