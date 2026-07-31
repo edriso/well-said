@@ -1,0 +1,15 @@
+{
+  "name": "Well Said — Daily speaking practice",
+  "short_name": "Well Said",
+  "description": "A calm daily gym for natural English speaking.",
+  "start_url": "/well-said/",
+  "scope": "/well-said/",
+  "display": "standalone",
+  "background_color": "#f3f0e8",
+  "theme_color": "#171512",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
