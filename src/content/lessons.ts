@@ -1,6 +1,7 @@
 import type { Lesson } from './types';
+import { generatedLessons } from './generatedCurriculum';
 
-export const lessons: Lesson[] = [
+const coreLessons: Lesson[] = [
   {
     id: 'small-talk-at-work',
     number: 1,
@@ -9,6 +10,7 @@ export const lessons: Lesson[] = [
     durationSeconds: 42,
     estimatedMinutes: 8,
     level: 'B1–B2',
+    category: 'Work',
     focus: 'Natural word stress',
     intention: 'Keep the small words light and let the key words carry the meaning.',
     speakers: [
@@ -48,6 +50,7 @@ export const lessons: Lesson[] = [
     durationSeconds: 36,
     estimatedMinutes: 7,
     level: 'A2–B1',
+    category: 'Food',
     focus: 'Polite rhythm',
     intention: 'Sound friendly by grouping requests and softening the small words.',
     speakers: [
@@ -85,6 +88,7 @@ export const lessons: Lesson[] = [
     durationSeconds: 46,
     estimatedMinutes: 9,
     level: 'B1–B2',
+    category: 'Work',
     focus: 'Polite correction',
     intention: 'Use pauses and contrastive stress to make changes easy to follow.',
     speakers: [
@@ -123,6 +127,7 @@ export const lessons: Lesson[] = [
     durationSeconds: 51,
     estimatedMinutes: 9,
     level: 'B2–C1',
+    category: 'Social',
     focus: 'Warm, expressive intonation',
     intention: 'Use pitch changes and pauses to sound interested—not rushed.',
     speakers: [
@@ -156,11 +161,13 @@ export const lessons: Lesson[] = [
   },
 ];
 
+export const lessons: Lesson[] = [...coreLessons, ...generatedLessons];
+
 export const getLessonById = (id: string) => lessons.find((lesson) => lesson.id === id);
 
 export const getTodaysLesson = (date = new Date()) => {
-  const start = Date.UTC(date.getFullYear(), 0, 0);
-  const current = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
-  const day = Math.floor((current - start) / 86_400_000);
-  return lessons[(day - 1) % lessons.length] ?? lessons[0]!;
+  const anchorDay = Math.floor(Date.UTC(2026, 0, 1) / 86_400_000);
+  const civilDay = Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86_400_000);
+  const index = ((civilDay - anchorDay) % lessons.length + lessons.length) % lessons.length;
+  return lessons[index] ?? lessons[0]!;
 };

@@ -1,6 +1,6 @@
 # Lesson authoring guide
 
-Lessons live in `src/content/lessons.ts` and implement the types in `src/content/types.ts`. Run `npm test` after every curriculum edit; content tests catch duplicate IDs, broken speakers, malformed phrase groups, and missing stress answers.
+Foundational lessons live in `src/content/lessons.ts`; the extended six-month catalog lives in `src/content/generatedCurriculum.ts`. Both implement the types in `src/content/types.ts`. Run `npm test` after every curriculum edit; content tests catch duplicate IDs, broken speakers, malformed phrase groups, invalid stress answers, unbalanced coverage, and scheduling regressions.
 
 ## Lesson checklist
 
@@ -28,7 +28,13 @@ Coach notes should be short and performable:
 
 Lesson and line IDs are durable data keys used by local progress and future audio files. Never reuse an old ID for different content. Changing visible copy is safe; changing IDs effectively creates a new lesson for existing learners.
 
-Daily rotation currently uses the local calendar day modulo the lesson count. Adding a lesson changes future rotation but preserves all stored completion data by ID.
+Daily rotation uses a continuous local civil-day ordinal modulo the lesson count. It does not reset on January 1. Adding or reordering a lesson changes future calendar assignments but preserves stored completion data by stable ID.
+
+## Extended catalog seeds
+
+Each generated lesson seed has a unique slug, title, situation, subject, communicative detail, and outcome. Category-specific frames turn those seeds into a five-turn practice dialogue. Keep the frames conversational and grammatically compatible with every seed in that category. Before merging a frame change, inspect samples from its beginning, middle, and end—not only the first lesson.
+
+The catalog is intentionally interleaved by category. Do not regroup it into category blocks: the order prevents learners from seeing the same type of situation repeatedly and is enforced by tests.
 
 ## Future timing metadata
 

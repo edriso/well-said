@@ -6,7 +6,7 @@ Well Said is a static React 19 application built by Vite and hosted below the `/
 
 The app has three kinds of state:
 
-- Curriculum is immutable typed data in `src/content/lessons.ts`.
+- Curriculum is immutable typed data composed in `src/content/lessons.ts`. Four foundational lessons are hand-authored there; the extended catalog is produced from reviewed scenario seeds and category dialogue frames in `src/content/generatedCurriculum.ts`.
 - Workout UI state (step, active line, speed, transcript mode) stays in the relevant React component.
 - Durable learning progress is handled by `useProgress` and written to `well-said:progress:v1` in localStorage.
 
@@ -25,6 +25,8 @@ Home
 ```
 
 The workout is a linear state machine. Learners can revisit completed steps, but incomplete future steps are disabled. Completed workouts restart at Listen when opened again.
+
+The daily scheduler converts the learner’s local calendar date into a continuous civil-day ordinal relative to 1 January 2026. It does not reset at New Year. With 184 lessons, any 184 consecutive dates map to distinct workouts.
 
 ## Audio boundary
 

@@ -4,7 +4,7 @@ The UI currently uses browser speech synthesis when an `audio` field is absent. 
 
 ## Deliverables per lesson
 
-Use `content/audio-briefs/<lesson-id>.md` as the performance script. Export:
+Use `content/audio-briefs/<lesson-id>.md` as the performance script for the foundational lessons. For extended-catalog lessons, the canonical script and performance direction are the lesson’s `lines`, `stressWords`, `coachNote`, `intention`, and stress-exercise fields in `src/content/generatedCurriculum.ts`; export those fields into the same folder convention before recording. Export:
 
 ```text
 public/audio/lessons/<lesson-id>/
