@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getLessonById, getTodaysLesson, lessons } from './lessons';
+import { flagshipLessonIds, getLessonById, getTodaysLesson, lessons } from './lessons';
 import { LESSON_CATEGORIES } from './types';
 
 const normalize = (value: string) => value
@@ -11,6 +11,16 @@ const normalize = (value: string) => value
 
 const tokens = (value: string) => value.toLocaleLowerCase('en').match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) ?? [];
 
+const trigrams = (value: string) => {
+  const words = tokens(value);
+  return new Set(words.slice(0, -2).map((word, index) => `${word} ${words[index + 1]} ${words[index + 2]}`));
+};
+
+const overlap = (left: Set<string>, right: Set<string>) => {
+  const shared = [...left].filter((item) => right.has(item)).length;
+  return shared / Math.max(1, Math.min(left.size, right.size));
+};
+
 describe('six-month lesson catalog', () => {
   it('contains 184 ordered, distinct workouts', () => {
     expect(lessons).toHaveLength(184);
@@ -20,6 +30,25 @@ describe('six-month lesson catalog', () => {
     expect(new Set(lessons.map((lesson) => normalize(lesson.lines.map((line) => line.text).join(' ')))).size).toBe(lessons.length);
     expect(new Set(lessons.map((lesson) => normalize(lesson.expressions.map((expression) => expression.phrase).join(' ')))).size).toBe(lessons.length);
     expect(lessons.map((lesson) => lesson.number)).toEqual(Array.from({ length: lessons.length }, (_, index) => index + 1));
+  });
+
+  it('publishes a reviewed 14-workout Start Here collection', () => {
+    expect(flagshipLessonIds).toHaveLength(14);
+    for (const id of flagshipLessonIds) {
+      const lesson = getLessonById(id)!;
+      expect(lesson.contentStatus).toBe('reviewed');
+      expect(lesson.collection).toBe('Start Here');
+    }
+    expect(lessons.filter((lesson) => lesson.contentStatus === 'draft')).toHaveLength(170);
+  });
+
+  it('flags near-duplicate full dialogues before publication', () => {
+    const dialogueTrigrams = lessons.map((lesson) => trigrams(lesson.lines.map((line) => line.text).join(' ')));
+    for (let left = 0; left < lessons.length; left += 1) {
+      for (let right = left + 1; right < lessons.length; right += 1) {
+        expect(overlap(dialogueTrigrams[left]!, dialogueTrigrams[right]!)).toBeLessThan(0.72);
+      }
+    }
   });
 
   it('keeps every lesson structurally valid and production-ready', () => {

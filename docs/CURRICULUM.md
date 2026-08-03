@@ -18,4 +18,6 @@ The guarantee depends on the catalog order and length. Before inserting, deletin
 
 Automated validation guarantees literal uniqueness, structural validity, stress-word presence, balanced category and level coverage, and date behavior. It cannot judge whether a scenario feels natural. Every seed or dialogue-frame change still needs a human language review and an audio performance review before studio recordings are marked approved.
 
+The catalog is managed in quality-controlled packs: Start Here, Workplace Conversations, Everyday Social English, Difficult Conversations, Travel and Services, and Storytelling and Opinions. Start Here contains 14 individually edited `reviewed` workouts. The other 170 entries remain `draft` roadmap material until each receives the same language review; status is intentionally separate from audio readiness.
+
 The catalog favors useful conversational functions over novelty alone: asking, clarifying, correcting, suggesting, declining, agreeing, supporting, deciding, and closing. Medical-adjacent lessons practice communication only and never provide diagnosis or treatment advice.

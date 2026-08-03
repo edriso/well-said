@@ -2,8 +2,10 @@ import { ArrowLeft, Check, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { Lesson } from '../content/types';
 import { Brand } from '../components/Brand';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { useLessonAudio } from '../hooks/useLessonAudio';
 import type { useProgress } from '../hooks/useProgress';
+import type { useTheme } from '../hooks/useTheme';
 import { CompleteStep } from '../workout/CompleteStep';
 import { ListenStep } from '../workout/ListenStep';
 import { PracticeStep } from '../workout/PracticeStep';
@@ -14,11 +16,13 @@ type Props = {
   lesson: Lesson;
   onClose: () => void;
   progressApi: ReturnType<typeof useProgress>;
+  themeApi: ReturnType<typeof useTheme>;
 };
 
 const stepNames = ['Listen', 'Practice', 'Shadow', 'Stress', 'Finish'];
+const stepHeadingIds = ['listen-title', 'practice-title', 'shadow-title', 'stress-title', 'complete-title'];
 
-export function WorkoutScreen({ lesson, onClose, progressApi }: Props) {
+export function WorkoutScreen({ lesson, onClose, progressApi, themeApi }: Props) {
   const existing = progressApi.progress.lessons[lesson.id];
   const [step, setStep] = useState(existing?.completedAt ? 0 : Math.min(existing?.lastStep ?? 0, 4));
   const audio = useLessonAudio();
@@ -27,7 +31,8 @@ export function WorkoutScreen({ lesson, onClose, progressApi }: Props) {
     audio.stop();
     setStep(next);
     progressApi.saveStep(lesson, next);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    window.setTimeout(() => document.getElementById(stepHeadingIds[next]!)?.focus(), 0);
   };
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export function WorkoutScreen({ lesson, onClose, progressApi }: Props) {
       <header className="workout-header">
         <button className="icon-button workout-close" onClick={onClose} aria-label="Exit workout"><X /></button>
         <Brand />
-        <span className="step-count">{step + 1} / {stepNames.length}</span>
+        <div className="workout-header-actions"><span className="step-count">{step + 1} of {stepNames.length} · {stepNames[step]}</span><ThemeToggle theme={themeApi.theme} onToggle={themeApi.toggleTheme} /></div>
       </header>
       <nav className="stepper" aria-label="Workout progress">
         {stepNames.map((name, index) => (

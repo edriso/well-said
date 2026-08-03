@@ -18,7 +18,7 @@ export function StressStep({ lesson, audio, onNext }: StepProps) {
     <section className="step-layout stress-layout" aria-labelledby="stress-title">
       <div className="step-intro compact">
         <p className="eyebrow">04 · Stress mode</p>
-        <h1 id="stress-title">Move the stress. Change the meaning.</h1>
+        <h1 id="stress-title" tabIndex={-1}>Move the stress. Change the meaning.</h1>
         <p>English speakers make one word stronger to show what they are correcting or contrasting.</p>
       </div>
 
@@ -36,8 +36,13 @@ export function StressStep({ lesson, audio, onNext }: StepProps) {
           <div className={`stress-result ${correct ? 'correct' : 'try-again'}`} aria-live="polite">
             <span>{correct ? <Check /> : <X />}</span>
             <div><strong>{correct ? 'Exactly.' : 'That changes a different detail.'}</strong><p>{selected.meaning}</p></div>
-            <button className="icon-button" onClick={() => playing ? audio.stop() : audio.play({ id: `stress-${selected.word}`, text: exercise.sentence, src: selected.audio, rate: 0.9 })} aria-label={`Hear ${selected.word} stressed`}>{playing ? <Pause /> : <Play />}</button>
+            {selected.audio && (
+              <button className="icon-button" onClick={() => playing ? audio.stop() : audio.play({ id: `stress-${selected.word}`, text: exercise.sentence, src: selected.audio, rate: 0.9 })} aria-label={`Hear ${selected.word} stressed`}>{playing ? <Pause /> : <Play />}</button>
+            )}
           </div>
+        )}
+        {!exercise.options.some((option) => option.audio) && (
+          <p className="stress-visual-note">This is a meaning exercise for now—say each version out loud and land the beat on the highlighted word. Studio audio for every version is coming.</p>
         )}
       </article>
 

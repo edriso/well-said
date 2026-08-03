@@ -1,5 +1,6 @@
 import type { Lesson } from './types';
 import { generatedLessons } from './generatedCurriculum';
+import { flagshipLessons } from './flagshipLessons';
 
 const coreLessons: Lesson[] = [
   {
@@ -161,7 +162,39 @@ const coreLessons: Lesson[] = [
   },
 ];
 
-export const lessons: Lesson[] = [...coreLessons, ...generatedLessons];
+const reviewedById = new Map(flagshipLessons.map((lesson) => [lesson.id, lesson]));
+
+const collectionByCategory: Record<Lesson['category'], NonNullable<Lesson['collection']>> = {
+  Everyday: 'Everyday Social English',
+  Work: 'Workplace Conversations',
+  Social: 'Everyday Social English',
+  Travel: 'Travel and Services',
+  Food: 'Everyday Social English',
+  Home: 'Everyday Social English',
+  Services: 'Travel and Services',
+  Community: 'Everyday Social English',
+  Wellbeing: 'Difficult Conversations',
+  Ideas: 'Storytelling and Opinions',
+};
+
+const reviewedCore = coreLessons.map((lesson) => ({
+  ...lesson,
+  contentStatus: 'reviewed' as const,
+  collection: 'Start Here' as const,
+}));
+
+const catalogLessons = generatedLessons.map((lesson) => {
+  const reviewed = reviewedById.get(lesson.id);
+  return reviewed
+    ? { ...reviewed, contentStatus: 'reviewed' as const, collection: 'Start Here' as const }
+    : { ...lesson, contentStatus: 'draft' as const, collection: collectionByCategory[lesson.category] };
+});
+
+export const lessons: Lesson[] = [...reviewedCore, ...catalogLessons];
+
+export const flagshipLessonIds = lessons
+  .filter((lesson) => lesson.collection === 'Start Here')
+  .map((lesson) => lesson.id);
 
 export const getLessonById = (id: string) => lessons.find((lesson) => lesson.id === id);
 

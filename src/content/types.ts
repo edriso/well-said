@@ -56,17 +56,31 @@ export type Lesson = {
   expressions: Expression[];
   stressExercise: StressExercise;
   fullAudio?: string;
+  contentStatus?: 'draft' | 'reviewed' | 'audio-ready';
+  collection?: 'Start Here' | 'Everyday Social English' | 'Workplace Conversations' | 'Travel and Services' | 'Difficult Conversations' | 'Storytelling and Opinions';
 };
+
+export type WorkoutFeel = 'easy' | 'right' | 'hard';
 
 export type LessonProgress = {
   completedAt?: string;
+  lastPracticedAt?: string;
   repsByLine: Record<string, number>;
   lastStep: number;
+  lastLineIndex?: number;
+  felt?: WorkoutFeel;
 };
 
 export type ProgressState = {
-  version: 1;
+  version: 2;
   lessons: Record<string, LessonProgress>;
-  totalSentences: number;
   totalReps: number;
+};
+
+export type SpeakingComfort = 'steady' | 'everyday' | 'stretch';
+
+export type Preferences = {
+  version: 1;
+  comfort: SpeakingComfort;
+  areas: LessonCategory[];
 };
