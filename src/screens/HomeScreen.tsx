@@ -1,16 +1,23 @@
-import { ArrowRight, Check, Clock3, Headphones, Search, Sparkles, Volume2 } from 'lucide-react';
+import { ArrowRight, Check, Clock3, Headphones, Search, Settings2, Sparkles, Volume2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { getTodaysLesson, lessons } from '../content/lessons';
+import { lessons } from '../content/lessons';
 import { LESSON_CATEGORIES, type Lesson, type ProgressState } from '../content/types';
+import { selectDailyLesson } from '../content/recommendations';
 import { Brand } from '../components/Brand';
+import { ThemeToggle } from '../components/ThemeToggle';
+import type { usePreferences } from '../hooks/usePreferences';
+import { countCompletedWorkouts, countPracticeDaysThisWeek, countPracticedLines } from '../hooks/useProgress';
+import type { useTheme } from '../hooks/useTheme';
 
 type Props = {
   progress: ProgressState;
   onOpenLesson: (lesson: Lesson) => void;
+  preferencesApi: ReturnType<typeof usePreferences>;
+  themeApi: ReturnType<typeof useTheme>;
 };
 
-export function HomeScreen({ progress, onOpenLesson }: Props) {
-  const today = getTodaysLesson();
+export function HomeScreen({ progress, onOpenLesson, preferencesApi, themeApi }: Props) {
+  const today = useMemo(() => selectDailyLesson(progress, preferencesApi.preferences), [preferencesApi.preferences, progress]);
   const completedToday = Boolean(progress.lessons[today.id]?.completedAt);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('All');
@@ -29,7 +36,7 @@ export function HomeScreen({ progress, onOpenLesson }: Props) {
     <main className="home-shell">
       <nav className="topbar page-width" aria-label="Primary navigation">
         <Brand />
-        <span className="nav-note">Daily speaking practice</span>
+        <div className="topbar-actions"><span className="nav-note">Daily speaking practice</span><ThemeToggle theme={themeApi.theme} onToggle={themeApi.toggleTheme} /></div>
       </nav>
 
       <section className="hero page-width" aria-labelledby="home-heading">
@@ -65,10 +72,34 @@ export function HomeScreen({ progress, onOpenLesson }: Props) {
         </article>
       </section>
 
-      <section className="progress-strip page-width" aria-label="Your progress">
-        <div><strong>{progress.totalSentences.toLocaleString()}</strong><span>sentences shadowed</span></div>
-        <div><strong>{progress.totalReps.toLocaleString()}</strong><span>speaking reps</span></div>
-        <div><strong>{Object.values(progress.lessons).filter((item) => item.completedAt).length}</strong><span>workouts complete</span></div>
+      <section className="progress-strip page-width" aria-label="Your weekly progress">
+        <div><strong>{countPracticeDaysThisWeek(progress)}</strong><span>days practiced this week</span></div>
+        <div><strong>{progress.totalReps.toLocaleString()}</strong><span>real speaking reps</span></div>
+        <div><strong>{countPracticedLines(progress)}</strong><span>lines practiced</span></div>
+        <div><strong>{countCompletedWorkouts(progress)}</strong><span>workouts complete</span></div>
+      </section>
+
+      <section className="preferences-section page-width" aria-labelledby="preferences-title">
+        <details className="preferences-card">
+          <summary><span><Settings2 aria-hidden="true" /><strong id="preferences-title">Make today’s workout fit you</strong></span><small>Level and situations</small></summary>
+          <div className="preferences-body">
+            <fieldset>
+              <legend>Speaking comfort</legend>
+              <div className="choice-row">
+                {([['steady', 'Build steadily'], ['everyday', 'Everyday challenge'], ['stretch', 'Stretch me']] as const).map(([value, label]) => (
+                  <label key={value}><input type="radio" name="comfort" checked={preferencesApi.preferences.comfort === value} onChange={() => preferencesApi.setPreferences({ comfort: value })} /> {label}</label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Situations that matter most</legend>
+              <div className="choice-row categories">
+                {LESSON_CATEGORIES.map((area) => <label key={area}><input type="checkbox" checked={preferencesApi.preferences.areas.includes(area)} onChange={() => preferencesApi.setPreferences({ areas: preferencesApi.preferences.areas.includes(area) ? preferencesApi.preferences.areas.filter((item) => item !== area) : [...preferencesApi.preferences.areas, area] })} /> {area}</label>)}
+              </div>
+            </fieldset>
+            <p>Your choices stay in this browser and gently adjust the daily recommendation. The full library remains available.</p>
+          </div>
+        </details>
       </section>
 
       <section className="library page-width" aria-labelledby="library-title">

@@ -6,9 +6,9 @@ Well Said is a static React 19 application built by Vite and hosted below the `/
 
 The app has three kinds of state:
 
-- Curriculum is immutable typed data composed in `src/content/lessons.ts`. Four foundational lessons are hand-authored there; the extended catalog is produced from reviewed scenario seeds and category dialogue frames in `src/content/generatedCurriculum.ts`.
+- Curriculum is immutable typed data composed in `src/content/lessons.ts`. Four foundational lessons and ten replacement lessons form the editorially reviewed Start Here collection. The remaining roadmap is produced from scenario seeds and category dialogue frames in `src/content/generatedCurriculum.ts`, grouped into packs, and marked `draft` until reviewed.
 - Workout UI state (step, active line, speed, transcript mode) stays in the relevant React component.
-- Durable learning progress is handled by `useProgress` and written to `well-said:progress:v1` in localStorage.
+- Durable learning progress is handled by `useProgress` and written to `well-said:progress:v2` in localStorage. Theme and lightweight personalization use separate versioned keys.
 
 Keeping these boundaries separate makes it possible to replace audio, expand the curriculum, or add a backend later without rewriting the practice UI.
 
@@ -30,7 +30,7 @@ The daily scheduler converts the learner’s local calendar date into a continuo
 
 ## Audio boundary
 
-`useLessonAudio` is the single playback adapter. It accepts an optional repository-relative source and otherwise uses browser speech synthesis as an explicit demo fallback. Only one source plays at a time, and route/step changes stop it. Do not invoke `Audio`, `speechSynthesis`, or autoplay from presentation components outside this adapter.
+`useLessonAudio` is the single playback adapter. It accepts an optional repository-relative source and otherwise uses browser speech synthesis as an explicit demo fallback. It can play dialogue lines as a sequence so fallback voices and conversational gaps are preserved. Only one source plays at a time, and route/step changes stop it. Do not invoke `Audio`, `speechSynthesis`, or autoplay from presentation components outside this adapter.
 
 `useRecorder` uses `getUserMedia` and `MediaRecorder`. Its object URL lives only in memory; nothing is uploaded or persisted. Permission refusal is an expected state, not an error that blocks a workout.
 
@@ -40,18 +40,20 @@ The current stored schema is:
 
 ```ts
 type ProgressState = {
-  version: 1;
+  version: 2;
   lessons: Record<string, {
     completedAt?: string;
+    lastPracticedAt?: string;
     repsByLine: Record<string, number>;
     lastStep: number;
+    lastLineIndex?: number;
+    felt?: 'easy' | 'right' | 'hard';
   }>;
-  totalSentences: number;
   totalReps: number;
 };
 ```
 
-Never mutate this shape without increasing the version and adding a tested migration. Completion is idempotent: repeating a workout can add reps but must not add its lines to `totalSentences` twice.
+The v1-to-v2 migration preserves completions and reps while dropping the old inferred `totalSentences` value. Never mutate this shape without increasing the version and adding a tested migration. Completion preserves its first completion date; spoken-line and weekly-day totals are derived from actual rep/practice records.
 
 ## Styling
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { lessons } from '../content/lessons';
 import type { Lesson } from '../content/types';
 import { useProgress } from '../hooks/useProgress';
+import { usePreferences } from '../hooks/usePreferences';
+import { useTheme } from '../hooks/useTheme';
 import { HomeScreen } from '../screens/HomeScreen';
 import { WorkoutScreen } from '../screens/WorkoutScreen';
 
@@ -11,13 +13,20 @@ export function App() {
     return lessons.find((item) => item.id === requestedId);
   });
   const progressApi = useProgress();
+  const preferencesApi = usePreferences();
+  const themeApi = useTheme();
+
+  const scrollToTop = () => window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+  });
 
   const openLesson = (lesson: Lesson) => {
     setActiveLesson(lesson);
     const url = new URL(window.location.href);
     url.searchParams.set('workout', lesson.id);
     window.history.pushState({}, '', url);
-    window.scrollTo({ top: 0 });
+    scrollToTop();
   };
 
   const closeLesson = () => {
@@ -25,7 +34,7 @@ export function App() {
     const url = new URL(window.location.href);
     url.searchParams.delete('workout');
     window.history.pushState({}, '', url);
-    window.scrollTo({ top: 0 });
+    scrollToTop();
   };
 
   useEffect(() => {
@@ -38,8 +47,8 @@ export function App() {
   }, []);
 
   return activeLesson ? (
-    <WorkoutScreen lesson={activeLesson} onClose={closeLesson} progressApi={progressApi} />
+    <WorkoutScreen lesson={activeLesson} onClose={closeLesson} progressApi={progressApi} themeApi={themeApi} />
   ) : (
-    <HomeScreen progress={progressApi.progress} onOpenLesson={openLesson} />
+    <HomeScreen progress={progressApi.progress} onOpenLesson={openLesson} preferencesApi={preferencesApi} themeApi={themeApi} />
   );
 }

@@ -1,6 +1,8 @@
 # Lesson authoring guide
 
-Foundational lessons live in `src/content/lessons.ts`; the extended six-month catalog lives in `src/content/generatedCurriculum.ts`. Both implement the types in `src/content/types.ts`. Run `npm test` after every curriculum edit; content tests catch duplicate IDs, broken speakers, malformed phrase groups, invalid stress answers, unbalanced coverage, and scheduling regressions.
+Foundational lessons live in `src/content/lessons.ts`; reviewed replacement lessons live in `src/content/flagshipLessons.ts`; and the extended six-month roadmap lives in `src/content/generatedCurriculum.ts`. All implement the types in `src/content/types.ts`. Run `npm test` after every curriculum edit; content tests catch duplicate and near-duplicate dialogues, broken speakers, malformed phrase groups, invalid stress answers, unbalanced coverage, and scheduling regressions.
+
+Every lesson has an editorial state: `draft`, `reviewed`, or `audio-ready`. A lesson may move to `reviewed` only after the checklist below is complete. Use `audio-ready` only after every required file has passed the checks in `AUDIO_PRODUCTION.md`. Collections are release-planning metadata and do not override those gates.
 
 ## Lesson checklist
 

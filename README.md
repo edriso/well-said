@@ -4,18 +4,20 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 
 ## What is included
 
-- One uncluttered daily workout plus a searchable library of 184 distinct workouts
+- One uncluttered daily workout plus a searchable roadmap of 184 distinct workouts
 - More than six calendar months of daily practice without a repeated workout
 - Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
-- Full shadowing, hidden/first-word transcript modes, and two-role practice
-- Static, explainable Stress Mode—no fake AI scoring
-- Versioned local progress with lifetime sentences and speaking reps
+- Full shadowing, hidden/first-word transcript modes, and turn-by-turn role practice
+- Static, explainable Stress Mode—no fake AI scoring or synthetic stress comparison
+- Focus Mode, slow reveal, and adjacent Model/Mine playback
+- Versioned local progress based on actual speaking reps, practiced lines, and practice days
+- Local theme and lightweight level/situation preferences
 - Responsive WCAG-conscious UI, reduced-motion support, and an installable web manifest
 - Typed lesson content, tests, CI, Pages deployment, and audio-production guidance
 
-The current model audio is a clearly labeled browser speech placeholder. Studio files can be dropped in later without changing the lesson UI.
+The current model audio is a clearly labeled browser speech placeholder. The 14-workout Start Here collection has received a dedicated editorial pass; the other curriculum packs remain explicitly marked as drafts. Studio files can be dropped in later without changing the lesson UI.
 
 ## Start locally
 
