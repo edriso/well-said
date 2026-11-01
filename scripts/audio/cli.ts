@@ -136,6 +136,20 @@ function lessonJobs(lesson: Lesson, cast: Map<string, Voice>, withStress: boolea
   return jobs;
 }
 
+const speechRequest = (job: Job) => ({
+  voiceId: job.voice.id,
+  text: job.text,
+  modelId: job.modelId,
+  outputFormat: config.outputFormat,
+  seed: Number.parseInt(fingerprint(job.text), 16),
+  ...(config.speed === 1 ? {} : { speed: config.speed }),
+  previousText: job.previousText,
+  nextText: job.nextText,
+});
+
+/** Cache file for a job's raw API response, keyed by everything that shapes the performance. */
+const rawPath = (job: Job) => join(RAW_CACHE_DIR, `${fingerprint(JSON.stringify(speechRequest(job)))}.mp3`);
+
 const isCurrent = (job: Job, entry: LessonAudioEntry | undefined) =>
   readSlot(entry, job.slot) === job.fingerprint && existsSync(publicPath(job.path));
 
@@ -187,6 +201,8 @@ async function generate() {
   const manifest = readJson<AudioManifest>(MANIFEST_PATH);
   const provenance = readJson<Provenance>(PROVENANCE_PATH);
   mkdirSync(RAW_CACHE_DIR, { recursive: true });
+  const subscription = await client.subscription();
+  let credits = subscription.character_limit - subscription.character_count;
   let synthesized = 0;
 
   for (const lesson of selected) {
@@ -200,22 +216,21 @@ async function generate() {
       : { lines: {}, expressions: [], stress: {} };
     const pending = lessonJobs(lesson, cast, flags['with-stress']).filter((job) => !isCurrent(job, existing));
 
+    // Never start a lesson the remaining credits cannot finish, so no lesson is left half-voiced.
+    const cost = pending.filter((job) => flags.fresh || !existsSync(rawPath(job))).reduce((sum, job) => sum + job.text.length, 0);
+    if (cost > credits) {
+      console.log(`\nStopping before ${lesson.id}: it needs ${cost.toLocaleString()} credits and ${credits.toLocaleString()} remain.`);
+      console.log('Add credits or a new ELEVENLABS_API_KEY, then run the same command again to continue.');
+      break;
+    }
+
     process.stdout.write(`${lesson.id}: ${pending.length ? `${pending.length} file(s)` : 'up to date'}`);
     await runPool(pending, config.concurrency, async (job) => {
-      const speech = {
-        voiceId: job.voice.id,
-        text: job.text,
-        modelId: job.modelId,
-        outputFormat: config.outputFormat,
-        seed: Number.parseInt(fingerprint(job.text), 16),
-        ...(config.speed === 1 ? {} : { speed: config.speed }),
-        previousText: job.previousText,
-        nextText: job.nextText,
-      };
-      const raw = join(RAW_CACHE_DIR, `${fingerprint(JSON.stringify(speech))}.mp3`);
+      const raw = rawPath(job);
       if (flags.fresh || !existsSync(raw)) {
-        await writeFile(raw, await client.speech(speech));
+        await writeFile(raw, await client.speech(speechRequest(job)));
         synthesized += job.text.length;
+        credits -= job.text.length;
       }
       await mkdir(dirname(publicPath(job.path)), { recursive: true });
       await processClip(raw, publicPath(job.path), job.text.split(/\s+/).filter(Boolean).length);
