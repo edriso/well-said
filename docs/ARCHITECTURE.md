@@ -2,7 +2,7 @@
 
 ## Runtime shape
 
-Well Said is a static React 19 application built by Vite and hosted below the `/well-said/` GitHub Pages base. It intentionally has no API, account, or server dependency. The URL uses a `?workout=<lesson-id>` query so a workout can be refreshed or shared without requiring a server-side SPA fallback.
+Well Said is a static React 19 application built by Vite and hosted below the `/well-said/` GitHub Pages base. It intentionally has no API, account, or server dependency at runtime. Model audio is generated ahead of time by a Node-only pipeline (`scripts/audio/`) and committed as static files. The URL uses a `?workout=<lesson-id>` query so a workout can be refreshed or shared without requiring a server-side SPA fallback.
 
 The app has three kinds of state:
 
@@ -26,9 +26,11 @@ Home
 
 The workout is a linear state machine. Learners can revisit completed steps, but incomplete future steps are disabled. Completed workouts restart at Listen when opened again.
 
-The daily scheduler converts the learner’s local calendar date into a continuous civil-day ordinal relative to 1 January 2026. It does not reset at New Year. With 184 lessons, any 184 consecutive dates map to distinct workouts.
+Recommendations first walk new learners through the reviewed Start Here collection in order (a workout finished today stays as today’s card), then hand over to the daily scheduler. The daily scheduler converts the learner’s local calendar date into a continuous civil-day ordinal relative to 1 January 2026. It does not reset at New Year. With 184 lessons, any 184 consecutive dates map to distinct workouts.
 
 ## Audio boundary
+
+Audio fields on lessons are filled in by `attachAudio` (`src/content/audio.ts`) from the generated `audio-manifest.json`. A file is attached only when the fingerprint of the text it was recorded from matches the current text, so edited content can never play outdated audio. See `AUDIO_PRODUCTION.md`.
 
 `useLessonAudio` is the single playback adapter. It accepts an optional repository-relative source and otherwise uses browser speech synthesis as an explicit demo fallback. It can play dialogue lines as a sequence so fallback voices and conversational gaps are preserved. Only one source plays at a time, and route/step changes stop it. Do not invoke `Audio`, `speechSynthesis`, or autoplay from presentation components outside this adapter.
 

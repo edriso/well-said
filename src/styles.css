@@ -119,6 +119,9 @@ p, h1, h2, blockquote { margin-top: 0; }
 .load-more { margin: 24px auto 0; display: flex; min-width: 180px; }.empty-library { padding: 45px 20px; border: 1px dashed var(--line); border-radius: 17px; text-align: center; color: var(--muted); }.empty-library p { margin: 6px 0 0; }
 footer.page-width { padding: 30px 0 50px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
 footer p { margin: 0; color: var(--muted); font-family: var(--font-reading); font-size: 17px; }
+.footer-copy { display: grid; gap: 6px; justify-items: end; text-align: right; }
+.footer-copy small { color: var(--muted); font-size: 12px; }
+.footer-copy a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 /* Workout shell */
 .workout-shell { min-height: 100vh; background: var(--surface); }
@@ -248,7 +251,7 @@ footer p { margin: 0; color: var(--muted); font-family: var(--font-reading); fon
   .progress-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; border: 1px solid var(--line); border-radius: 17px; background: var(--surface); }.progress-strip div { min-width: 0; padding: 13px; border-right: 0; border-bottom: 0; }.progress-strip strong { font-size: 25px; }.progress-strip span { max-width: 115px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 12px; }.section-heading > p { width: auto; }.section-heading h2 { font-size: 33px; }.lesson-grid { grid-template-columns: 1fr; }
   .library-tools { grid-template-columns: 1fr 1fr; }.search-field { grid-column: 1 / -1; }.result-count { text-align: right; }
-  footer.page-width { align-items: flex-start; flex-direction: column; gap: 14px; }footer p { font-size: 13px; }
+  footer.page-width { align-items: flex-start; flex-direction: column; gap: 14px; } .footer-copy { justify-items: start; text-align: left; }footer p { font-size: 13px; }
   .workout-header { padding: 0 14px; }.workout-header .brand { font-size: 0; gap: 0; }.workout-header-actions { gap: 6px; }.workout-header-actions .theme-toggle { width: 38px; height: 38px; }.stepper { width: calc(100% - 20px); }.stepper button small { display: none; }.stepper button { min-height: 34px; }
   .workout-content { padding-top: 30px; }.step-intro { margin-top: 5px; }.step-intro h1 { font-size: 39px; }
   .dialogue-player-card { grid-template-columns: 1fr auto; min-height: 155px; padding: 24px; }.player-visual { display: none; }.dialogue-player-card h2 { font-size: 21px; }

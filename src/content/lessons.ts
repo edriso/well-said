@@ -1,6 +1,7 @@
 import type { Lesson } from './types';
 import { generatedLessons } from './generatedCurriculum';
 import { flagshipLessons } from './flagshipLessons';
+import { attachAudio } from './audio';
 
 const coreLessons: Lesson[] = [
   {
@@ -190,7 +191,7 @@ const catalogLessons = generatedLessons.map((lesson) => {
     : { ...lesson, contentStatus: 'draft' as const, collection: collectionByCategory[lesson.category] };
 });
 
-export const lessons: Lesson[] = [...reviewedCore, ...catalogLessons];
+export const lessons: Lesson[] = [...reviewedCore, ...catalogLessons].map((lesson) => attachAudio(lesson));
 
 export const flagshipLessonIds = lessons
   .filter((lesson) => lesson.collection === 'Start Here')

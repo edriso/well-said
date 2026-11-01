@@ -1,61 +1,82 @@
 # Audio production
 
-The UI currently uses browser speech synthesis when an `audio` field is absent. This is a functional placeholder, visibly disclosed on the home card. Final recordings should replace it lesson by lesson.
+Model audio is produced by a small, reproducible pipeline in `scripts/audio/` that uses ElevenLabs text-to-speech and ffmpeg. Any line without a current recording falls back to the browser speech demo, so the app always works.
 
-## Deliverables per lesson
+## Setup
 
-Use `content/audio-briefs/<lesson-id>.md` as the performance script for the foundational lessons. For extended-catalog lessons, the canonical script and performance direction are the lesson’s `lines`, `stressWords`, `coachNote`, `intention`, and stress-exercise fields in `src/content/generatedCurriculum.ts`; export those fields into the same folder convention before recording. Export:
+Requirements: Node 24, ffmpeg (`brew install ffmpeg`), and an ElevenLabs API key.
+
+```bash
+cp .env.example .env.local   # then set ELEVENLABS_API_KEY
+npm run audio:voices         # optional: list voices your key can use
+```
+
+The key is read only by the Node scripts. It is never bundled into the web app. Do not give it a `VITE_` prefix.
+
+## Commands
+
+```bash
+npm run audio:plan                         # characters, files, size, remaining credits
+npm run audio:generate                     # Start Here collection (default)
+npm run audio:generate -- --lesson=ordering-coffee,catching-up
+npm run audio:generate -- --collection="Workplace Conversations" --limit=5
+npm run audio:generate -- --all            # entire catalog (~93k characters)
+npm run audio:check                        # validate files, fingerprints, loudness, size
+```
+
+Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` (git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
+
+## What a lesson gets
 
 ```text
 public/audio/lessons/<lesson-id>/
-  full.mp3
-  line-01.mp3
-  line-02.mp3
-  ...
-  expression-01.mp3
-  ...
-  stress-<word>.mp3
+  <line-id>.mp3        one clean file per dialogue line (e.g. coffee-1.mp3)
+  full.mp3             the lines joined with natural turn gaps
+  expression-01.mp3    one file per reusable expression
+  stress-<word>.mp3    opt-in, see below
 ```
 
-Every complete set needs:
+Files are named by durable line IDs, so reordering lines never mismatches audio. Paths are relative to `public/`; the playback adapter adds `import.meta.env.BASE_URL`.
 
-- One continuous full dialogue with both voices
-- One clean file per line, matching the full performance closely
-- One clean file per expression
-- One file per Stress Mode option, genuinely performing the named contrast
+## How audio stays in sync with text
 
-## Recording direction
+`src/content/audio-manifest.json` records a fingerprint of the exact text each file was performed from. `attachAudio` in `src/content/audio.ts` wires a file into a lesson only when the fingerprint still matches. If an author edits a line:
 
-- Use two distinct adult English speakers with natural conversational delivery.
-- Preserve each speaker across full and isolated line files.
-- Aim for clear international comprehensibility, not an exaggerated teaching voice.
-- Keep contractions, reductions, and linking natural at the stated CEFR level.
-- Honor the marked stress and coach note without turning stressed words into shouting.
-- Leave about 120–180 ms of clean head/tail room on line files. Do not add music or effects.
-- For a future curriculum, vary English varieties thoughtfully and label them only when pedagogically useful.
+- The app ignores the stale file and uses the browser voice for that line.
+- `npm test` fails and tells you to run `npm run audio:generate`.
 
-## Technical target
+`content/audio-provenance.json` records the provider, model, voice per speaker, and generation date for every lesson.
 
-- Source master: mono WAV, 48 kHz, 24-bit PCM
-- Web delivery: mono MP3, 96–128 kbps constant quality
-- Integrated loudness: approximately -19 LUFS mono
-- True peak: no higher than -1 dBTP
-- No audible clipping, gating, denoising artifacts, or inconsistent room tone
+## Voices
 
-Keep source masters outside the Git repository or in approved large-file storage. Commit only optimized delivery files and provenance notes.
+Each speaker is cast from a voice pool (`scripts/audio/cast.ts`) and keeps a stable voice across lessons; the two speakers in one lesson never share a voice. Defaults are ElevenLabs premade voices (four American, one British per pool). Override the pools with `ELEVENLABS_VOICES_FEMALE` and `ELEVENLABS_VOICES_MALE`. Changing a lesson's cast or model regenerates that lesson automatically.
 
-## Wiring files into a lesson
+## Processing
 
-Paths are relative to `public/` and must not begin with the Pages base:
+Every clip is:
 
-```ts
-fullAudio: 'audio/lessons/small-talk-at-work/full.mp3'
+1. Trimmed of edge silence.
+2. Eased toward a learner-friendly pace. Clips faster than ~200 words per minute are time-stretched by at most 0.85×. Slower clips are untouched.
+3. Normalized to -19 LUFS integrated with a transparent limiter keeping true peak at or below -1 dBTP (verified and corrected per file).
+4. Given ~150 ms of clean head and tail room.
+5. Encoded as mono MP3, 44.1 kHz, 96 kbps, with metadata stripped.
 
-audio: 'audio/lessons/small-talk-at-work/line-01.mp3'
-```
+The full dialogue concatenates the processed lines with a short conversational gap (~0.5 s) and is normalized again. Budget roughly 0.4 MB of repository space per lesson.
 
-The adapter adds `import.meta.env.BASE_URL`, so the same data works locally and at `/well-said/`. If a configured file fails, playback falls back to browser speech instead of breaking the workout.
+## Stress Mode audio (opt-in)
+
+`--with-stress` performs each Stress Mode option with the contrasted word capitalized, using `ELEVENLABS_STRESS_MODEL_ID` (default `eleven_v3`, which responds best to emphasis). Synthetic contrastive stress is not always convincing, so it is off by default. Listen to every file and delete any that do not clearly perform the named contrast before committing.
+
+## Licensing
+
+Audio generated on the ElevenLabs **free** plan may be used non-commercially with attribution. The app credits ElevenLabs in the home-page footer whenever model audio is present. Commercial use requires audio generated while on a paid plan; rights are not retroactive, so regenerate (`--force --fresh`) after upgrading if the product becomes commercial.
 
 ## Review before merge
 
-Listen on headphones and a phone speaker. Compare isolated lines with the full dialogue, verify every filename on a case-sensitive filesystem, test all three playback rates, and confirm the Stress Mode meanings match the audible contrast.
+1. `npm run audio:check` passes.
+2. Listen on headphones and a phone speaker to at least one full lesson per new voice.
+3. Compare isolated lines with the full dialogue, and test all three playback rates.
+4. Confirm marked stress words are audible and nothing sounds clipped or rushed.
+5. Mark a lesson `audio-ready` only after this human review.
+
+Human-studio recordings can replace generated files at any time: keep the file names, then update the manifest fingerprints (or regenerate and overwrite). The script briefs in `content/audio-briefs/` remain the performance direction for the foundational lessons.

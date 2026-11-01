@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "lessons": {
+    "small-talk-at-work": {
+      "lines": {
+        "work-2": "a6480fa2",
+        "work-1": "5b71fed7",
+        "work-4": "19542979",
+        "work-3": "88104c45",
+        "work-5": "4d927f55",
+        "work-6": "1ddecec2"
+      },
+      "expressions": [
+        "986ad666",
+        "88fab4ae",
+        "7aa8c476"
+      ],
+      "stress": {},
+      "full": "fa9c4c81"
+    },
+    "ordering-coffee": {
+      "lines": {
+        "coffee-1": "d648c69f",
+        "coffee-2": "91259006",
+        "coffee-3": "5ea4e07a",
+        "coffee-4": "7e6273c3",
+        "coffee-5": "164f79a4"
+      },
+      "expressions": [
+        "d2e10c72",
+        "93d0250d"
+      ],
+      "stress": {},
+      "full": "6c8e8c16"
+    },
+    "moving-a-meeting": {
+      "lines": {
+        "meeting-1": "fe0fab94",
+        "meeting-2": "0aaf63e7",
+        "meeting-3": "a39c9ce7",
+        "meeting-4": "79d5181e",
+        "meeting-5": "df0cc088"
+      },
+      "expressions": [
+        "65d82bcb",
+        "8345ec00",
+        "589b91e3"
+      ],
+      "stress": {},
+      "full": "69528962"
+    },
+    "catching-up": {
+      "lines": {
+        "catch-1": "aa2430c3",
+        "catch-2": "9ec2643c",
+        "catch-3": "e04fa6ae",
+        "catch-4": "13f0e4bd",
+        "catch-5": "b1277ba8",
+        "catch-6": "6a916a3e"
+      },
+      "expressions": [
+        "16237112",
+        "a000c93f",
+        "d16253a0"
+      ],
+      "stress": {},
+      "full": "fc91a03c"
+    },
+    "right-platform": {
+      "lines": {
+        "daily-008-1": "becf5b8d",
+        "daily-008-2": "a19e8c68",
+        "daily-008-3": "ecb70076",
+        "daily-008-4": "d140783a",
+        "daily-008-5": "8242bed7"
+      },
+      "expressions": [
+        "abaf193f",
+        "4c891c6a",
+        "461db6ac"
+      ],
+      "stress": {},
+      "full": "f729166c"
+    },
+    "sharing-gym-equipment": {
+      "lines": {
+        "daily-025-1": "83adfac7",
+        "daily-025-2": "a1702b37",
+        "daily-025-3": "fc12af70",
+        "daily-025-4": "f99ea775",
+        "daily-025-5": "4a58bc06"
+      },
+      "expressions": [
+        "ccdc9888",
+        "e41a8c11",
+        "31fd4218"
+      ],
+      "stress": {},
+      "full": "88e2009e"
+    },
+    "asking-specific-help": {
+      "lines": {
+        "daily-046-2": "927c7dbe",
+        "daily-046-1": "495bae04",
+        "daily-046-3": "6d4ffc99",
+        "daily-046-4": "d833ce46",
+        "daily-046-5": "d39ece77",
+        "daily-046-6": "ae7188f2"
+      },
+      "expressions": [
+        "94732a1e",
+        "2bbe8e8b",
+        "f3a3cf08"
+      ],
+      "stress": {},
+      "full": "582da66c"
+    },
+    "noisy-room": {
+      "lines": {
+        "daily-048-1": "ce2550b5",
+        "daily-048-2": "914aa766",
+        "daily-048-3": "43b44adf",
+        "daily-048-4": "55bf59d9",
+        "daily-048-5": "42d737ae",
+        "daily-048-6": "b4862239"
+      },
+      "expressions": [
+        "fd00cbe3",
+        "ab11b019",
+        "ed8ba32f"
+      ],
+      "stress": {},
+      "full": "a961eea0"
+    },
+    "spelling-a-name": {
+      "lines": {
+        "daily-065-2": "a2234ef1",
+        "daily-065-1": "679c79d8",
+        "daily-065-3": "a8d4dde4",
+        "daily-065-4": "5b96f0e6",
+        "daily-065-6": "92f11c6e",
+        "daily-065-5": "21985272"
+      },
+      "expressions": [
+        "01e54b45",
+        "33626b90",
+        "93d08599"
+      ],
+      "stress": {},
+      "full": "fb52aa2b"
+    },
+    "food-tradition": {
+      "lines": {
+        "daily-092-1": "3005fba4",
+        "daily-092-2": "62b5ef7e",
+        "daily-092-3": "9efd84d4",
+        "daily-092-4": "763d52c3",
+        "daily-092-6": "cbb83530",
+        "daily-092-5": "ef54c8db"
+      },
+      "expressions": [
+        "13d10dd6",
+        "d748cd1d",
+        "2c96187b"
+      ],
+      "stress": {},
+      "full": "becfacee"
+    },
+    "wrong-order-correction": {
+      "lines": {
+        "daily-095-2": "990a6b6a",
+        "daily-095-1": "beef007a",
+        "daily-095-4": "ca749252",
+        "daily-095-3": "14e4d86f",
+        "daily-095-5": "d1421d9b"
+      },
+      "expressions": [
+        "6191df3b",
+        "c5993b60",
+        "52eea1c1"
+      ],
+      "stress": {},
+      "full": "56652549"
+    },
+    "late-apology": {
+      "lines": {
+        "daily-097-1": "7727e260",
+        "daily-097-2": "e56e531a",
+        "daily-097-3": "3753e49a",
+        "daily-097-4": "2773b050",
+        "daily-097-5": "5b1e0d03"
+      },
+      "expressions": [
+        "2f65d8da",
+        "48118a17",
+        "bc91267e"
+      ],
+      "stress": {},
+      "full": "fc37f1c7"
+    },
+    "repairing-misunderstanding": {
+      "lines": {
+        "daily-117-2": "75388c12",
+        "daily-117-1": "33fbe780",
+        "daily-117-4": "2c1e389b",
+        "daily-117-3": "1887e292",
+        "daily-117-5": "c755a6f8"
+      },
+      "expressions": [
+        "64f49003",
+        "31fd4218",
+        "1b564f46"
+      ],
+      "stress": {},
+      "full": "122611a4"
+    },
+    "complicated-choice": {
+      "lines": {
+        "daily-184-1": "43416ac3",
+        "daily-184-2": "246e66a4",
+        "daily-184-3": "402e0440",
+        "daily-184-4": "3c636025",
+        "daily-184-5": "c1d3bbe6",
+        "daily-184-6": "11d426e6"
+      },
+      "expressions": [
+        "4d76a350",
+        "b497903a",
+        "9812b1e2"
+      ],
+      "stress": {},
+      "full": "8f0dcdc2"
+    }
+  }
+}
