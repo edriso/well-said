@@ -5,6 +5,7 @@
  *   npm run audio:generate -- [selection] [--force]  synthesize, normalize, and register audio
  *   npm run audio:check                              validate files, fingerprints, loudness, and size
  *   npm run audio:voices                             list voices available to your API key
+ *   npm run audio:prune                              drop recordings whose text has changed or whose lesson is gone
  *
  * Selection (default: the reviewed Start Here collection):
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
@@ -312,6 +313,57 @@ async function check() {
   }
 }
 
+/**
+ * Removes recordings that no longer match their text (or whose lesson/line no
+ * longer exists) from the manifest, provenance, and disk. Use after rewriting
+ * voiced content; regenerate afterwards to restore audio for those items.
+ */
+async function prune() {
+  const manifest = readJson<AudioManifest>(MANIFEST_PATH);
+  const provenance = readJson<Provenance>(PROVENANCE_PATH);
+  let removedItems = 0;
+  let removedLessons = 0;
+
+  for (const [lessonId, entry] of Object.entries(manifest.lessons)) {
+    const lesson = lessons.find((item) => item.id === lessonId);
+    const kept: LessonAudioEntry = { lines: {}, expressions: [], stress: {} };
+    if (lesson) {
+      for (const line of lesson.lines) {
+        if (entry.lines[line.id] === fingerprint(line.text)) kept.lines[line.id] = entry.lines[line.id]!;
+      }
+      lesson.expressions.forEach((expression, index) => {
+        if (entry.expressions[index] === fingerprint(expression.phrase)) kept.expressions[index] = entry.expressions[index]!;
+      });
+      // Expression fingerprints are positional; stop at the first gap so indexes stay aligned with file names.
+      const firstGap = kept.expressions.findIndex((value) => value === undefined);
+      if (firstGap >= 0) kept.expressions = kept.expressions.slice(0, firstGap);
+      for (const option of lesson.stressExercise.options) {
+        const slug = stressSlug(option.word);
+        if (entry.stress[slug] === fingerprint(stressPerformanceText(lesson.stressExercise.sentence, option.word))) kept.stress[slug] = entry.stress[slug]!;
+      }
+      const allLines = lesson.lines.every((line) => kept.lines[line.id]);
+      if (allLines && entry.full === fingerprint(fullDialogueText(lesson))) kept.full = entry.full;
+    }
+
+    const before = referencedFiles(lessonId, entry).size;
+    const after = referencedFiles(lessonId, kept).size;
+    removedItems += before - after;
+    if (after === 0) {
+      delete manifest.lessons[lessonId];
+      delete provenance.lessons[lessonId];
+      rmSync(publicPath(audioPaths.dir(lessonId)), { recursive: true, force: true });
+      removedLessons += 1;
+    } else {
+      manifest.lessons[lessonId] = kept;
+      removeUnreferenced(lessonId, kept);
+    }
+  }
+
+  writeJson(MANIFEST_PATH, manifest);
+  writeJson(PROVENANCE_PATH, provenance);
+  console.log(`Pruned ${removedItems} stale file(s); ${removedLessons} lesson(s) no longer have model audio.`);
+}
+
 async function listVoices() {
   const voices = await createClient(requireApiKey()).voices();
   for (const voice of voices) {
@@ -320,7 +372,7 @@ async function listVoices() {
   }
 }
 
-const commands: Record<string, () => Promise<void>> = { plan, generate, check, voices: listVoices };
+const commands: Record<string, () => Promise<void>> = { plan, generate, check, prune, voices: listVoices };
 const command = commands[positionals[0] ?? ''];
 
 if (!command) {

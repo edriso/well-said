@@ -1,6 +1,6 @@
 # Lesson authoring guide
 
-Foundational lessons live in `src/content/lessons.ts`; reviewed replacement lessons live in `src/content/flagshipLessons.ts`; and the extended six-month roadmap lives in `src/content/generatedCurriculum.ts`. All implement the types in `src/content/types.ts`. Run `npm test` after every curriculum edit; content tests catch duplicate and near-duplicate dialogues, broken speakers, malformed phrase groups, invalid stress answers, unbalanced coverage, and scheduling regressions.
+Every workout is hand-authored data in `src/content/catalog/`: `startHere.ts` holds the 14 Start Here workouts, and one file per situation family (`everyday.ts`, `work.ts`, … `ideas.ts`) holds the rest. `src/content/lessons.ts` composes them in lesson-number order. All implement the types in `src/content/types.ts`; content never lives in components. Run `npm test` after every curriculum edit; content tests catch duplicate and near-duplicate dialogues, broken speakers, malformed phrase groups, invalid stress answers, unbalanced coverage, and scheduling regressions.
 
 Every lesson has an editorial state: `draft`, `reviewed`, or `audio-ready`. A lesson may move to `reviewed` only after the checklist below is complete. Use `audio-ready` only after every required file has passed the checks in `AUDIO_PRODUCTION.md`. Collections are release-planning metadata and do not override those gates.
 
@@ -32,11 +32,21 @@ Lesson and line IDs are durable data keys used by local progress and audio file 
 
 Daily rotation uses a continuous local civil-day ordinal modulo the lesson count. It does not reset on January 1. Adding or reordering a lesson changes future calendar assignments but preserves stored completion data by stable ID.
 
-## Extended catalog seeds
+## Writing conventions
 
-Each generated lesson seed has a unique slug, title, situation, subject, communicative detail, and outcome. Category-specific frames turn those seeds into a five-turn practice dialogue. Keep the frames conversational and grammatically compatible with every seed in that category. Before merging a frame change, inspect samples from its beginning, middle, and end—not only the first lesson.
+These keep dialogue consistent for learners and for model audio:
 
-The catalog is intentionally interleaved by category. Do not regroup it into category blocks: the order prevents learners from seeing the same type of situation repeatedly and is enforced by tests.
+- Use straight apostrophes in `text`, `phraseGroups`, and stress sentences, and write numbers as words ("six fifteen", "forty dollars").
+- Phrase groups are the units a speaker says without pausing. A comma on a group boundary may be dropped; keep terminal punctuation.
+- Stress words are single whole words from the line: the real peaks in context, not function words unless they are contrastive.
+- Coach notes are one or two short, performable sentences, with stressed words in CAPS.
+- Give speakers specific roles ("Pharmacist", "Flatmate"). Every speaker name must exist in `scripts/audio/cast.ts`, which picks the voice.
+- Vary openings, turn structure, tone, and endings across a category. Avoid summary closings such as "That clarifies the plan."
+- Health, wellbeing, legal, and money conversations practice communication only. Never give diagnosis, treatment, therapy, legal, or financial advice.
+
+## Order and focus
+
+The catalog interleaves situation families by lesson number, so consecutive days vary; tests enforce this. Speaking focus also rotates within each family, so every family practices most of the ten focuses. Keep the `focus` of an existing lesson unless you rebalance deliberately.
 
 ## Future timing metadata
 

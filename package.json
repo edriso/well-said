@@ -14,7 +14,8 @@
     "audio:plan": "tsx scripts/audio/cli.ts plan",
     "audio:generate": "tsx scripts/audio/cli.ts generate",
     "audio:check": "tsx scripts/audio/cli.ts check",
-    "audio:voices": "tsx scripts/audio/cli.ts voices"
+    "audio:voices": "tsx scripts/audio/cli.ts voices",
+    "audio:prune": "tsx scripts/audio/cli.ts prune"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",

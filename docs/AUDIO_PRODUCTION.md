@@ -22,6 +22,7 @@ npm run audio:generate -- --lesson=ordering-coffee,catching-up
 npm run audio:generate -- --collection="Workplace Conversations" --limit=5
 npm run audio:generate -- --all            # entire catalog (~93k characters)
 npm run audio:check                        # validate files, fingerprints, loudness, size
+npm run audio:prune                        # drop recordings whose text changed (after rewrites)
 ```
 
 Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` (git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
@@ -43,7 +44,7 @@ Files are named by durable line IDs, so reordering lines never mismatches audio.
 `src/content/audio-manifest.json` records a fingerprint of the exact text each file was performed from. `attachAudio` in `src/content/audio.ts` wires a file into a lesson only when the fingerprint still matches. If an author edits a line:
 
 - The app ignores the stale file and uses the browser voice for that line.
-- `npm test` fails and tells you to run `npm run audio:generate`.
+- `npm test` fails and tells you to run `npm run audio:generate`, or `npm run audio:prune` if you want to ship the text change before re-recording.
 
 `content/audio-provenance.json` records the provider, model, voice per speaker, and generation date for every lesson.
 
