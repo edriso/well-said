@@ -307,6 +307,66 @@
       "stress": {},
       "full": "a9e84f5f"
     },
+    "explaining-haircut": {
+      "lines": {
+        "daily-021-2": "67b90cd7",
+        "daily-021-1": "6f006e04",
+        "daily-021-4": "d2dabc13",
+        "daily-021-3": "7dabf3ba",
+        "daily-021-5": "342cb9b7"
+      },
+      "expressions": [
+        "6f006e04",
+        "6b9fcdc5"
+      ],
+      "stress": {},
+      "full": "5e151945"
+    },
+    "volunteer-shift": {
+      "lines": {
+        "daily-022-2": "67b90cd7",
+        "daily-022-1": "f3b767de",
+        "daily-022-4": "d2dabc13",
+        "daily-022-3": "09f5081d",
+        "daily-022-5": "e3ff830d"
+      },
+      "expressions": [
+        "f3b767de",
+        "b928d94e"
+      ],
+      "stress": {},
+      "full": "84b2c049"
+    },
+    "mild-symptom": {
+      "lines": {
+        "daily-023-1": "713ff785",
+        "daily-023-2": "67b90cd7",
+        "daily-023-4": "d2dabc13",
+        "daily-023-3": "27e7fed4",
+        "daily-023-5": "52c96af2"
+      },
+      "expressions": [
+        "713ff785",
+        "fc31c63c"
+      ],
+      "stress": {},
+      "full": "5dcbabd1"
+    },
+    "weather-plan": {
+      "lines": {
+        "daily-024-2": "67b90cd7",
+        "daily-024-1": "6d86da6f",
+        "daily-024-4": "d2dabc13",
+        "daily-024-3": "d2b8e3cc",
+        "daily-024-5": "2498d16a"
+      },
+      "expressions": [
+        "6d86da6f",
+        "c5fa98b0"
+      ],
+      "stress": {},
+      "full": "80eb709d"
+    },
     "sharing-gym-equipment": {
       "lines": {
         "daily-025-1": "83adfac7",
@@ -322,6 +382,111 @@
       ],
       "stress": {},
       "full": "88e2009e"
+    },
+    "renegotiating-deadline": {
+      "lines": {
+        "daily-026-1": "15f95079",
+        "daily-026-2": "59a2f097",
+        "daily-026-3": "9478a905",
+        "daily-026-4": "db25de62",
+        "daily-026-5": "b12aa787"
+      },
+      "expressions": [
+        "15f95079",
+        "a422491d"
+      ],
+      "stress": {},
+      "full": "22118575"
+    },
+    "lunch-invitation": {
+      "lines": {
+        "daily-027-1": "1355b238",
+        "daily-027-2": "59a2f097",
+        "daily-027-3": "13398ae8",
+        "daily-027-4": "db25de62",
+        "daily-027-5": "31c16e2c"
+      },
+      "expressions": [
+        "1355b238",
+        "6eacf794"
+      ],
+      "stress": {},
+      "full": "e18e1cb9"
+    },
+    "rideshare-pickup": {
+      "lines": {
+        "daily-028-1": "3ddc071f",
+        "daily-028-2": "59a2f097",
+        "daily-028-3": "96ce65b9",
+        "daily-028-4": "db25de62",
+        "daily-028-5": "0cb2f22b"
+      },
+      "expressions": [
+        "3ddc071f",
+        "7dd278f2"
+      ],
+      "stress": {},
+      "full": "442f560c"
+    },
+    "asking-ingredients": {
+      "lines": {
+        "daily-029-1": "74232060",
+        "daily-029-2": "59a2f097",
+        "daily-029-4": "db25de62",
+        "daily-029-3": "f84decee",
+        "daily-029-5": "c637c984"
+      },
+      "expressions": [
+        "74232060",
+        "e29e4c72"
+      ],
+      "stress": {},
+      "full": "6072c0e9"
+    },
+    "music-down": {
+      "lines": {
+        "daily-030-1": "8d3f5260",
+        "daily-030-2": "59a2f097",
+        "daily-030-3": "e78c66f9",
+        "daily-030-4": "db25de62",
+        "daily-030-5": "b039b890"
+      },
+      "expressions": [
+        "8d3f5260",
+        "b7ad3476"
+      ],
+      "stress": {},
+      "full": "49e61686"
+    },
+    "worth-repairing": {
+      "lines": {
+        "daily-031-1": "6fb09242",
+        "daily-031-2": "59a2f097",
+        "daily-031-3": "adb46566",
+        "daily-031-4": "db25de62",
+        "daily-031-5": "ced10700"
+      },
+      "expressions": [
+        "6fb09242",
+        "fc966b8a"
+      ],
+      "stress": {},
+      "full": "32045ea5"
+    },
+    "damaged-streetlight": {
+      "lines": {
+        "daily-032-1": "aebb8e31",
+        "daily-032-2": "59a2f097",
+        "daily-032-3": "e26d5c2f",
+        "daily-032-4": "db25de62",
+        "daily-032-5": "d843fb55"
+      },
+      "expressions": [
+        "aebb8e31",
+        "480a7c6a"
+      ],
+      "stress": {},
+      "full": "00cbe2cf"
     },
     "asking-specific-help": {
       "lines": {
