@@ -59,6 +59,8 @@ The v1-to-v2 migration preserves completions and reps while dropping the old inf
 
 ## Styling
 
+The production build splits the UI, React, and the curriculum into separate chunks: they load in parallel and stay cached independently, so a UI change does not force learners to re-download the lessons.
+
 Tailwind 4 supplies the CSS pipeline, while the branded design is expressed as small semantic classes in `src/styles.css`. This avoids a runtime component kit and keeps accessibility states auditable. Design tokens live at `:root`. The UI must continue to work at 320 CSS px, 200% zoom, keyboard-only input, and reduced-motion preference.
 
 ## Deliberate constraints
