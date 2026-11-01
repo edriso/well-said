@@ -6,7 +6,7 @@ Well Said is a static React 19 application built by Vite and hosted below the `/
 
 The app has three kinds of state:
 
-- Curriculum is immutable typed data composed in `src/content/lessons.ts`. Four foundational lessons and ten replacement lessons form the editorially reviewed Start Here collection. The remaining roadmap is produced from scenario seeds and category dialogue frames in `src/content/generatedCurriculum.ts`, grouped into packs, and marked `draft` until reviewed.
+- Curriculum is immutable, hand-authored typed data in `src/content/catalog/` (Start Here plus one file per situation family), composed in lesson-number order by `src/content/lessons.ts`, which also assigns collections and attaches model audio.
 - Workout UI state (step, active line, speed, transcript mode) stays in the relevant React component.
 - Durable learning progress is handled by `useProgress` and written to `well-said:progress:v2` in localStorage. Theme and lightweight personalization use separate versioned keys.
 

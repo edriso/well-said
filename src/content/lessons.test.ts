@@ -32,14 +32,35 @@ describe('six-month lesson catalog', () => {
     expect(lessons.map((lesson) => lesson.number)).toEqual(Array.from({ length: lessons.length }, (_, index) => index + 1));
   });
 
-  it('publishes a reviewed 14-workout Start Here collection', () => {
+  it('publishes a 14-workout Start Here collection and no drafts', () => {
     expect(flagshipLessonIds).toHaveLength(14);
     for (const id of flagshipLessonIds) {
       const lesson = getLessonById(id)!;
       expect(lesson.contentStatus).toBe('reviewed');
       expect(lesson.collection).toBe('Start Here');
     }
-    expect(lessons.filter((lesson) => lesson.contentStatus === 'draft')).toHaveLength(170);
+    expect(lessons.filter((lesson) => lesson.contentStatus === 'draft')).toHaveLength(0);
+  });
+
+  it('contains only hand-authored dialogue, with no template remnants', () => {
+    for (const lesson of lessons) {
+      expect(lesson.stressExercise.sentence).not.toMatch(/not the other option/i);
+      expect(lesson.speakers.map((speaker) => speaker.role)).not.toContain('Helper');
+      expect(lesson.speakers.map((speaker) => speaker.role)).not.toContain('Specialist');
+      for (const expression of lesson.expressions) expect(expression.meaning).not.toMatch(/^A natural way to open this specific conversation/);
+    }
+  });
+
+  it('rotates speaking focus within every situation family', () => {
+    // Start Here lessons carry hand-named focuses; the rest of the catalog rotates through ten shared ones.
+    const rotating = lessons.filter((lesson) => lesson.collection !== 'Start Here');
+    const focusCounts = new Map<string, number>();
+    for (const lesson of rotating) focusCounts.set(lesson.focus, (focusCounts.get(lesson.focus) ?? 0) + 1);
+    expect(focusCounts.size).toBe(10);
+    for (const count of focusCounts.values()) expect(count).toBeGreaterThanOrEqual(15);
+    for (const category of LESSON_CATEGORIES) {
+      expect(new Set(rotating.filter((lesson) => lesson.category === category).map((lesson) => lesson.focus)).size).toBeGreaterThanOrEqual(8);
+    }
   });
 
   it('flags near-duplicate full dialogues before publication', () => {

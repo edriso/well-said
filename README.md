@@ -4,9 +4,10 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 
 ## What is included
 
-- One uncluttered daily workout plus a searchable roadmap of 184 distinct workouts
-- More than six calendar months of daily practice without a repeated workout
-- Model audio, generated with ElevenLabs and loudness-normalized, for all of Start Here and a growing share of the catalog (labeled “Model audio” in the library)
+- One uncluttered daily workout plus a searchable library of 184 hand-written dialogues across ten everyday situation families
+- More than six calendar months of daily practice without a repeated workout, with speaking focus and difficulty (A2–C1) rotating through the catalog
+- A guided Start Here path: new learners meet 14 gentle, fully voiced workouts first
+- Model audio, generated with ElevenLabs and loudness-normalized, labeled “Model audio” in the library
 - Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
@@ -18,7 +19,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - Responsive WCAG-conscious UI, reduced-motion support, and an installable web manifest
 - Typed lesson content, tests, CI, Pages deployment, and audio-production guidance
 
-New learners start with the 14-workout Start Here collection, which has received a dedicated editorial pass and has model audio for every line, the full dialogue, and every expression. The other curriculum packs remain explicitly marked as drafts; some already have model audio, and the rest use a clearly labeled browser speech demo until their audio is generated. Audio is wired in by a manifest, so new or human-studio recordings never require UI changes.
+Every workout is an individually written, independently reviewed conversation with its own coach notes, reusable expressions, and contrastive-stress challenge. The Start Here collection has model audio for every line, the full dialogue, and every expression. The rest of the catalog uses a clearly labeled browser speech demo until its audio is generated (about 66,000 ElevenLabs characters for the full catalog; see [audio production](docs/AUDIO_PRODUCTION.md)). Audio is wired in by a manifest, so new or human-studio recordings never require UI changes.
 
 ## Start locally
 
@@ -57,7 +58,7 @@ See [audio production](docs/AUDIO_PRODUCTION.md) for selection flags, voices, pr
 src/
   app/          Application shell and URL state
   components/   Reusable presentation components
-  content/      Typed lessons, generated catalog, audio manifest, and validation
+  content/      Hand-written catalog (catalog/), composition, audio manifest, and tests
   hooks/        Audio, recording, and local progress adapters
   lib/          Small framework-free helpers
   screens/      Home and workout screen composition
