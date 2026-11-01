@@ -181,8 +181,107 @@
         "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
       }
     },
+    "explaining-haircut": {
+      "generatedAt": "2026-11-01T16:27:46.331Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "volunteer-shift": {
+      "generatedAt": "2026-11-01T16:27:50.054Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "mild-symptom": {
+      "generatedAt": "2026-11-01T16:27:53.830Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "weather-plan": {
+      "generatedAt": "2026-11-01T16:27:57.616Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
     "sharing-gym-equipment": {
       "generatedAt": "2026-11-01T16:15:03.281Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "renegotiating-deadline": {
+      "generatedAt": "2026-11-01T16:28:01.132Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "lunch-invitation": {
+      "generatedAt": "2026-11-01T16:28:04.510Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "rideshare-pickup": {
+      "generatedAt": "2026-11-01T16:28:07.974Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "asking-ingredients": {
+      "generatedAt": "2026-11-01T16:28:11.763Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "music-down": {
+      "generatedAt": "2026-11-01T16:28:15.009Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "worth-repairing": {
+      "generatedAt": "2026-11-01T16:28:18.368Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "damaged-streetlight": {
+      "generatedAt": "2026-11-01T16:28:21.979Z",
       "provider": "ElevenLabs",
       "model": "eleven_multilingual_v2",
       "voices": {
