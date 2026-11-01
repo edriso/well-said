@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Clock3, Headphones, Search, Settings2, Sparkles, Volume2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { hasModelAudio } from '../content/audio';
 import { lessons } from '../content/lessons';
 import { LESSON_CATEGORIES, type Lesson, type ProgressState } from '../content/types';
 import { selectDailyLesson } from '../content/recommendations';
@@ -8,6 +9,8 @@ import { ThemeToggle } from '../components/ThemeToggle';
 import type { usePreferences } from '../hooks/usePreferences';
 import { countCompletedWorkouts, countPracticeDaysThisWeek, countPracticedLines } from '../hooks/useProgress';
 import type { useTheme } from '../hooks/useTheme';
+
+const usesModelAudio = lessons.some(hasModelAudio);
 
 type Props = {
   progress: ProgressState;
@@ -68,7 +71,7 @@ export function HomeScreen({ progress, onOpenLesson, preferencesApi, themeApi }:
           <button className="primary-button large" onClick={() => onOpenLesson(today)}>
             {completedToday ? 'Practice again' : 'Start workout'} <ArrowRight size={20} />
           </button>
-          <p className="audio-note"><Headphones size={15} /> Demo voice is active until studio audio is added.</p>
+          <p className="audio-note"><Headphones size={15} aria-hidden="true" /> {hasModelAudio(today) ? 'Model audio performed with synthetic voices.' : 'Browser demo voice until model audio is added.'}</p>
         </article>
       </section>
 
@@ -118,7 +121,7 @@ export function HomeScreen({ progress, onOpenLesson, preferencesApi, themeApi }:
             return (
               <button className="lesson-card" key={lesson.id} onClick={() => onOpenLesson(lesson)}>
                 <span className="lesson-card-index">{complete ? <Check size={17} /> : String(lesson.number).padStart(2, '0')}</span>
-                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.category} · {lesson.focus} · {lesson.estimatedMinutes} min</small></span>
+                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.category} · {lesson.focus} · {lesson.estimatedMinutes} min{hasModelAudio(lesson) ? ' · Model audio' : ''}</small></span>
                 <ArrowRight className="card-arrow" size={19} />
               </button>
             );
@@ -128,7 +131,13 @@ export function HomeScreen({ progress, onOpenLesson, preferencesApi, themeApi }:
         {visibleCount < filteredLessons.length && <button className="secondary-button load-more" onClick={() => setVisibleCount((count) => count + 12)}>Show 12 more <ArrowRight /></button>}
       </section>
 
-      <footer className="page-width"><Brand /><p>Show up. Speak out. Leave a little clearer.</p></footer>
+      <footer className="page-width">
+        <Brand />
+        <div className="footer-copy">
+          <p>Show up. Speak out. Leave a little clearer.</p>
+          {usesModelAudio && <small>Model audio voiced with <a href="https://elevenlabs.io" target="_blank" rel="noreferrer">ElevenLabs</a>.</small>}
+        </div>
+      </footer>
     </main>
   );
 }

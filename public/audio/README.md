@@ -1,5 +1,5 @@
-# Final audio target
+# Model audio
 
-No binary placeholder audio is committed. Missing `audio` fields intentionally trigger the browser speech demo so the application remains fully testable without pretending silence is model speech.
+Generated delivery files live in `lessons/<lesson-id>/`. They are produced by `npm run audio:generate` and registered in `src/content/audio-manifest.json`. Do not add, rename, or edit files here by hand; follow `docs/AUDIO_PRODUCTION.md`.
 
-Follow `docs/AUDIO_PRODUCTION.md` and the lesson-specific briefs in `content/audio-briefs/`. Keep this file when adding subdirectories so the contract stays discoverable.
+Lessons without files intentionally use the browser speech demo, so the app never pretends silence is model speech.

@@ -6,6 +6,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 
 - One uncluttered daily workout plus a searchable roadmap of 184 distinct workouts
 - More than six calendar months of daily practice without a repeated workout
+- Model audio for the 14-workout Start Here collection, generated with ElevenLabs and loudness-normalized
 - Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
@@ -17,7 +18,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - Responsive WCAG-conscious UI, reduced-motion support, and an installable web manifest
 - Typed lesson content, tests, CI, Pages deployment, and audio-production guidance
 
-The current model audio is a clearly labeled browser speech placeholder. The 14-workout Start Here collection has received a dedicated editorial pass; the other curriculum packs remain explicitly marked as drafts. Studio files can be dropped in later without changing the lesson UI.
+New learners start with the 14-workout Start Here collection, which has received a dedicated editorial pass and has model audio for every line, the full dialogue, and every expression. The other curriculum packs remain explicitly marked as drafts and use a clearly labeled browser speech demo until their audio is generated. Audio is wired in by a manifest, so new or human-studio recordings never require UI changes.
 
 ## Start locally
 
@@ -37,19 +38,34 @@ npm run build
 npm run check
 ```
 
+## Model audio
+
+Audio generation needs ffmpeg and an ElevenLabs API key. The key is used only by local Node scripts and never reaches the browser bundle.
+
+```bash
+cp .env.example .env.local     # add ELEVENLABS_API_KEY
+npm run audio:plan             # cost, size, and remaining credits
+npm run audio:generate         # Start Here by default; see the guide for options
+npm run audio:check            # files, fingerprints, loudness, and size
+```
+
+See [audio production](docs/AUDIO_PRODUCTION.md) for selection flags, voices, processing, and licensing.
+
 ## Project map
 
 ```text
 src/
   app/          Application shell and URL state
   components/   Reusable presentation components
-  content/      Typed core lessons, seed-driven catalog, and validation
+  content/      Typed lessons, generated catalog, audio manifest, and validation
   hooks/        Audio, recording, and local progress adapters
+  lib/          Small framework-free helpers
   screens/      Home and workout screen composition
   workout/      The five workout steps
+scripts/audio/  ElevenLabs + ffmpeg model-audio pipeline (Node only)
 docs/           Architecture, authoring, audio, and deployment guides
-content/        Human/AI production briefs for lesson audio
-public/audio/   Final audio target (placeholder documentation only)
+content/        Audio performance briefs and audio provenance
+public/audio/   Generated model audio, one folder per lesson
 ```
 
 Read [Architecture](docs/ARCHITECTURE.md), [curriculum design](docs/CURRICULUM.md), [lesson authoring](docs/CONTENT_GUIDE.md), [audio production](docs/AUDIO_PRODUCTION.md), and [deployment](docs/DEPLOYMENT.md) before making substantial changes.

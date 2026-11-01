@@ -28,7 +28,7 @@ Coach notes should be short and performable:
 
 ## IDs and ordering
 
-Lesson and line IDs are durable data keys used by local progress and future audio files. Never reuse an old ID for different content. Changing visible copy is safe; changing IDs effectively creates a new lesson for existing learners.
+Lesson and line IDs are durable data keys used by local progress and audio file names. Never reuse an old ID for different content. Changing visible copy is safe; changing IDs effectively creates a new lesson for existing learners.
 
 Daily rotation uses a continuous local civil-day ordinal modulo the lesson count. It does not reset on January 1. Adding or reordering a lesson changes future calendar assignments but preserves stored completion data by stable ID.
 
@@ -41,3 +41,7 @@ The catalog is intentionally interleaved by category. Do not regroup it into cat
 ## Future timing metadata
 
 Word-level highlighting should only be added after studio audio has reviewed timestamps. Store timings with content, in seconds from the beginning of each final file. Do not infer timing from text length in the UI.
+
+## After editing a voiced lesson
+
+Changing a line, expression, or stress sentence in a lesson that has model audio makes its recording stale. The app falls back to the browser voice for that item and `npm test` fails until you run `npm run audio:generate -- --lesson=<id>` and commit the updated files and manifest.

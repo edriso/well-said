@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "lessons": {
+    "small-talk-at-work": {
+      "generatedAt": "2026-11-01T16:14:54.913Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "ordering-coffee": {
+      "generatedAt": "2026-11-01T16:14:56.427Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "moving-a-meeting": {
+      "generatedAt": "2026-11-01T16:14:58.009Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "catching-up": {
+      "generatedAt": "2026-11-01T16:14:59.862Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "June": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Daniel": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "right-platform": {
+      "generatedAt": "2026-11-01T16:15:01.859Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "sharing-gym-equipment": {
+      "generatedAt": "2026-11-01T16:15:03.281Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "asking-specific-help": {
+      "generatedAt": "2026-11-01T16:15:05.088Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Noura": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Adam": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)"
+      }
+    },
+    "noisy-room": {
+      "generatedAt": "2026-11-01T16:15:06.895Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Noura": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Adam": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)"
+      }
+    },
+    "spelling-a-name": {
+      "generatedAt": "2026-11-01T16:15:08.647Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Priya": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Leo": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "food-tradition": {
+      "generatedAt": "2026-11-01T16:15:10.404Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Farah": "Bella - Professional, Bright, Warm (hpp4J3VqNfWAUOO0d1Us)",
+        "Eli": "Roger - Laid-Back, Casual, Resonant (CwhRBWXzGAHq8TQ4Fs17)"
+      }
+    },
+    "wrong-order-correction": {
+      "generatedAt": "2026-11-01T16:15:12.002Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Ngozi": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Marta": "Alice - Clear, Engaging Educator (Xb7hH8MSUJpSbSDYk0k2)"
+      }
+    },
+    "late-apology": {
+      "generatedAt": "2026-11-01T16:15:13.770Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Ngozi": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Marta": "Alice - Clear, Engaging Educator (Xb7hH8MSUJpSbSDYk0k2)"
+      }
+    },
+    "repairing-misunderstanding": {
+      "generatedAt": "2026-11-01T16:15:15.584Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Sofia": "Alice - Clear, Engaging Educator (Xb7hH8MSUJpSbSDYk0k2)",
+        "Karim": "Roger - Laid-Back, Casual, Resonant (CwhRBWXzGAHq8TQ4Fs17)"
+      }
+    },
+    "complicated-choice": {
+      "generatedAt": "2026-11-01T16:15:17.840Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Mina": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Zoe": "Alice - Clear, Engaging Educator (Xb7hH8MSUJpSbSDYk0k2)"
+      }
+    }
+  }
+}

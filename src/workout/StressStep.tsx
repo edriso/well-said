@@ -42,7 +42,7 @@ export function StressStep({ lesson, audio, onNext }: StepProps) {
           </div>
         )}
         {!exercise.options.some((option) => option.audio) && (
-          <p className="stress-visual-note">This is a meaning exercise for now—say each version out loud and land the beat on the highlighted word. Studio audio for every version is coming.</p>
+          <p className="stress-visual-note">This is a meaning exercise for now—say each version out loud and land the beat on the highlighted word. Model audio for each version is coming.</p>
         )}
       </article>
 
