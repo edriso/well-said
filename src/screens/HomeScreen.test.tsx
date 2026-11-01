@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import { describe, expect, it, vi } from 'vitest';
-import { getTodaysLesson } from '../content/lessons';
+import { flagshipLessonIds, getLessonById } from '../content/lessons';
 import { emptyProgress } from '../hooks/useProgress';
 import { defaultPreferences } from '../hooks/usePreferences';
 import { HomeScreen } from './HomeScreen';
@@ -18,7 +18,8 @@ describe('HomeScreen', () => {
 
     expect(screen.getByRole('heading', { name: /sound a little more natural/i })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: /start workout/i }));
-    expect(onOpenLesson).toHaveBeenCalledWith(getTodaysLesson());
+    expect(onOpenLesson).toHaveBeenCalledWith(getLessonById(flagshipLessonIds[0]!));
+    expect(screen.getByText(/model audio performed with synthetic voices/i)).toBeInTheDocument();
   });
 
   it('has no automatically detectable accessibility violations', async () => {

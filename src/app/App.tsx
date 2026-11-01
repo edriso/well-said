@@ -6,6 +6,7 @@ import { usePreferences } from '../hooks/usePreferences';
 import { useTheme } from '../hooks/useTheme';
 import { HomeScreen } from '../screens/HomeScreen';
 import { WorkoutScreen } from '../screens/WorkoutScreen';
+import { scrollToTop } from '../lib/motion';
 
 export function App() {
   const [activeLesson, setActiveLesson] = useState<Lesson | undefined>(() => {
@@ -15,11 +16,6 @@ export function App() {
   const progressApi = useProgress();
   const preferencesApi = usePreferences();
   const themeApi = useTheme();
-
-  const scrollToTop = () => window.scrollTo({
-    top: 0,
-    behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-  });
 
   const openLesson = (lesson: Lesson) => {
     setActiveLesson(lesson);

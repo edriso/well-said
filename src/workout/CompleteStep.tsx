@@ -8,10 +8,11 @@ type Props = {
   lesson: Lesson;
   progressApi: ReturnType<typeof useProgress>;
   onClose: () => void;
+  onRestart: () => void;
   audio: AudioController;
 };
 
-export function CompleteStep({ lesson, progressApi, onClose, audio }: Props) {
+export function CompleteStep({ lesson, progressApi, onClose, onRestart, audio }: Props) {
   useEffect(() => {
     progressApi.complete(lesson);
     // Completion preserves the first completion date while updating recent practice.
@@ -55,7 +56,7 @@ export function CompleteStep({ lesson, progressApi, onClose, audio }: Props) {
 
       <div className="completion-actions">
         <button className="primary-button large" onClick={onClose}>Back home <Home /></button>
-        <button className="secondary-button" onClick={() => window.location.reload()}><RotateCcw /> Repeat workout</button>
+        <button className="secondary-button" onClick={onRestart}><RotateCcw /> Repeat workout</button>
       </div>
       <p className="come-back"><Headphones /> Come back tomorrow. We’ll have another conversation ready.</p>
     </section>

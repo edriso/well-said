@@ -4,6 +4,7 @@ import type { Lesson } from '../content/types';
 import { Brand } from '../components/Brand';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useLessonAudio } from '../hooks/useLessonAudio';
+import { scrollToTop } from '../lib/motion';
 import type { useProgress } from '../hooks/useProgress';
 import type { useTheme } from '../hooks/useTheme';
 import { CompleteStep } from '../workout/CompleteStep';
@@ -31,7 +32,7 @@ export function WorkoutScreen({ lesson, onClose, progressApi, themeApi }: Props)
     audio.stop();
     setStep(next);
     progressApi.saveStep(lesson, next);
-    window.scrollTo({ top: 0, behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    scrollToTop();
     window.setTimeout(() => document.getElementById(stepHeadingIds[next]!)?.focus(), 0);
   };
 
@@ -66,7 +67,7 @@ export function WorkoutScreen({ lesson, onClose, progressApi, themeApi }: Props)
           {step === 1 && <PracticeStep {...shared} progressApi={progressApi} />}
           {step === 2 && <ShadowStep {...shared} />}
           {step === 3 && <StressStep {...shared} />}
-          {step === 4 && <CompleteStep lesson={lesson} progressApi={progressApi} onClose={onClose} audio={audio} />}
+          {step === 4 && <CompleteStep lesson={lesson} progressApi={progressApi} onClose={onClose} onRestart={() => moveTo(0)} audio={audio} />}
         </div>
       </div>
     </main>
