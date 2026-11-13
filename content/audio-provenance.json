@@ -37,6 +37,33 @@
         "Daniel": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
       }
     },
+    "finding-pharmacy-item": {
+      "generatedAt": "2026-11-13T09:04:33.566Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "todays-priorities": {
+      "generatedAt": "2026-11-13T09:04:38.667Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "seat-free": {
+      "generatedAt": "2026-11-13T09:04:43.150Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
     "right-platform": {
       "generatedAt": "2026-11-01T16:15:01.859Z",
       "provider": "ElevenLabs",
@@ -46,8 +73,188 @@
         "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
       }
     },
+    "quick-lunch-order": {
+      "generatedAt": "2026-11-13T09:04:47.859Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "bathroom-schedule": {
+      "generatedAt": "2026-11-13T09:04:53.097Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "phone-plans": {
+      "generatedAt": "2026-11-13T09:04:57.750Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "community-picnic": {
+      "generatedAt": "2026-11-13T09:05:02.979Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "doctor-appointment": {
+      "generatedAt": "2026-11-13T09:05:07.246Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "choosing-movie": {
+      "generatedAt": "2026-11-13T09:05:13.307Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Maya": "Jessica - Playful, Bright, Warm (cgSgspJ2msm6clMCkdW9)",
+        "Noah": "Eric - Smooth, Trustworthy (cjVigY5qzO86Huf0OWal)"
+      }
+    },
+    "paying-at-supermarket": {
+      "generatedAt": "2026-11-13T09:05:18.493Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "stand-up-update": {
+      "generatedAt": "2026-11-13T09:05:22.884Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "ending-hallway-chat": {
+      "generatedAt": "2026-11-13T09:05:27.595Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "missed-stop": {
+      "generatedAt": "2026-11-13T09:05:31.999Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "table-for-two": {
+      "generatedAt": "2026-11-13T09:05:36.748Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "dividing-chores": {
+      "generatedAt": "2026-11-13T09:05:41.568Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "explaining-haircut": {
+      "generatedAt": "2026-11-13T09:05:46.226Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "volunteer-shift": {
+      "generatedAt": "2026-11-13T09:05:51.066Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "mild-symptom": {
+      "generatedAt": "2026-11-13T09:05:55.881Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
+    "weather-plan": {
+      "generatedAt": "2026-11-13T09:06:00.914Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Alex": "Chris - Charming, Down-to-Earth (iP95p4xoKVk53GoZ742B)",
+        "Sam": "Matilda - Knowledgable, Professional (XrExE9yKIg1WjnnlVkGX)"
+      }
+    },
     "sharing-gym-equipment": {
       "generatedAt": "2026-11-01T16:15:03.281Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "renegotiating-deadline": {
+      "generatedAt": "2026-11-13T09:06:05.348Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "lunch-invitation": {
+      "generatedAt": "2026-11-13T09:06:09.508Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "rideshare-pickup": {
+      "generatedAt": "2026-11-13T09:06:14.376Z",
+      "provider": "ElevenLabs",
+      "model": "eleven_multilingual_v2",
+      "voices": {
+        "Lina": "Sarah - Mature, Reassuring, Confident (EXAVITQu4vr4xnSDxMaL)",
+        "Omar": "Will - Relaxed Optimist (bIHbv24MWmeRgasZH58o)"
+      }
+    },
+    "asking-ingredients": {
+      "generatedAt": "2026-11-13T09:06:18.298Z",
       "provider": "ElevenLabs",
       "model": "eleven_multilingual_v2",
       "voices": {

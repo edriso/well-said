@@ -66,6 +66,58 @@
       "stress": {},
       "full": "fc91a03c"
     },
+    "finding-pharmacy-item": {
+      "lines": {
+        "daily-005-2": "f1794924",
+        "daily-005-1": "97fee600",
+        "daily-005-3": "5a62be8a",
+        "daily-005-4": "b80c91fe",
+        "daily-005-6": "ec669c97",
+        "daily-005-5": "f128b198",
+        "daily-005-7": "589dc2b0"
+      },
+      "expressions": [
+        "e33dfe55",
+        "4853bd2f",
+        "4df29062"
+      ],
+      "stress": {},
+      "full": "2b8fb9bb"
+    },
+    "todays-priorities": {
+      "lines": {
+        "daily-006-1": "9a4cce89",
+        "daily-006-2": "bdfc1ece",
+        "daily-006-3": "8fd0fb21",
+        "daily-006-4": "b20c3d9e",
+        "daily-006-5": "20a4dbd5",
+        "daily-006-6": "ec05cc1e"
+      },
+      "expressions": [
+        "b1d9c4b5",
+        "d5d974c5",
+        "d65ffa88"
+      ],
+      "stress": {},
+      "full": "c98bf9df"
+    },
+    "seat-free": {
+      "lines": {
+        "daily-007-1": "1c4f45ef",
+        "daily-007-2": "93e1feea",
+        "daily-007-3": "b474e3db",
+        "daily-007-4": "489d0a3a",
+        "daily-007-5": "dfb87ce3",
+        "daily-007-6": "2a278d2c"
+      },
+      "expressions": [
+        "24dbb63e",
+        "570c2120",
+        "7b296ec2"
+      ],
+      "stress": {},
+      "full": "b452f973"
+    },
     "right-platform": {
       "lines": {
         "daily-008-1": "becf5b8d",
@@ -82,6 +134,290 @@
       "stress": {},
       "full": "f729166c"
     },
+    "quick-lunch-order": {
+      "lines": {
+        "daily-009-2": "5cc8d34c",
+        "daily-009-1": "d5383816",
+        "daily-009-3": "b248722d",
+        "daily-009-4": "adc11a43",
+        "daily-009-6": "306eb6de",
+        "daily-009-5": "54163651"
+      },
+      "expressions": [
+        "52409eff",
+        "4c828939",
+        "d2dec341"
+      ],
+      "stress": {},
+      "full": "a848ab0d"
+    },
+    "bathroom-schedule": {
+      "lines": {
+        "daily-010-1": "58892311",
+        "daily-010-2": "acdc986e",
+        "daily-010-4": "417a5c00",
+        "daily-010-3": "e4b7c0d0",
+        "daily-010-6": "b5ad0b64",
+        "daily-010-5": "397226be",
+        "daily-010-7": "19e40484"
+      },
+      "expressions": [
+        "164253eb",
+        "08b90e94",
+        "db92c712"
+      ],
+      "stress": {},
+      "full": "6af922ac"
+    },
+    "phone-plans": {
+      "lines": {
+        "daily-011-1": "579cb086",
+        "daily-011-2": "7e3bdf58",
+        "daily-011-3": "f40b4060",
+        "daily-011-4": "97dcb2fb",
+        "daily-011-6": "d0d3e7ca",
+        "daily-011-5": "1e00b33a",
+        "daily-011-7": "2c83acbc"
+      },
+      "expressions": [
+        "fec7f0fc",
+        "dc9c41fb",
+        "0912ce00"
+      ],
+      "stress": {},
+      "full": "4c079d98"
+    },
+    "community-picnic": {
+      "lines": {
+        "daily-012-1": "a035ce57",
+        "daily-012-2": "c784412c",
+        "daily-012-3": "c3835244",
+        "daily-012-4": "dbc70053",
+        "daily-012-5": "719ed85d",
+        "daily-012-6": "62168997",
+        "daily-012-7": "9bd93e82"
+      },
+      "expressions": [
+        "3defed41",
+        "370ab281",
+        "ff3a64a3"
+      ],
+      "stress": {},
+      "full": "095b45a6"
+    },
+    "doctor-appointment": {
+      "lines": {
+        "daily-013-1": "a536717c",
+        "daily-013-2": "1a9c07be",
+        "daily-013-3": "e4477efd",
+        "daily-013-4": "953defaf",
+        "daily-013-5": "bee10882",
+        "daily-013-6": "b331707b"
+      },
+      "expressions": [
+        "891eff6b",
+        "4cd2c062",
+        "2eae0387"
+      ],
+      "stress": {},
+      "full": "12476bc1"
+    },
+    "choosing-movie": {
+      "lines": {
+        "daily-014-1": "9da83d48",
+        "daily-014-2": "ecff6bb0",
+        "daily-014-3": "a9459d48",
+        "daily-014-4": "b445ce21",
+        "daily-014-5": "251526df",
+        "daily-014-6": "191064d2",
+        "daily-014-7": "b26bbc61"
+      },
+      "expressions": [
+        "1b0a05b4",
+        "f7332f99",
+        "85669c61"
+      ],
+      "stress": {},
+      "full": "8bfbe9af"
+    },
+    "paying-at-supermarket": {
+      "lines": {
+        "daily-015-1": "54741682",
+        "daily-015-2": "9dbe06a4",
+        "daily-015-3": "673117d2",
+        "daily-015-4": "512ec918",
+        "daily-015-5": "402ab857",
+        "daily-015-6": "56cf481e",
+        "daily-015-7": "25fa5945"
+      },
+      "expressions": [
+        "438875d2",
+        "2356e2d9",
+        "e7e3cb85"
+      ],
+      "stress": {},
+      "full": "50ac603e"
+    },
+    "stand-up-update": {
+      "lines": {
+        "daily-016-1": "c3fe37cf",
+        "daily-016-2": "22a3a70a",
+        "daily-016-3": "ea5fa6ee",
+        "daily-016-4": "afa86a3b",
+        "daily-016-5": "6b47a447",
+        "daily-016-6": "103364f9"
+      },
+      "expressions": [
+        "3f393471",
+        "fba7f744",
+        "34b0f1e9"
+      ],
+      "stress": {},
+      "full": "18216acc"
+    },
+    "ending-hallway-chat": {
+      "lines": {
+        "daily-017-1": "f8a1531e",
+        "daily-017-2": "4416472c",
+        "daily-017-3": "0ac7acf3",
+        "daily-017-4": "51c5d9ea",
+        "daily-017-5": "05ca417d",
+        "daily-017-6": "323ab255",
+        "daily-017-7": "cdee9383"
+      },
+      "expressions": [
+        "d1e42672",
+        "68f8e0fc",
+        "afbd900f"
+      ],
+      "stress": {},
+      "full": "f42e3b08"
+    },
+    "missed-stop": {
+      "lines": {
+        "daily-018-1": "eccfaa37",
+        "daily-018-2": "9b0db17a",
+        "daily-018-3": "ec16df10",
+        "daily-018-4": "89b799e6",
+        "daily-018-5": "740616cf",
+        "daily-018-6": "9193f80e"
+      },
+      "expressions": [
+        "4ff73ed9",
+        "f0e2df7d",
+        "19a1e6eb"
+      ],
+      "stress": {},
+      "full": "44a4e6fc"
+    },
+    "table-for-two": {
+      "lines": {
+        "daily-019-1": "7057efcc",
+        "daily-019-2": "97168b49",
+        "daily-019-4": "9e48bc62",
+        "daily-019-3": "52567405",
+        "daily-019-6": "a9f8e84c",
+        "daily-019-5": "9cd3157d",
+        "daily-019-7": "03df91e1"
+      },
+      "expressions": [
+        "b90fef2f",
+        "81e75bf7",
+        "f64f514c"
+      ],
+      "stress": {},
+      "full": "66b2d09d"
+    },
+    "dividing-chores": {
+      "lines": {
+        "daily-020-1": "57577c6a",
+        "daily-020-2": "312cb990",
+        "daily-020-3": "24b9d6aa",
+        "daily-020-4": "7474ffff",
+        "daily-020-5": "c0d2a2de",
+        "daily-020-6": "cdaaa46d",
+        "daily-020-7": "0ee9a1ab"
+      },
+      "expressions": [
+        "c88bab52",
+        "5ff7f17a",
+        "5fd7ccdd"
+      ],
+      "stress": {},
+      "full": "cf399a34"
+    },
+    "explaining-haircut": {
+      "lines": {
+        "daily-021-1": "b5054c8c",
+        "daily-021-2": "8b030c47",
+        "daily-021-3": "bcbbfaaa",
+        "daily-021-4": "6bdde612",
+        "daily-021-5": "583f4361",
+        "daily-021-6": "e1271f42",
+        "daily-021-7": "b3a024a7"
+      },
+      "expressions": [
+        "cf7803fe",
+        "505ceb95",
+        "17637c53"
+      ],
+      "stress": {},
+      "full": "c91f1fd5"
+    },
+    "volunteer-shift": {
+      "lines": {
+        "daily-022-1": "f602fe5d",
+        "daily-022-2": "05a61890",
+        "daily-022-3": "eff8f486",
+        "daily-022-4": "6b75177f",
+        "daily-022-6": "141f2aa6",
+        "daily-022-5": "8b19d247",
+        "daily-022-7": "ce03b465"
+      },
+      "expressions": [
+        "aec85cad",
+        "7c8401ea",
+        "c3af66fd"
+      ],
+      "stress": {},
+      "full": "a4d3181d"
+    },
+    "mild-symptom": {
+      "lines": {
+        "daily-023-1": "9fa50ad6",
+        "daily-023-2": "eff2a5e0",
+        "daily-023-3": "37889c42",
+        "daily-023-4": "b99e8ef7",
+        "daily-023-5": "1c84897c",
+        "daily-023-6": "7a2240e7",
+        "daily-023-7": "d4e117eb"
+      },
+      "expressions": [
+        "f809c948",
+        "4962ec18",
+        "3a18c33d"
+      ],
+      "stress": {},
+      "full": "472761b5"
+    },
+    "weather-plan": {
+      "lines": {
+        "daily-024-1": "5ae792ea",
+        "daily-024-2": "11dcfcc9",
+        "daily-024-3": "1ce394e4",
+        "daily-024-4": "f59a16f5",
+        "daily-024-5": "c5ff9a43",
+        "daily-024-6": "27a0e27f",
+        "daily-024-7": "1d83d239"
+      },
+      "expressions": [
+        "2cebb827",
+        "a5471e66",
+        "3c4d44fe"
+      ],
+      "stress": {},
+      "full": "dd205f51"
+    },
     "sharing-gym-equipment": {
       "lines": {
         "daily-025-1": "83adfac7",
@@ -97,6 +433,77 @@
       ],
       "stress": {},
       "full": "88e2009e"
+    },
+    "renegotiating-deadline": {
+      "lines": {
+        "daily-026-1": "25fd3d4c",
+        "daily-026-2": "739f1747",
+        "daily-026-3": "0e9dbb33",
+        "daily-026-4": "3b439831",
+        "daily-026-5": "dab77d24",
+        "daily-026-6": "1baf25c9",
+        "daily-026-7": "017e8016"
+      },
+      "expressions": [
+        "a9de055b",
+        "a16f916b",
+        "29c4e3a6"
+      ],
+      "stress": {},
+      "full": "39faba6a"
+    },
+    "lunch-invitation": {
+      "lines": {
+        "daily-027-2": "546c3839",
+        "daily-027-1": "2fb203d0",
+        "daily-027-3": "d49b0371",
+        "daily-027-4": "2755c0b0",
+        "daily-027-5": "4778613b",
+        "daily-027-6": "665a92cb"
+      },
+      "expressions": [
+        "4f97b06a",
+        "ffd58ba9",
+        "6c4ae81c"
+      ],
+      "stress": {},
+      "full": "e4db039a"
+    },
+    "rideshare-pickup": {
+      "lines": {
+        "daily-028-2": "d01be381",
+        "daily-028-1": "ebadcb27",
+        "daily-028-3": "dcbfe1e5",
+        "daily-028-4": "b5e4a768",
+        "daily-028-6": "6b037449",
+        "daily-028-5": "90fedeb8",
+        "daily-028-7": "815bbbb8"
+      },
+      "expressions": [
+        "eb4bbdfc",
+        "cedbb452",
+        "2762fb27"
+      ],
+      "stress": {},
+      "full": "a67b1b38"
+    },
+    "asking-ingredients": {
+      "lines": {
+        "daily-029-1": "e0750419",
+        "daily-029-2": "055dc4e7",
+        "daily-029-3": "5087eb0d",
+        "daily-029-4": "8db8afb2",
+        "daily-029-5": "079703da",
+        "daily-029-7": "fe9a5cbb",
+        "daily-029-6": "d99f4e0e"
+      },
+      "expressions": [
+        "44fecee2",
+        "801b129d",
+        "f87ed1b0"
+      ],
+      "stress": {},
+      "full": "a502c07b"
     },
     "asking-specific-help": {
       "lines": {
