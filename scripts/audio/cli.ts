@@ -11,11 +11,12 @@
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
  *   --non-commercial       lessons whose audio came from a free/pay-as-you-go plan (re-voice with --force --fresh)
  * Options:
- *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear).
- *                   content/stress-audio-rejected.json rejects a take ("reason") or asks for a
- *                   re-take ({ "reason", "take": 2 }); re-takes use a new seed, so they differ
+ *   --no-stress     skip Stress Mode takes (kept as they are). By default every performable
+ *                   option is voiced; content/stress-audio-rejected.json rejects a take ("reason")
+ *                   or asks for a re-take ({ "reason", "take": 2 }) with a new seed.
+ *                   (--with-stress is still accepted; stress is on by default.)
  *   --retakes       only lessons whose Stress Mode takes differ from the review file: requested
- *                   re-takes, restored takes, or edited stress sentences (implies --with-stress)
+ *                   re-takes, restored takes, or edited stress sentences
  *   --force         re-process files even when the recorded text is unchanged (uses the raw cache)
  *   --fresh         with --force, ignore the raw cache and synthesize again (spends credits)
  *
@@ -65,6 +66,7 @@ const { positionals, values: flags } = parseArgs({
     force: { type: 'boolean', default: false },
     fresh: { type: 'boolean', default: false },
     'with-stress': { type: 'boolean', default: false },
+    'no-stress': { type: 'boolean', default: false },
     retakes: { type: 'boolean', default: false },
   },
 });
@@ -79,7 +81,33 @@ const formatBytes = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
 const rejectedStress = existsSync(REJECTED_STRESS_PATH) ? readJson<RejectedStress>(REJECTED_STRESS_PATH).lessons : {};
 
-const withStress = flags['with-stress'] || flags.retakes;
+if (flags['no-stress'] && (flags['with-stress'] || flags.retakes)) {
+  console.error('--no-stress cannot be combined with --with-stress or --retakes.');
+  process.exit(1);
+}
+const withStress = !flags['no-stress'];
+
+/** Repository space per voiced lesson, Stress Mode included (measured on the full catalog). */
+const MB_PER_LESSON = 0.75;
+
+/** Free and pay-as-you-go audio is licensed for non-commercial use with attribution only. */
+const isCommercialPlan = (tier: string) => !['free', 'payg'].includes(tier);
+
+/** Voice IDs from provenance labels such as "Jessica - Warm (cgSgspJ2msm6clMCkdW9)". */
+const voiceIdsOf = (voices: Record<string, string>) =>
+  Object.fromEntries(Object.entries(voices).map(([speaker, label]) => [speaker, label.match(/\(([^()]+)\)$/)?.[1] ?? label]));
+
+/**
+ * True when the lesson was voiced with this model and these voice IDs. IDs are
+ * compared rather than display names, so a voice renamed by ElevenLabs does
+ * not trigger a re-voice.
+ */
+const castMatches = (lesson: Lesson, cast: Map<string, Voice>, previous: Provenance['lessons'][string] | undefined) => {
+  if (!previous || previous.model !== config.modelId) return false;
+  const ids = voiceIdsOf(previous.voices);
+  return Object.keys(ids).length === lesson.speakers.length
+    && lesson.speakers.every((speaker) => ids[speaker.name] === cast.get(speaker.id)!.id);
+};
 const stressTake = (lesson: Lesson, word: string) => requestedStressTake(rejectedStress, lesson.id, stressSlug(word));
 
 /**
@@ -188,6 +216,22 @@ const rawPath = (job: Job) => join(RAW_CACHE_DIR, `${fingerprint(JSON.stringify(
 const isCurrent = (job: Job, entry: LessonAudioEntry | undefined) =>
   readSlot(entry, job.slot) === job.fingerprint && existsSync(publicPath(job.path));
 
+/**
+ * The entry with keys in lesson order (lines as authored, expressions, Stress Mode
+ * options, then the full dialogue), so parallel jobs finishing in any order
+ * never reshuffle the manifest.
+ */
+function orderedEntry(lesson: Lesson, entry: LessonAudioEntry): LessonAudioEntry {
+  const pick = (record: Record<string, string>, keys: string[]) =>
+    Object.fromEntries(keys.filter((key) => record[key] !== undefined).map((key) => [key, record[key]!]));
+  return {
+    lines: pick(entry.lines, lesson.lines.map((line) => line.id)),
+    expressions: entry.expressions,
+    stress: pick(entry.stress, lesson.stressExercise.options.map((option) => stressSlug(option.word))),
+    ...(entry.full ? { full: entry.full } : {}),
+  };
+}
+
 const referencedFiles = (lessonId: string, entry: LessonAudioEntry) => new Set([
   ...(entry.full ? [audioPaths.full(lessonId)] : []),
   ...Object.keys(entry.lines).map((lineId) => audioPaths.line(lessonId, lineId)),
@@ -219,6 +263,7 @@ async function runPool<T>(items: T[], size: number, worker: (item: T) => Promise
 async function plan() {
   const selected = selectLessons();
   const manifest = readJson<AudioManifest>(MANIFEST_PATH);
+  const provenance = readJson<Provenance>(PROVENANCE_PATH);
   const pools: VoicePools = {
     female: config.voiceIds.female.map((id) => ({ id, name: id })),
     male: config.voiceIds.male.map((id) => ({ id, name: id })),
@@ -227,14 +272,17 @@ async function plan() {
   let characters = 0;
   let affected = 0;
   for (const lesson of selected) {
-    const pending = lessonJobs(lesson, castLesson(lesson, pools), withStress)
-      .filter((job) => flags.force || !isCurrent(job, manifest.lessons[lesson.id]));
+    const cast = castLesson(lesson, pools);
+    // Mirror generate(): a cast or model change re-voices the whole lesson.
+    const rebuild = flags.force || !castMatches(lesson, cast, provenance.lessons[lesson.id]);
+    const pending = lessonJobs(lesson, cast, withStress)
+      .filter((job) => rebuild || !isCurrent(job, manifest.lessons[lesson.id]));
     if (pending.length) affected += 1;
     files += pending.length;
     characters += pending.filter((job) => flags.fresh || !existsSync(rawPath(job))).reduce((sum, job) => sum + job.text.length, 0);
   }
   console.log(`Lessons: ${affected} of ${selected.length} selected need work  ·  files: ${files}  ·  credits: ${characters.toLocaleString()}`);
-  if (affected) console.log(`Estimated repository growth: up to ~${formatBytes(affected * 0.65 * 1024 * 1024)} (about 0.65 MB per new lesson)`);
+  if (affected) console.log(`Estimated repository growth: up to ~${formatBytes(affected * MB_PER_LESSON * 1024 * 1024)} (about ${MB_PER_LESSON} MB per new lesson)`);
   if (config.apiKey) {
     const subscription = await createClient(requireApiKey()).subscription();
     const remaining = subscription.character_limit - subscription.character_count;
@@ -256,16 +304,23 @@ async function generate() {
   const subscription = await client.subscription();
   let credits = subscription.character_limit - subscription.character_count;
   let synthesized = 0;
+  const newStressTakes: string[] = [];
 
   for (const lesson of selected) {
     const cast = castLesson(lesson, pools);
     const voices = Object.fromEntries(lesson.speakers.map((speaker) => [speaker.name, `${cast.get(speaker.id)!.name} (${cast.get(speaker.id)!.id})`]));
     const previous = provenance.lessons[lesson.id];
-    const castChanged = !previous || previous.model !== config.modelId || JSON.stringify(previous.voices) !== JSON.stringify(voices);
+    const castChanged = !castMatches(lesson, cast, previous);
+    const registeredStress = manifest.lessons[lesson.id]?.stress ?? {};
+    if (!withStress && castChanged && Object.keys(registeredStress).length) {
+      throw new Error(`${lesson.id}: the cast or model changed, so its Stress Mode takes would no longer match the new voices. Run without --no-stress to re-voice them too.`);
+    }
     const existing = castChanged || flags.force ? undefined : manifest.lessons[lesson.id];
     const entry: LessonAudioEntry = existing
       ? { ...existing, lines: { ...existing.lines }, expressions: [...existing.expressions], stress: { ...existing.stress } }
       : { lines: {}, expressions: [], stress: {} };
+    // A run that skips Stress Mode must never discard the takes already registered.
+    if (!withStress) entry.stress = { ...registeredStress };
     const allowedStress = new Set(stressOptions(lesson).map((option) => stressSlug(option.word)));
     for (const slug of Object.keys(entry.stress)) if (!allowedStress.has(slug)) delete entry.stress[slug];
     const pending = lessonJobs(lesson, cast, withStress).filter((job) => !isCurrent(job, existing));
@@ -279,12 +334,15 @@ async function generate() {
     }
 
     process.stdout.write(`${lesson.id}: ${pending.length ? `${pending.length} file(s)` : 'up to date'}`);
+    let synthesizedFiles = 0;
     await runPool(pending, config.concurrency, async (job) => {
       const raw = rawPath(job);
       if (flags.fresh || !existsSync(raw)) {
         await writeFile(raw, await client.speech(speechRequest(job)));
         synthesized += job.text.length;
         credits -= job.text.length;
+        synthesizedFiles += 1;
+        if (job.slot.kind === 'stress') newStressTakes.push(`${lesson.id}/stress-${job.slot.key}`);
       }
       await mkdir(dirname(publicPath(job.path)), { recursive: true });
       await processClip(raw, publicPath(job.path), job.text.split(/\s+/).filter(Boolean).length);
@@ -302,7 +360,20 @@ async function generate() {
     }
 
     removeUnreferenced(lesson.id, entry);
-    manifest.lessons[lesson.id] = entry;
+
+    // Rights follow the plan each file was synthesized on. The lesson is commercial
+    // only if every file came from a paid plan: a file kept from an earlier run, or
+    // re-processed from the raw cache, keeps the earlier status.
+    const voicedFiles = referencedFiles(lesson.id, entry).size - (entry.full ? 1 : 0);
+    const allFresh = synthesizedFiles > 0 && synthesizedFiles === voicedFiles;
+    const keptCommercial = previous?.commercialUse ?? false;
+    const commercialUse = !pending.length && previous?.commercialUse !== undefined
+      ? previous.commercialUse
+      : allFresh
+        ? isCommercialPlan(subscription.tier)
+        : keptCommercial && (synthesizedFiles === 0 || isCommercialPlan(subscription.tier));
+
+    manifest.lessons[lesson.id] = orderedEntry(lesson, entry);
     manifest.lessons = sortByCatalog(manifest.lessons);
     provenance.lessons[lesson.id] = {
       generatedAt: pending.length || !previous ? new Date().toISOString() : previous.generatedAt,
@@ -310,9 +381,9 @@ async function generate() {
       model: config.modelId,
       stressModel: Object.keys(entry.stress).length ? (withStress ? config.stressModelId : previous?.stressModel) : undefined,
       voices,
-      // Free and pay-as-you-go audio is licensed for non-commercial use with attribution only.
-      plan: pending.length || !previous?.plan ? subscription.tier : previous.plan,
-      commercialUse: pending.length || previous?.commercialUse === undefined ? !['free', 'payg'].includes(subscription.tier) : previous.commercialUse,
+      // The plan of the most recent synthesis; commercialUse covers every file in the lesson.
+      plan: synthesizedFiles || !previous?.plan ? subscription.tier : previous.plan,
+      commercialUse,
     };
     provenance.lessons = sortByCatalog(provenance.lessons);
     writeJson(MANIFEST_PATH, manifest);
@@ -320,6 +391,10 @@ async function generate() {
     process.stdout.write(' ✓\n');
   }
   console.log(`Done. Synthesized ${synthesized.toLocaleString()} characters. Run \`npm run audio:check\` next.`);
+  if (newStressTakes.length) {
+    console.log(`\nListen to ${newStressTakes.length} new Stress Mode take(s) before committing; record weak ones in content/stress-audio-rejected.json:`);
+    for (const take of newStressTakes) console.log(`  ${take}`);
+  }
 }
 
 async function check() {
