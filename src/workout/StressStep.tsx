@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Lightbulb, Pause, Play, X } from 'lucide-react';
 import { useState } from 'react';
+import { stressWordKey } from '../content/audio';
 import type { StressOption } from '../content/types';
 import type { StepProps } from './types';
 
@@ -8,10 +9,10 @@ export function StressStep({ lesson, audio, onNext }: StepProps) {
   const [selected, setSelected] = useState<StressOption>();
   const correct = selected?.word.toLocaleLowerCase() === exercise.answer.toLocaleLowerCase();
   const playing = audio.activeId === `stress-${selected?.word}` && audio.isPlaying;
+  const hasAnyTake = exercise.options.some((option) => option.audio);
 
   const renderSentence = (stressedWord?: string) => exercise.sentence.split(/(\s+)/).map((part, index) => {
-    const clean = part.toLocaleLowerCase().replace(/[^a-z']/g, '');
-    return clean === stressedWord?.toLocaleLowerCase() ? <strong className="stress-demo" key={index}>{part}</strong> : part;
+    return stressedWord && stressWordKey(part) === stressedWord.toLocaleLowerCase('en') ? <strong className="stress-demo" key={index}>{part}</strong> : part;
   });
 
   return (
@@ -36,13 +37,16 @@ export function StressStep({ lesson, audio, onNext }: StepProps) {
           <div className={`stress-result ${correct ? 'correct' : 'try-again'}`} aria-live="polite">
             <span>{correct ? <Check /> : <X />}</span>
             <div><strong>{correct ? 'Exactly.' : 'That changes a different detail.'}</strong><p>{selected.meaning}</p></div>
+            {!selected.audio && hasAnyTake && (
+              <p className="stress-visual-note">No model take for this version. Say it yourself with the beat on {selected.word.toLocaleUpperCase()}.</p>
+            )}
             {selected.audio && (
               <button className="icon-button" onClick={() => playing ? audio.stop() : audio.play({ id: `stress-${selected.word}`, text: exercise.sentence, src: selected.audio, rate: 0.9 })} aria-label={`Hear ${selected.word} stressed`}>{playing ? <Pause /> : <Play />}</button>
             )}
           </div>
         )}
-        {!exercise.options.some((option) => option.audio) && (
-          <p className="stress-visual-note">This is a meaning exercise for now—say each version out loud and land the beat on the highlighted word. Model audio for each version is coming.</p>
+        {!hasAnyTake && (
+          <p className="stress-visual-note">Choose a word, then say the sentence out loud with the beat on that word.</p>
         )}
       </article>
 

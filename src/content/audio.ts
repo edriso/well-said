@@ -81,6 +81,9 @@ export function attachAudio(lesson: Lesson, manifest: AudioManifest = audioManif
   };
 }
 
+/** A sentence fragment reduced to the word it contains, for matching stress options ("café," → "café"). */
+export const stressWordKey = (part: string) => part.toLocaleLowerCase('en').replace(/[^\p{L}\p{N}']/gu, '');
+
 /**
  * The sentence as the voice performs it, with the contrasted word marked. The
  * cue is capitalization; a word that is already upper case ("I", a gate letter
@@ -92,7 +95,7 @@ export function stressPerformanceText(sentence: string, word: string): string {
   return sentence
     .split(/(\s+)/)
     .map((part) => {
-      if (part.toLocaleLowerCase('en').replace(/[^\p{L}\p{N}']/gu, '') !== target) return part;
+      if (stressWordKey(part) !== target) return part;
       const upper = part.toLocaleUpperCase('en');
       return upper !== part ? upper : part.replace(/[\p{L}\p{N}']+/u, (core) => `"${core}"`);
     })
