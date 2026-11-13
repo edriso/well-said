@@ -9,7 +9,7 @@ Every lesson has an editorial state: `draft`, `reviewed`, or `audio-ready`. A le
 1. Choose one ordinary situation with exactly two speakers.
 2. Write 5–7 conversational lines totaling roughly 30–60 seconds.
 3. Keep the level, focus, and intention narrow enough for one workout.
-4. Split each line into natural thought groups. The groups must reconstruct the original sentence exactly when joined with spaces (ignoring terminal punctuation in the validator).
+4. Split each line into natural thought groups. Joined with spaces, the groups must contain the line's words in order; punctuation is ignored, so a comma at a group boundary may be dropped.
 5. Mark 1–3 meaningful content words. A learner should hear them as the strongest beats in this specific context.
 6. Write one plain-language coaching note about rhythm, linking, pausing, energy, or intention.
 7. Add 2–3 reusable expressions with meaning and a fresh example.
@@ -54,4 +54,4 @@ Word-level highlighting should only be added after studio audio has reviewed tim
 
 ## After editing a voiced lesson
 
-Changing a line, expression, or stress sentence in a lesson that has model audio makes its recording stale. The app falls back to the browser voice for that item and `npm test` fails until you run `npm run audio:generate -- --lesson=<id> --with-stress` and commit the updated files and manifest.
+Changing a line, expression, or stress sentence in a lesson that has model audio makes its recording stale. The app falls back to the browser voice for that item and `npm test` fails until you run `npm run audio:generate -- --lesson=<id>` and commit the updated files and manifest.

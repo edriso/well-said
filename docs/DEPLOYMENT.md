@@ -20,7 +20,11 @@ npm run check
 npm run preview
 ```
 
-Open the preview URL with `/well-said/` if necessary. Verify the home page, direct `?workout=<id>` load, playback fallback, microphone denial, local progress after refresh, mobile layout, and a completed workout restart.
+Open the preview URL with `/well-said/` if necessary. Verify the home page, direct `?workout=<id>` load, model audio and Stress Mode playback, microphone denial, local progress after refresh, mobile layout, and a completed workout restart.
+
+## Site size
+
+The built site is about 155 MB, almost all of it model audio in `public/audio/`. GitHub Pages allows sites up to 1 GB, so there is ample room, but keep audio at the documented 96 kbps mono and run `npm run audio:check` before adding more.
 
 ## Repository rename or custom domain
 

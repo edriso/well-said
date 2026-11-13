@@ -20,7 +20,7 @@ Home
      ├─ Listen        full context; optional transcript
      ├─ Practice      line playback, stress, phrase groups, reps, recording
      ├─ Shadow        full dialogue, transcript support, role practice
-     ├─ Stress        one manually authored contrastive-stress challenge
+     ├─ Stress        one authored contrastive-stress challenge, each option performed
      └─ Complete      calm summary and reusable expressions
 ```
 
@@ -30,7 +30,7 @@ Recommendations first walk new learners through the reviewed Start Here collecti
 
 ## Audio boundary
 
-Audio fields on lessons are filled in by `attachAudio` (`src/content/audio.ts`) from the generated `audio-manifest.json`. A file is attached only when the fingerprint of the text it was recorded from matches the current text, so edited content can never play outdated audio. See `AUDIO_PRODUCTION.md`.
+Audio fields on lessons are filled in by `attachAudio` (`src/content/audio.ts`) from the generated `audio-manifest.json`. A file is attached only when the fingerprint of the text it was recorded from matches the current text, so edited content can never play outdated audio. Stress Mode takes follow the same rule, and the manifest also records which reviewed take is registered (see `content/stress-audio-rejected.json`). See `AUDIO_PRODUCTION.md`.
 
 `useLessonAudio` is the single playback adapter. It accepts an optional repository-relative source and otherwise uses browser speech synthesis as an explicit demo fallback. It can play dialogue lines as a sequence so fallback voices and conversational gaps are preserved. Only one source plays at a time, and route/step changes stop it. Do not invoke `Audio`, `speechSynthesis`, or autoplay from presentation components outside this adapter.
 
@@ -57,9 +57,11 @@ type ProgressState = {
 
 The v1-to-v2 migration preserves completions and reps while dropping the old inferred `totalSentences` value. Never mutate this shape without increasing the version and adding a tested migration. Completion preserves its first completion date; spoken-line and weekly-day totals are derived from actual rep/practice records.
 
-## Styling
+## Build
 
-The production build splits the UI, React, and the curriculum into separate chunks: they load in parallel and stay cached independently, so a UI change does not force learners to re-download the lessons.
+The production build splits the UI, React, and the curriculum into separate chunks: they load in parallel and stay cached independently, so a UI change does not force learners to re-download the lessons. Model audio is served as static files from `public/audio/` and is never bundled.
+
+## Styling
 
 Tailwind 4 supplies the CSS pipeline, while the branded design is expressed as small semantic classes in `src/styles.css`. This avoids a runtime component kit and keeps accessibility states auditable. Design tokens live at `:root`. The UI must continue to work at 320 CSS px, 200% zoom, keyboard-only input, and reduced-motion preference.
 
