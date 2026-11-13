@@ -23,6 +23,7 @@ npm run audio:generate -- --collection="Workplace Conversations" --limit=5
 npm run audio:generate -- --all            # entire catalog (~93k characters)
 npm run audio:check                        # validate files, fingerprints, loudness, size
 npm run audio:prune                        # drop recordings whose text changed (after rewrites)
+npm run audio:retakes                      # bring Stress Mode takes in line with the review file
 ```
 
 Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` (git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
@@ -68,7 +69,24 @@ The full dialogue concatenates the processed lines with a short conversational g
 
 `--with-stress` performs each Stress Mode option with the contrasted word capitalized (or, for a word that is already upper case such as "I", in quotation marks), using `ELEVENLABS_STRESS_MODEL_ID` (default `eleven_v3`, which responds best to emphasis). Synthetic contrastive stress is not always convincing, so it is off by default. Listen to every file before committing.
 
-- To reject a take that does not clearly perform the named contrast, add it to `content/stress-audio-rejected.json` (`"<lesson-id>": { "<stress-slug>": "<reason>" }`) and run `npm run audio:prune`. Do not just delete the file: the seed comes from the text, so the next `--with-stress` run would rebuild the same take from the raw cache. Rejected takes stay listed, and `npm test` and `audio:check` fail if one is registered again. Remove an entry to restore a take; the raw cache re-processes it without spending credits.
+Review decisions live in `content/stress-audio-rejected.json`, keyed by lesson id and stress slug (the file name without `stress-`):
+
+```json
+{
+  "version": 1,
+  "lessons": {
+    "ordering-coffee": {
+      "small": { "reason": "SMALL barely stands out.", "take": 2 },
+      "i": "No take makes the contrast clear; keep it text-only."
+    }
+  }
+}
+```
+
+- **Re-take** (`{ "reason", "take" }`): run `npm run audio:plan -- --retakes` to see the cost (about 30–45 credits each), then `npm run audio:retakes`. Each take number uses its own seed, so take 2 is a genuinely new performance and stays reproducible. If it is still weak, raise `take` to 3 and run again. Until a requested take is generated, `npm test` and `audio:check` fail and name the take that is missing.
+- **Reject** (a plain reason): the option keeps no audio and the learner gets the text-only exercise. Run `npm run audio:prune` to remove the file.
+- Do not just delete a weak file. The default seed comes from the text, so the next `--with-stress` run would rebuild the same take from the raw cache.
+- Removing an entry restores take 1: run `npm run audio:retakes`, which re-processes it from the raw cache without spending credits.
 
 ## Licensing
 

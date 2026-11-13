@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import rejectedStress from '../../content/stress-audio-rejected.json';
-import { attachAudio, audioManifest, audioPaths, canPerformStress, fingerprint, fullDialogueText, hasModelAudio, stressPerformanceText, stressSlug, type AudioManifest } from './audio';
+import { attachAudio, audioManifest, audioPaths, canPerformStress, fingerprint, fullDialogueText, hasModelAudio, requestedStressTake, stressPerformanceText, stressSlug, stressTakeFingerprint, type AudioManifest, type StressReview } from './audio';
 import { getLessonById, lessons } from './lessons';
 
 const filesOnDisk = new Set(Object.keys(import.meta.glob('/public/audio/lessons/**/*.mp3')));
 const onDisk = (path: string) => filesOnDisk.has(path);
 const publicFile = (path: string) => `/public/${path}`;
+const review = rejectedStress.lessons as StressReview;
 
 describe('audio contract', () => {
   it('fingerprints text deterministically', () => {
@@ -55,6 +56,45 @@ describe('audio contract', () => {
     expect(options.find((option) => option.word === 'small')!.audio).toBe(audioPaths.stress(lesson.id, 'small'));
   });
 
+  it('tracks stress re-takes without breaking existing takes', () => {
+    const text = 'Could I get a SMALL latte?';
+    expect(stressTakeFingerprint(text)).toBe(fingerprint(text));
+    expect(stressTakeFingerprint(text, 1)).toBe(fingerprint(text));
+    expect(stressTakeFingerprint(text, 3)).toBe(`${fingerprint(text)}#3`);
+
+    const decisions: StressReview = { lesson: { flat: 'No usable take.', weak: { reason: 'Stress too soft.', take: 2 } } };
+    expect(requestedStressTake(decisions, 'lesson', 'flat')).toBeUndefined();
+    expect(requestedStressTake(decisions, 'lesson', 'weak')).toBe(2);
+    expect(requestedStressTake(decisions, 'lesson', 'fine')).toBe(1);
+    expect(requestedStressTake(decisions, 'other', 'weak')).toBe(1);
+
+    // The app plays a re-take exactly like a first take.
+    const attached = getLessonById('ordering-coffee')!;
+    const { sentence } = attached.stressExercise;
+    const manifest: AudioManifest = {
+      version: 1,
+      lessons: { [attached.id]: { lines: {}, expressions: [], stress: { small: stressTakeFingerprint(stressPerformanceText(sentence, 'small'), 2) } } },
+    };
+    const options = attachAudio(attached, manifest).stressExercise.options;
+    expect(options.find((option) => option.word === 'small')!.audio).toBe(audioPaths.stress(attached.id, 'small'));
+  });
+
+  it('keeps the stress review file well-formed', () => {
+    for (const [lessonId, decisions] of Object.entries(review)) {
+      const lesson = getLessonById(lessonId);
+      expect(lesson, `stress review names unknown lesson ${lessonId}`).toBeDefined();
+      for (const [slug, decision] of Object.entries(decisions)) {
+        const option = lesson!.stressExercise.options.find((item) => stressSlug(item.word) === slug);
+        expect(option, `stress review names unknown option ${lessonId}/${slug}`).toBeDefined();
+        const reason = typeof decision === 'string' ? decision : decision.reason;
+        expect(reason.trim(), `${lessonId}/${slug} needs a reason`).not.toBe('');
+        if (typeof decision !== 'string') {
+          expect(Number.isInteger(decision.take) && decision.take >= 2, `${lessonId}/${slug}: take must be a whole number, 2 or more`).toBe(true);
+        }
+      }
+    }
+  });
+
   it('attaches only recordings whose text still matches', () => {
     const attached = getLessonById('ordering-coffee')!;
     const lesson = {
@@ -100,14 +140,16 @@ describe('audio contract', () => {
         expect(recorded, `${lessonId} expression ${index + 1} changed after recording`).toBe(fingerprint(expression.phrase));
         expect(onDisk(publicFile(audioPaths.expression(lessonId, index)))).toBe(true);
       });
-      const rejected = (rejectedStress.lessons as Record<string, Record<string, string>>)[lessonId] ?? {};
       for (const [slug, recorded] of Object.entries(entry.stress)) {
         const option = lesson!.stressExercise.options.find((item) => stressSlug(item.word) === slug);
         expect(option, `${lessonId}/stress-${slug} has no matching stress option`).toBeDefined();
         const { sentence } = lesson!.stressExercise;
         expect(canPerformStress(sentence, option!.word), `${lessonId}/stress-${slug} names a word the sentence does not contain`).toBe(true);
-        expect(rejected[slug], `${lessonId}/stress-${slug} was rejected on review; run npm run audio:prune`).toBeUndefined();
-        expect(recorded, `${lessonId}/stress-${slug} changed after recording`).toBe(fingerprint(stressPerformanceText(sentence, option!.word)));
+        const take = requestedStressTake(review, lessonId, slug);
+        expect(take, `${lessonId}/stress-${slug} was rejected on review; run npm run audio:prune`).toBeDefined();
+        const text = stressPerformanceText(sentence, option!.word);
+        expect(recorded.split('#')[0], `${lessonId}/stress-${slug} changed after recording`).toBe(fingerprint(text));
+        expect(recorded, `${lessonId}/stress-${slug}: take ${take} requested on review; run npm run audio:retakes`).toBe(stressTakeFingerprint(text, take));
         expect(onDisk(publicFile(audioPaths.stress(lessonId, option!.word))), `${lessonId}/stress-${slug}.mp3 is missing`).toBe(true);
       }
       if (entry.full) {

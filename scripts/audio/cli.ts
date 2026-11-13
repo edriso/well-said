@@ -11,8 +11,11 @@
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
  *   --non-commercial       lessons whose audio came from a free/pay-as-you-go plan (re-voice with --force --fresh)
  * Options:
- *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear;
- *                   takes listed in content/stress-audio-rejected.json are never registered)
+ *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear).
+ *                   content/stress-audio-rejected.json rejects a take ("reason") or asks for a
+ *                   re-take ({ "reason", "take": 2 }); re-takes use a new seed, so they differ
+ *   --retakes       only lessons whose Stress Mode takes differ from the review file: requested
+ *                   re-takes, restored takes, or edited stress sentences (implies --with-stress)
  *   --force         re-process files even when the recorded text is unchanged (uses the raw cache)
  *   --fresh         with --force, ignore the raw cache and synthesize again (spends credits)
  *
@@ -22,7 +25,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { audioPaths, canPerformStress, fingerprint, fullDialogueText, stressPerformanceText, stressSlug, type AudioManifest, type LessonAudioEntry } from '../../src/content/audio';
+import { audioPaths, canPerformStress, fingerprint, fullDialogueText, requestedStressTake, stressPerformanceText, stressSlug, stressTakeFingerprint, stressTextFingerprint, type AudioManifest, type LessonAudioEntry, type StressReview } from '../../src/content/audio';
 import { lessons } from '../../src/content/lessons';
 import type { Lesson } from '../../src/content/types';
 import { castLesson, type Voice, type VoicePools } from './cast';
@@ -30,8 +33,8 @@ import { config, MANIFEST_PATH, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJE
 import { createClient, ElevenLabsError, type ElevenLabsClient } from './elevenlabs';
 import { assertFfmpeg, concatDialogue, LOUDNESS, measure, processClip } from './ffmpeg';
 
-/** Stress takes a reviewer heard and rejected: lesson id → stress slug → reason. */
-type RejectedStress = { version: 1; lessons: Record<string, Record<string, string>> };
+/** Stress takes a reviewer heard and rejected (reason) or asked to re-take ({ reason, take }). */
+type RejectedStress = { version: 1; lessons: StressReview };
 
 type Provenance = {
   version: 1;
@@ -41,7 +44,7 @@ type Provenance = {
 /** Where a file's fingerprint lives in the manifest entry. */
 type Slot = { kind: 'lines' | 'stress'; key: string } | { kind: 'expressions'; key: number };
 
-type Job = { slot: Slot; path: string; text: string; fingerprint: string; voice: Voice; modelId: string; previousText?: string; nextText?: string };
+type Job = { slot: Slot; path: string; text: string; fingerprint: string; voice: Voice; modelId: string; take?: number; previousText?: string; nextText?: string };
 
 const readSlot = (entry: LessonAudioEntry | undefined, slot: Slot) =>
   slot.kind === 'expressions' ? entry?.expressions[slot.key] : entry?.[slot.kind][slot.key];
@@ -62,6 +65,7 @@ const { positionals, values: flags } = parseArgs({
     force: { type: 'boolean', default: false },
     fresh: { type: 'boolean', default: false },
     'with-stress': { type: 'boolean', default: false },
+    retakes: { type: 'boolean', default: false },
   },
 });
 
@@ -75,13 +79,23 @@ const formatBytes = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
 const rejectedStress = existsSync(REJECTED_STRESS_PATH) ? readJson<RejectedStress>(REJECTED_STRESS_PATH).lessons : {};
 
+const withStress = flags['with-stress'] || flags.retakes;
+const stressTake = (lesson: Lesson, word: string) => requestedStressTake(rejectedStress, lesson.id, stressSlug(word));
+
 /**
  * Stress options that may have model audio: the word must be in the sentence,
- * and the take must not have been rejected on review. The seed is derived from
- * the text, so synthesizing a rejected take again reproduces it.
+ * and the take must not have been rejected outright on review. (A rejected take
+ * can't simply be regenerated: the seed comes from the text, so it would come
+ * back identical. A re-take number changes the seed instead.)
  */
 const stressOptions = (lesson: Lesson) => lesson.stressExercise.options.filter((option) =>
-  canPerformStress(lesson.stressExercise.sentence, option.word) && !rejectedStress[lesson.id]?.[stressSlug(option.word)]);
+  canPerformStress(lesson.stressExercise.sentence, option.word) && stressTake(lesson, option.word) !== undefined);
+
+/** The manifest value each performable stress option should have, including its take. */
+const expectedStress = (lesson: Lesson) => new Map(stressOptions(lesson).map((option) => [
+  stressSlug(option.word),
+  stressTakeFingerprint(stressPerformanceText(lesson.stressExercise.sentence, option.word), stressTake(lesson, option.word)),
+]));
 
 function selectLessons(): Lesson[] {
   let selected: Lesson[];
@@ -92,6 +106,10 @@ function selectLessons(): Lesson[] {
     selected = lessons.filter((lesson) => ids.includes(lesson.id));
   } else if (flags.all) {
     selected = lessons;
+  } else if (flags.retakes) {
+    const manifest = readJson<AudioManifest>(MANIFEST_PATH);
+    selected = lessons.filter((lesson) => [...expectedStress(lesson)].some(([slug, value]) =>
+      manifest.lessons[lesson.id]?.stress[slug] !== value));
   } else if (flags['non-commercial']) {
     const provenance = readJson<Provenance>(PROVENANCE_PATH);
     selected = lessons.filter((lesson) => provenance.lessons[lesson.id]?.commercialUse === false);
@@ -102,12 +120,6 @@ function selectLessons(): Lesson[] {
   }
   const limit = flags.limit ? Number(flags.limit) : undefined;
   return limit ? selected.slice(0, limit) : selected;
-}
-
-function speechText(lesson: Lesson, withStress: boolean) {
-  const texts = [...lesson.lines.map((line) => line.text), ...lesson.expressions.map((expression) => expression.phrase)];
-  if (withStress) texts.push(...stressOptions(lesson).map((option) => stressPerformanceText(lesson.stressExercise.sentence, option.word)));
-  return texts;
 }
 
 async function resolvePools(client: ElevenLabsClient): Promise<VoicePools> {
@@ -143,13 +155,15 @@ function lessonJobs(lesson: Lesson, cast: Map<string, Voice>, withStress: boolea
   if (withStress) {
     for (const option of stressOptions(lesson)) {
       const text = stressPerformanceText(lesson.stressExercise.sentence, option.word);
+      const take = stressTake(lesson, option.word)!;
       jobs.push({
         slot: { kind: 'stress', key: stressSlug(option.word) },
         path: audioPaths.stress(lesson.id, option.word),
         text,
-        fingerprint: fingerprint(text),
+        fingerprint: stressTakeFingerprint(text, take),
         voice: voiceFor(lesson.speakers[0]!.id),
         modelId: config.stressModelId,
+        take,
       });
     }
   }
@@ -161,7 +175,8 @@ const speechRequest = (job: Job) => ({
   text: job.text,
   modelId: job.modelId,
   outputFormat: config.outputFormat,
-  seed: Number.parseInt(fingerprint(job.text), 16),
+  // Take 1 keeps the text-derived seed (and its cache key); a re-take varies the seed for a new performance.
+  seed: Number.parseInt(fingerprint(job.take && job.take > 1 ? `${job.text}#take${job.take}` : job.text), 16),
   ...(config.speed === 1 ? {} : { speed: config.speed }),
   previousText: job.previousText,
   nextText: job.nextText,
@@ -197,12 +212,29 @@ async function runPool<T>(items: T[], size: number, worker: (item: T) => Promise
   }));
 }
 
+/**
+ * Estimates what `generate` would do with the same flags: files not yet current
+ * in the manifest, and the credits for the ones not already in the raw cache.
+ */
 async function plan() {
   const selected = selectLessons();
-  const characters = selected.reduce((sum, lesson) => sum + speechText(lesson, flags['with-stress']).join('').length, 0);
-  const files = selected.reduce((sum, lesson) => sum + speechText(lesson, flags['with-stress']).length + 1, 0);
-  console.log(`Lessons: ${selected.length}  ·  files: ${files}  ·  characters: ${characters.toLocaleString()}`);
-  console.log(`Estimated repository size: ~${formatBytes(selected.length * 0.65 * 1024 * 1024)} (about 0.65 MB per lesson)`);
+  const manifest = readJson<AudioManifest>(MANIFEST_PATH);
+  const pools: VoicePools = {
+    female: config.voiceIds.female.map((id) => ({ id, name: id })),
+    male: config.voiceIds.male.map((id) => ({ id, name: id })),
+  };
+  let files = 0;
+  let characters = 0;
+  let affected = 0;
+  for (const lesson of selected) {
+    const pending = lessonJobs(lesson, castLesson(lesson, pools), withStress)
+      .filter((job) => flags.force || !isCurrent(job, manifest.lessons[lesson.id]));
+    if (pending.length) affected += 1;
+    files += pending.length;
+    characters += pending.filter((job) => flags.fresh || !existsSync(rawPath(job))).reduce((sum, job) => sum + job.text.length, 0);
+  }
+  console.log(`Lessons: ${affected} of ${selected.length} selected need work  ·  files: ${files}  ·  credits: ${characters.toLocaleString()}`);
+  if (affected) console.log(`Estimated repository growth: up to ~${formatBytes(affected * 0.65 * 1024 * 1024)} (about 0.65 MB per new lesson)`);
   if (config.apiKey) {
     const subscription = await createClient(requireApiKey()).subscription();
     const remaining = subscription.character_limit - subscription.character_count;
@@ -236,7 +268,7 @@ async function generate() {
       : { lines: {}, expressions: [], stress: {} };
     const allowedStress = new Set(stressOptions(lesson).map((option) => stressSlug(option.word)));
     for (const slug of Object.keys(entry.stress)) if (!allowedStress.has(slug)) delete entry.stress[slug];
-    const pending = lessonJobs(lesson, cast, flags['with-stress']).filter((job) => !isCurrent(job, existing));
+    const pending = lessonJobs(lesson, cast, withStress).filter((job) => !isCurrent(job, existing));
 
     // Never start a lesson the remaining credits cannot finish, so no lesson is left half-voiced.
     const cost = pending.filter((job) => flags.fresh || !existsSync(rawPath(job))).reduce((sum, job) => sum + job.text.length, 0);
@@ -276,7 +308,7 @@ async function generate() {
       generatedAt: pending.length || !previous ? new Date().toISOString() : previous.generatedAt,
       provider: 'ElevenLabs',
       model: config.modelId,
-      stressModel: Object.keys(entry.stress).length ? (flags['with-stress'] ? config.stressModelId : previous?.stressModel) : undefined,
+      stressModel: Object.keys(entry.stress).length ? (withStress ? config.stressModelId : previous?.stressModel) : undefined,
       voices,
       // Free and pay-as-you-go audio is licensed for non-commercial use with attribution only.
       plan: pending.length || !previous?.plan ? subscription.tier : previous.plan,
@@ -316,11 +348,12 @@ async function check() {
     for (const line of lesson.lines) {
       if (entry.lines[line.id] && entry.lines[line.id] !== fingerprint(line.text)) problems.push(`${lessonId}/${line.id}: text changed since recording; regenerate`);
     }
-    const allowedStress = new Map(stressOptions(lesson).map((option) => [stressSlug(option.word), stressPerformanceText(lesson.stressExercise.sentence, option.word)]));
+    const expectedTakes = expectedStress(lesson);
     for (const [slug, recorded] of Object.entries(entry.stress)) {
-      const text = allowedStress.get(slug);
-      if (text === undefined) problems.push(`${lessonId}/stress-${slug}: rejected or not performable; run npm run audio:prune`);
-      else if (recorded !== fingerprint(text)) problems.push(`${lessonId}/stress-${slug}: text changed since recording; regenerate`);
+      const value = expectedTakes.get(slug);
+      if (value === undefined) problems.push(`${lessonId}/stress-${slug}: rejected or not performable; run npm run audio:prune`);
+      else if (stressTextFingerprint(recorded) !== stressTextFingerprint(value)) problems.push(`${lessonId}/stress-${slug}: text changed since recording; regenerate`);
+      else if (recorded !== value) problems.push(`${lessonId}/stress-${slug}: take ${value.split('#')[1] ?? 1} requested, take ${recorded.split('#')[1] ?? 1} registered; run npm run audio:retakes`);
     }
   }
 
@@ -367,9 +400,9 @@ async function prune() {
       // Expression fingerprints are positional; stop at the first gap so indexes stay aligned with file names.
       const firstGap = kept.expressions.findIndex((value) => value === undefined);
       if (firstGap >= 0) kept.expressions = kept.expressions.slice(0, firstGap);
-      for (const option of stressOptions(lesson)) {
-        const slug = stressSlug(option.word);
-        if (entry.stress[slug] === fingerprint(stressPerformanceText(lesson.stressExercise.sentence, option.word))) kept.stress[slug] = entry.stress[slug]!;
+      // A take is kept only if it is the take the review asks for, so a rejected take never lingers.
+      for (const [slug, value] of expectedStress(lesson)) {
+        if (entry.stress[slug] === value) kept.stress[slug] = value;
       }
       const allLines = lesson.lines.every((line) => kept.lines[line.id]);
       if (allLines && entry.full === fingerprint(fullDialogueText(lesson))) kept.full = entry.full;

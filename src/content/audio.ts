@@ -73,7 +73,7 @@ export function attachAudio(lesson: Lesson, manifest: AudioManifest = audioManif
       ...lesson.stressExercise,
       options: lesson.stressExercise.options.map((option) =>
         canPerformStress(lesson.stressExercise.sentence, option.word) &&
-        matches(entry.stress[stressSlug(option.word)], stressPerformanceText(lesson.stressExercise.sentence, option.word))
+        matches(stressTextFingerprint(entry.stress[stressSlug(option.word)]), stressPerformanceText(lesson.stressExercise.sentence, option.word))
           ? { ...option, audio: audioPaths.stress(lesson.id, option.word) }
           : option,
       ),
@@ -101,6 +101,31 @@ export function stressPerformanceText(sentence: string, word: string): string {
 
 /** False when the word is not in the sentence, so there is nothing to perform. */
 export const canPerformStress = (sentence: string, word: string) => stressPerformanceText(sentence, word) !== sentence;
+
+/**
+ * Stress Mode review decisions (`content/stress-audio-rejected.json`), keyed by
+ * lesson id, then stress slug. A plain string rejects the take with no
+ * replacement; `{ reason, take }` replaces it with re-take number `take` (2+).
+ */
+export type StressReview = Record<string, Record<string, string | { reason: string; take: number }>>;
+
+/** The take a stress option should use: 1 by default, a re-take number, or undefined when rejected outright. */
+export function requestedStressTake(review: StressReview, lessonId: string, slug: string): number | undefined {
+  const decision = review[lessonId]?.[slug];
+  if (decision === undefined) return 1;
+  return typeof decision === 'string' ? undefined : decision.take;
+}
+
+/**
+ * Manifest value for a stress take: the text fingerprint, plus `#<take>` for a
+ * re-take, so the registered take is visible and verifiable. Take 1 is the bare
+ * fingerprint, so takes recorded before re-takes existed stay valid.
+ */
+export const stressTakeFingerprint = (text: string, take = 1) =>
+  take > 1 ? `${fingerprint(text)}#${take}` : fingerprint(text);
+
+/** The text fingerprint inside a stress manifest value, whatever its take. */
+export const stressTextFingerprint = (recorded: string | undefined) => recorded?.split('#')[0];
 
 /** True when every dialogue line has a matching model recording. */
 export const hasModelAudio = (lesson: Lesson) => lesson.lines.length > 0 && lesson.lines.every((line) => Boolean(line.audio));
