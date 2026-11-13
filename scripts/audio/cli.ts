@@ -1,26 +1,29 @@
 /**
  * Model-audio pipeline for Well Said.
  *
- *   npm run audio:plan     -- [selection]            estimate characters and files; show remaining credits
- *   npm run audio:generate -- [selection] [--force]  synthesize, normalize, and register audio
- *   npm run audio:check                              validate files, fingerprints, loudness, and size
+ *   npm run audio:plan     -- [selection] [options]  pending files and credits needed; credits remaining
+ *   npm run audio:generate -- [selection] [options]  synthesize, normalize, and register audio
+ *   npm run audio:check                              validate files, fingerprints, takes, loudness, and size
+ *   npm run audio:prune                              drop recordings whose text changed, whose take was
+ *                                                    rejected, or whose lesson is gone
+ *   npm run audio:retakes                            bring Stress Mode takes in line with the review file
+ *   npm run audio:screen   -- [selection]            score how clearly each Stress Mode take stresses its word
  *   npm run audio:voices                             list voices available to your API key
- *   npm run audio:prune                              drop recordings whose text has changed or whose lesson is gone
  *
- * Selection (default: the reviewed Start Here collection):
+ * Selection (default: the Start Here collection):
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
  *   --non-commercial       lessons whose audio came from a free/pay-as-you-go plan (re-voice with --force --fresh)
+ *   --retakes              lessons whose Stress Mode takes differ from content/stress-audio-rejected.json
  * Options:
- *   --no-stress     skip Stress Mode takes (kept as they are). By default every performable
- *                   option is voiced; content/stress-audio-rejected.json rejects a take ("reason")
- *                   or asks for a re-take ({ "reason", "take": 2 }) with a new seed.
- *                   (--with-stress is still accepted; stress is on by default.)
- *   --retakes       only lessons whose Stress Mode takes differ from the review file: requested
- *                   re-takes, restored takes, or edited stress sentences
+ *   --no-stress     skip Stress Mode takes (registered ones are kept). By default every performable
+ *                   option is voiced; the review file rejects a take ("reason") or asks for a re-take
+ *                   ({ "reason", "take": 2 }), which uses a new seed. --with-stress is still accepted.
  *   --force         re-process files even when the recorded text is unchanged (uses the raw cache)
  *   --fresh         with --force, ignore the raw cache and synthesize again (spends credits)
+ *   --threshold=<n> screen: list takes scoring below n (default 0)
  *
- * Raw API responses are cached in .cache/audio-raw/ so re-processing never spends credits twice.
+ * Raw API responses are cached in .cache/audio-raw/ and alignments in .cache/alignments/, so
+ * re-processing and re-screening never spend credits twice.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -30,9 +33,10 @@ import { audioPaths, canPerformStress, fingerprint, fullDialogueText, requestedS
 import { lessons } from '../../src/content/lessons';
 import type { Lesson } from '../../src/content/types';
 import { castLesson, type Voice, type VoicePools } from './cast';
-import { config, MANIFEST_PATH, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJECTED_STRESS_PATH, requireApiKey } from './config';
+import { ALIGNMENT_CACHE_DIR, config, MANIFEST_PATH, STRESS_SCREEN_REPORT, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJECTED_STRESS_PATH, requireApiKey } from './config';
 import { createClient, ElevenLabsError, type ElevenLabsClient } from './elevenlabs';
 import { assertFfmpeg, concatDialogue, LOUDNESS, measure, processClip } from './ffmpeg';
+import { screenStress } from './screen';
 
 /** Stress takes a reviewer heard and rejected (reason) or asked to re-take ({ reason, take }). */
 type RejectedStress = { version: 1; lessons: StressReview };
@@ -68,6 +72,7 @@ const { positionals, values: flags } = parseArgs({
     'with-stress': { type: 'boolean', default: false },
     'no-stress': { type: 'boolean', default: false },
     retakes: { type: 'boolean', default: false },
+    threshold: { type: 'string' },
   },
 });
 
@@ -282,7 +287,9 @@ async function plan() {
     characters += pending.filter((job) => flags.fresh || !existsSync(rawPath(job))).reduce((sum, job) => sum + job.text.length, 0);
   }
   console.log(`Lessons: ${affected} of ${selected.length} selected need work  ·  files: ${files}  ·  credits: ${characters.toLocaleString()}`);
-  if (affected) console.log(`Estimated repository growth: up to ~${formatBytes(affected * MB_PER_LESSON * 1024 * 1024)} (about ${MB_PER_LESSON} MB per new lesson)`);
+  // Only lessons without any audio grow the repository; other work replaces files in place.
+  const newLessons = selected.filter((lesson) => !manifest.lessons[lesson.id]).length;
+  if (newLessons) console.log(`Estimated repository growth: ~${formatBytes(newLessons * MB_PER_LESSON * 1024 * 1024)} for ${newLessons} new lesson(s) (about ${MB_PER_LESSON} MB each)`);
   if (config.apiKey) {
     const subscription = await createClient(requireApiKey()).subscription();
     const remaining = subscription.character_limit - subscription.character_count;
@@ -502,6 +509,31 @@ async function prune() {
   console.log(`Pruned ${removedItems} stale file(s); ${removedLessons} lesson(s) no longer have model audio.`);
 }
 
+/** Scores every registered Stress Mode take (see screen.ts) and lists the weak ones. */
+async function screen() {
+  await assertFfmpeg();
+  const threshold = flags.threshold === undefined ? 0 : Number(flags.threshold);
+  if (!Number.isFinite(threshold)) throw new Error('--threshold must be a number.');
+  const client = config.apiKey ? createClient(requireApiKey()) : undefined;
+  const results = await screenStress(selectLessons(), PUBLIC_DIR, ALIGNMENT_CACHE_DIR, client);
+  writeJson(STRESS_SCREEN_REPORT, results);
+
+  const scores = results.map((result) => result.score).sort((a, b) => a - b);
+  const at = (quantile: number) => scores[Math.floor(quantile * (scores.length - 1))]?.toFixed(2) ?? 'n/a';
+  console.log(`Screened ${scores.length} takes · p10 ${at(0.1)} · median ${at(0.5)} · below 0: ${scores.filter((score) => score < 0).length}`);
+  const weak = results.filter((result) => result.score < threshold).sort((a, b) => a.score - b.score);
+  if (!weak.length) {
+    console.log(`No takes below ${threshold}.`);
+    return;
+  }
+  const signed = (value: number, unit: string) => `${value >= 0 ? '+' : ''}${value}${unit}`;
+  console.log(`\n${weak.length} take(s) below ${threshold} (target word vs. the same word in sibling takes):`);
+  for (const result of weak) {
+    console.log(`  ${result.score.toFixed(2).padStart(6)}  ${signed(result.loudnessDb, ' dB').padStart(8)}  ${signed(result.durationPct, '%').padStart(5)}  ${result.lessonId}/${result.slug}`);
+  }
+  console.log(`\nFull report: ${STRESS_SCREEN_REPORT}. Request re-takes in content/stress-audio-rejected.json, then run npm run audio:retakes.`);
+}
+
 async function listVoices() {
   const voices = await createClient(requireApiKey()).voices();
   for (const voice of voices) {
@@ -510,7 +542,7 @@ async function listVoices() {
   }
 }
 
-const commands: Record<string, () => Promise<void>> = { plan, generate, check, prune, voices: listVoices };
+const commands: Record<string, () => Promise<void>> = { plan, generate, check, prune, screen, voices: listVoices };
 const command = commands[positionals[0] ?? ''];
 
 if (!command) {

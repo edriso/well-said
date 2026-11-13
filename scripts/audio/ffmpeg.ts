@@ -86,3 +86,15 @@ export async function measure(file: string): Promise<Measurement> {
   const { stdout } = await run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', file]);
   return { integrated, truePeak, duration: Number(stdout.trim()) };
 }
+
+export const PCM_RATE = 16000;
+
+/** Decodes a file to mono 16 kHz samples in [-1, 1] for analysis. */
+export async function decodePcm(file: string): Promise<Float64Array> {
+  const { stdout } = await run('ffmpeg', ['-v', 'error', '-i', file, '-ac', '1', '-ar', String(PCM_RATE), '-f', 's16le', '-'], {
+    encoding: 'buffer',
+    maxBuffer: 64 * 1024 * 1024,
+  });
+  const samples = new Int16Array(stdout.buffer, stdout.byteOffset, stdout.byteLength / 2);
+  return Float64Array.from(samples, (value) => value / 32768);
+}

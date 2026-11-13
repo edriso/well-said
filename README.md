@@ -48,6 +48,7 @@ cp .env.example .env.local     # add ELEVENLABS_API_KEY
 npm run audio:plan             # pending files, credits needed, and credits remaining
 npm run audio:generate         # Start Here by default; see the guide for options
 npm run audio:check            # files, fingerprints, loudness, and size
+npm run audio:screen           # score how clearly each Stress Mode take stresses its word
 npm run audio:retakes          # apply Stress Mode re-take decisions
 ```
 

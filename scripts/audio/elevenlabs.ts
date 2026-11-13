@@ -17,6 +17,8 @@ export type SpeechRequest = {
   nextText?: string;
 };
 
+export type AlignedWord = { text: string; start: number; end: number };
+
 export type Subscription = {
   tier: string;
   character_count: number;
@@ -30,7 +32,8 @@ export function createClient(apiKey: string) {
   const request = async (path: string, init: RequestInit = {}, attempt = 0): Promise<Response> => {
     const response = await fetch(`${API_ROOT}${path}`, {
       ...init,
-      headers: { 'xi-api-key': apiKey, 'Content-Type': 'application/json', ...init.headers },
+      // JSON bodies are strings; multipart (FormData) bodies must set their own boundary header.
+      headers: { 'xi-api-key': apiKey, ...(typeof init.body === 'string' ? { 'Content-Type': 'application/json' } : {}), ...init.headers },
     });
     if (response.ok) return response;
 
@@ -59,6 +62,15 @@ export function createClient(apiKey: string) {
         }),
       });
       return Buffer.from(await response.arrayBuffer());
+    },
+
+    /** Word timings for known text in an audio file (forced alignment; about one credit per call). */
+    async align(audio: Buffer, text: string): Promise<AlignedWord[]> {
+      const form = new FormData();
+      form.append('file', new Blob([new Uint8Array(audio)], { type: 'audio/mpeg' }), 'clip.mp3');
+      form.append('text', text);
+      const data = (await (await request('/forced-alignment', { method: 'POST', body: form })).json()) as { words: AlignedWord[] };
+      return data.words.filter((word) => word.text.trim());
     },
 
     async subscription(): Promise<Subscription> {
