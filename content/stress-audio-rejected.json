@@ -1,4 +1,521 @@
 {
   "version": 1,
-  "lessons": {}
+  "lessons": {
+    "accepting-compliment": {
+      "i": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -2.41; kept take 2, which now scores +8.01.",
+        "take": 2
+      }
+    },
+    "acknowledging-setback": {
+      "close": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.49; kept take 2, which now scores +0.47.",
+        "take": 2
+      }
+    },
+    "across-time-zones": {
+      "cairo": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.33; kept take 2, which now scores +0.90.",
+        "take": 2
+      },
+      "four": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.06; kept take 2, which now scores +1.09.",
+        "take": 2
+      }
+    },
+    "afternoon-in-town": {
+      "i-d": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.06; kept take 2, which now scores +0.27.",
+        "take": 2
+      }
+    },
+    "another-size": {
+      "asked": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.84; kept take 2, which now scores +0.89.",
+        "take": 2
+      }
+    },
+    "asking-ingredients": {
+      "said": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.56; kept take 2, which now scores +0.37.",
+        "take": 2
+      }
+    },
+    "async-update": {
+      "post": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.23; kept take 2, which now scores +1.51.",
+        "take": 2
+      }
+    },
+    "avoiding-assumption": {
+      "thursday": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.35; kept take 2, which now scores +0.12.",
+        "take": 2
+      }
+    },
+    "bakery-sold-out": {
+      "i-ll": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.38, take 2 -0.75, take 3 -1.35, take 4 -1.86; no take stressed the word, so this version is text-only."
+    },
+    "bank-card-replacement": {
+      "damaged": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.36; kept take 2, which now scores +0.41.",
+        "take": 2
+      },
+      "my": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.29; kept take 2, which now scores +0.13.",
+        "take": 2
+      }
+    },
+    "borrowing-tool": {
+      "needed": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.57; kept take 2, which now scores +0.20.",
+        "take": 2
+      }
+    },
+    "cafe-closing-early": {
+      "today": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.28, take 2 -0.83, take 3 -2.14, take 4 -0.76; no take stressed the word, so this version is text-only."
+    },
+    "cancelled-train": {
+      "coach": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.49; kept take 2, which now scores +0.89.",
+        "take": 2
+      },
+      "i-m": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.03; kept take 2, which now scores -0.11.",
+        "take": 2
+      },
+      "nine": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.25, take 2 -0.19, take 3 -0.31; kept take 2, which now scores -0.19.",
+        "take": 2
+      }
+    },
+    "changing-utility-name": {
+      "park": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.86; kept take 2, which now scores +0.26.",
+        "take": 2
+      },
+      "we": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.26; kept take 2, which now scores +0.54.",
+        "take": 2
+      }
+    },
+    "checking-in": {
+      "advice": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.50; kept take 2, which now scores +0.15.",
+        "take": 2
+      },
+      "company": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.25; kept take 2, which now scores +0.51.",
+        "take": 2
+      }
+    },
+    "coffee-too-sweet": {
+      "asked": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.51, take 2 -0.41, take 3 +0.78; kept take 3, which now scores +0.78.",
+        "take": 3
+      }
+    },
+    "collecting-dry-cleaning": {
+      "brought": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.21, take 2 -0.02, take 3 +0.98; kept take 3, which now scores +0.98.",
+        "take": 3
+      }
+    },
+    "declining-warmly": {
+      "i-m": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.39, take 2 -0.62, take 3 +0.05; kept take 3, which now scores +0.05.",
+        "take": 3
+      }
+    },
+    "different-view": {
+      "parking": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.04; kept take 2, which now scores +0.37.",
+        "take": 2
+      }
+    },
+    "donation-dropoff": {
+      "boots": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.29, take 2 -0.53, take 3 +0.19; kept take 3, which now scores +0.19.",
+        "take": 3
+      }
+    },
+    "exercise-time": {
+      "evening": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.01, take 2 -0.34, take 3 +0.18; kept take 3, which now scores +0.18.",
+        "take": 3
+      }
+    },
+    "ferry-timetable": {
+      "ferry": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.00; kept take 2, which now scores +0.73.",
+        "take": 2
+      }
+    },
+    "fifteen-or-fifty": {
+      "cost": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.11; kept take 2, which now scores +1.53.",
+        "take": 2
+      }
+    },
+    "final-plan": {
+      "booking": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.25; kept take 2, which now scores +0.60.",
+        "take": 2
+      },
+      "we-re": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.37, take 2 -0.23, take 3 -0.19, take 4 +0.34; kept take 4, which now scores +0.34.",
+        "take": 4
+      }
+    },
+    "food-tradition": {
+      "grandmother": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.03; kept take 2, which now scores +0.00.",
+        "take": 2
+      }
+    },
+    "furniture-delivery": {
+      "old": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.13; kept take 2, which now scores +1.54.",
+        "take": 2
+      },
+      "sofa": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.49; kept take 2, which now scores +1.91.",
+        "take": 2
+      }
+    },
+    "guest-staying-over": {
+      "two": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.24, take 2 -0.02, take 3 +0.22; kept take 3, which now scores +0.22.",
+        "take": 3
+      }
+    },
+    "holiday-plans": {
+      "cards": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.10; kept take 2, which now scores +0.82.",
+        "take": 2
+      },
+      "we": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.15, take 2 -0.37, take 3 -0.42, take 4 -0.75; no take stressed the word, so this version is text-only."
+    },
+    "hotel-check-in": {
+      "starts": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.11, take 2 -0.21, take 3 -0.20, take 4 -0.05; kept take 4, which now scores -0.05.",
+        "take": 4
+      }
+    },
+    "introducing-people": {
+      "green": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.08; kept take 2, which now scores +0.74.",
+        "take": 2
+      },
+      "jacket": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.40, take 2 -0.01, take 3 +0.30; kept take 3, which now scores +0.30.",
+        "take": 3
+      }
+    },
+    "laundry-timing": {
+      "use": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.07; kept take 2, which now scores +0.04.",
+        "take": 2
+      }
+    },
+    "locked-out": {
+      "counter": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.01, take 2 -0.34, take 3 -0.19, take 4 +0.31; kept take 4, which now scores +0.31.",
+        "take": 4
+      }
+    },
+    "lost-wallet": {
+      "bookstore": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.52; kept take 2, which now scores +0.09.",
+        "take": 2
+      },
+      "paid": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.50, take 2 -0.74, take 3 -0.08, take 4 -1.07; kept take 3, which now scores -0.08.",
+        "take": 3
+      }
+    },
+    "market-produce": {
+      "wanted": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.50; kept take 2, which now scores +1.66.",
+        "take": 2
+      }
+    },
+    "meeting-middle": {
+      "saturday": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.73, take 2 -0.51, take 3 +1.03; kept take 3, which now scores +1.03.",
+        "take": 3
+      }
+    },
+    "meeting-point-change": {
+      "meet": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.68, take 2 -0.69, take 3 -0.59, take 4 -0.92; no take stressed the word, so this version is text-only."
+    },
+    "morning-stretch": {
+      "breakfast": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.21; kept take 2, which now scores +0.72.",
+        "take": 2
+      },
+      "stretch": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.64; kept take 2, which now scores +1.39.",
+        "take": 2
+      }
+    },
+    "moving-day-boxes": {
+      "kettle": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.32; kept take 2, which now scores +0.47.",
+        "take": 2
+      }
+    },
+    "music-down": {
+      "i": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -6.24; kept take 2, which now scores +3.84.",
+        "take": 2
+      }
+    },
+    "neighborhood-watch": {
+      "park": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.32, take 2 -0.16, take 3 +0.08; kept take 3, which now scores +0.08.",
+        "take": 3
+      }
+    },
+    "new-habit-cue": {
+      "mug": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.34; kept take 2, which now scores +0.78.",
+        "take": 2
+      }
+    },
+    "noisy-room": {
+      "need": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.82; kept take 2, which now scores +0.02.",
+        "take": 2
+      }
+    },
+    "partly-agreeing": {
+      "i-d": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.20; kept take 2, which now scores +0.11.",
+        "take": 2
+      }
+    },
+    "paying-at-supermarket": {
+      "wanted": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.04; kept take 2, which now scores +0.97.",
+        "take": 2
+      }
+    },
+    "pharmacy-directions": {
+      "label": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.27; kept take 2, which now scores +0.65.",
+        "take": 2
+      }
+    },
+    "picnic-shopping": {
+      "bringing": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.24, take 2 -0.68, take 3 +0.29; kept take 3, which now scores +0.29.",
+        "take": 3
+      }
+    },
+    "pitching-improvement": {
+      "drop": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.26, take 2 -1.17, take 3 +0.54; kept take 3, which now scores +0.54.",
+        "take": 3
+      },
+      "second": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.13; kept take 2, which now scores +0.51.",
+        "take": 2
+      }
+    },
+    "plant-watering": {
+      "i": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.20; kept take 2, which now scores +2.67.",
+        "take": 2
+      },
+      "watered": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.47; kept take 2, which now scores +0.21.",
+        "take": 2
+      }
+    },
+    "practical-support": {
+      "leave": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.18, take 2 -0.41, take 3 +0.76; kept take 3, which now scores +0.76.",
+        "take": 3
+      }
+    },
+    "printing-documents": {
+      "color": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.60, take 2 -0.43, take 3 +0.22; kept take 3, which now scores +0.50.",
+        "take": 3
+      }
+    },
+    "pronouncing-name": {
+      "first": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.00; kept take 2, which now scores +0.68.",
+        "take": 2
+      }
+    },
+    "public-meeting-question": {
+      "first": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.77; kept take 2, which now scores +0.55.",
+        "take": 2
+      }
+    },
+    "quiet-evening": {
+      "breakfast": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.45; kept take 2, which now scores +0.00.",
+        "take": 2
+      }
+    },
+    "rental-car-return": {
+      "b": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.00; kept take 2, which now scores +0.88.",
+        "take": 2
+      }
+    },
+    "responding-pushback": {
+      "start": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.01; kept take 2, which now scores +0.76.",
+        "take": 2
+      }
+    },
+    "restaurant-decision": {
+      "thai": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.24; kept take 2, which now scores +0.61.",
+        "take": 2
+      }
+    },
+    "return-policy": {
+      "credit": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.13; kept take 2, which now scores +0.36.",
+        "take": 2
+      },
+      "refund": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.00; kept take 2, which now scores +0.41.",
+        "take": 2
+      },
+      "you-ll": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.19; kept take 2, which now scores +0.42.",
+        "take": 2
+      }
+    },
+    "school-fundraiser": {
+      "stage": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.10; kept take 2, which now scores +0.05.",
+        "take": 2
+      }
+    },
+    "screen-break": {
+      "urgent": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.44; kept take 2, which now scores +0.45.",
+        "take": 2
+      }
+    },
+    "service-appointment-window": {
+      "technician": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.17; kept take 2, which now scores +1.78.",
+        "take": 2
+      }
+    },
+    "spelling-a-name": {
+      "booking": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.14; kept take 2, which now scores +0.52.",
+        "take": 2
+      }
+    },
+    "spoiler-etiquette": {
+      "i-m": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.83, take 2 -0.58, take 3 -0.30, take 4 +0.97; kept take 4, which now scores +0.97.",
+        "take": 4
+      }
+    },
+    "sports-club-trial": {
+      "indoor": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.34; kept take 2, which now scores +0.45.",
+        "take": 2
+      }
+    },
+    "taking-ownership": {
+      "rate": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -1.58, take 2 -0.45, take 3 +0.44; kept take 3, which now scores +0.44.",
+        "take": 3
+      },
+      "used": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.04; kept take 2, which now scores +2.06.",
+        "take": 2
+      }
+    },
+    "thanking-support": {
+      "password": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.63; kept take 2, which now scores +0.59.",
+        "take": 2
+      }
+    },
+    "thermostat-setting": {
+      "nineteen": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.08; kept take 2, which now scores +0.44.",
+        "take": 2
+      }
+    },
+    "transit-card": {
+      "i-ll": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.93; kept take 2, which now scores +0.83.",
+        "take": 2
+      },
+      "take": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.09; kept take 2, which now scores +0.20.",
+        "take": 2
+      }
+    },
+    "walking-directions": {
+      "right": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.18; kept take 2, which now scores +0.57.",
+        "take": 2
+      },
+      "turn": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.37; kept take 2, which now scores +0.70.",
+        "take": 2
+      },
+      "fountain": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.21, take 2 +0.33; kept take 2, which now scores +0.33.",
+        "take": 2
+      }
+    },
+    "weather-plan": {
+      "moving": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.87; kept take 2, which now scores +0.11.",
+        "take": 2
+      }
+    },
+    "welcoming-club-member": {
+      "first": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 +0.24, take 2 +0.98; kept take 2, which now scores +1.81.",
+        "take": 2
+      }
+    },
+    "wrapping-up-meeting": {
+      "updating": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 scored -0.24; kept take 2, which now scores +0.85.",
+        "take": 2
+      }
+    },
+    "wrong-dish": {
+      "ordered": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.31, take 2 -0.06, take 3 -0.58, take 4 +0.59; kept take 4, which now scores +0.59.",
+        "take": 4
+      }
+    },
+    "wrong-order-correction": {
+      "ordered": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.56, take 2 -0.09, take 3 +0.33; kept take 3, which now scores +0.33.",
+        "take": 3
+      }
+    },
+    "wrong-reservation-date": {
+      "arrive": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 -0.03, take 2 -0.51, take 3 +0.20; kept take 3, which now scores +0.20.",
+        "take": 3
+      },
+      "friday": {
+        "reason": "Automated prominence screen (loudness and duration vs. sibling takes, not a listening review): take 1 +0.16, take 2 +0.22; kept take 2, which now scores +0.22.",
+        "take": 2
+      }
+    }
+  }
 }

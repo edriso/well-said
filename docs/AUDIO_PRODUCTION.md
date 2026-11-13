@@ -24,9 +24,10 @@ npm run audio:generate -- --all            # entire catalog; only out-of-date fi
 npm run audio:check                        # validate files, fingerprints, loudness, size
 npm run audio:prune                        # drop recordings whose text changed (after rewrites)
 npm run audio:retakes                      # bring Stress Mode takes in line with the review file
+npm run audio:screen -- --all              # score how clearly each Stress Mode take stresses its word
 ```
 
-Every run voices dialogue lines, the full dialogue, expressions, and Stress Mode options; add `--no-stress` to skip Stress Mode (existing takes are kept, and the run refuses if a cast or model change would leave them in the wrong voice). `audio:plan` applies the same rules, so its estimate includes whole-lesson re-voices after a cast or model change. Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` (git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
+Every run voices dialogue lines, the full dialogue, expressions, and Stress Mode options; add `--no-stress` to skip Stress Mode (existing takes are kept, and the run refuses if a cast or model change would leave them in the wrong voice). `audio:plan` applies the same rules, so its estimate includes whole-lesson re-voices after a cast or model change. Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` and word alignments in `.cache/alignments/` (both git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
 
 ## What a lesson gets
 
@@ -87,6 +88,14 @@ Review decisions live in `content/stress-audio-rejected.json`, keyed by lesson i
 - **Reject** (a plain reason): the option keeps no audio and the learner gets the text-only exercise. Run `npm run audio:prune` to remove the file.
 - Do not just delete a weak file. The default seed comes from the text, so the next run would rebuild the same take from the raw cache.
 - Removing an entry restores take 1: run `npm run audio:retakes`, which re-processes it from the raw cache without spending credits.
+
+### Automated screen
+
+`npm run audio:screen` scores every take without listening. The three takes of an exercise say the same sentence in the same voice, so a convincing take makes its target word louder and/or longer than the same word in the two sibling takes, each measured relative to the rest of its take. ElevenLabs forced alignment supplies word timings (about one credit per take, cached by file). Pitch is deliberately left out because simple pitch trackers make octave errors on these voices.
+
+Scores are in cue units: +1 is roughly one clear, natural cue (+3 dB or +30% longer). Around 0 the word is no more prominent than when unstressed; below about -0.3 it is clearly less prominent. The screen writes a full report to `.cache/stress-screen.json` and lists takes below `--threshold` (default 0).
+
+The current takes were selected this way: every take scoring below 0 was re-taken (up to take 4), the best-scoring take was kept, and the four options whose best take still scored -0.3 or lower were rejected as text-only. The review file records each decision with its scores. That moved the 10th percentile from -0.24 to +0.20 and left no take below -0.3. A listening pass is still the final word; the screen only catches what it can measure.
 
 ## Licensing
 
