@@ -25,9 +25,11 @@ npm run audio:check                        # validate files, fingerprints, loudn
 npm run audio:prune                        # drop recordings whose text changed (after rewrites)
 npm run audio:retakes                      # bring Stress Mode takes in line with the review file
 npm run audio:screen -- --all              # score how clearly each Stress Mode take stresses its word
+npm run audio:verify -- --all              # transcribe every line and expression; report wording mismatches
+npm run audio:timings -- --all             # word timings for follow-along highlighting
 ```
 
-Every run voices dialogue lines, the full dialogue, expressions, and Stress Mode options; add `--no-stress` to skip Stress Mode (existing takes are kept, and the run refuses if a cast or model change would leave them in the wrong voice). `audio:plan` applies the same rules, so its estimate includes whole-lesson re-voices after a cast or model change. Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/` and word alignments in `.cache/alignments/` (both git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
+Every run voices dialogue lines, the full dialogue, expressions, and Stress Mode options; add `--no-stress` to skip Stress Mode (existing takes are kept, and the run refuses if a cast or model change would leave them in the wrong voice). `audio:plan` applies the same rules, so its estimate includes whole-lesson re-voices after a cast or model change. Generation is incremental and resumable. Unchanged files are skipped. Raw API responses are cached in `.cache/audio-raw/`, word alignments in `.cache/alignments/`, and transcripts in `.cache/transcripts/` (all git-ignored), so `--force` re-processes from the cache without spending credits; add `--fresh` to synthesize again. The manifest is saved after every lesson, so an interrupted run (for example, when credits run out) keeps finished lessons.
 
 ## What a lesson gets
 
@@ -37,6 +39,7 @@ public/audio/lessons/<lesson-id>/
   full.mp3             the lines joined with natural turn gaps
   expression-01.mp3    one file per reusable expression
   stress-<word>.mp3    one per performable Stress Mode option
+  timings.json         word timings for follow-along highlighting (see below)
 ```
 
 Files are named by durable line IDs, so reordering lines never mismatches audio. Paths are relative to `public/`; the playback adapter adds `import.meta.env.BASE_URL`.
@@ -96,6 +99,16 @@ Review decisions live in `content/stress-audio-rejected.json`, keyed by lesson i
 Scores are in cue units: +1 is roughly one clear, natural cue (+3 dB or +30% longer). Around 0 the word is no more prominent than when unstressed; below about -0.3 it is clearly less prominent. The screen writes a full report to `.cache/stress-screen.json` and lists takes below `--threshold` (default 0).
 
 The current takes were selected this way: every take scoring below 0 was re-taken (up to take 4), the best-scoring take was kept, and the four options whose best take still scored -0.3 or lower were rejected as text-only. The review file records each decision with its scores. That moved the 10th percentile from -0.24 to +0.20 and left no take below -0.3. A listening pass is still the final word; the screen only catches what it can measure.
+
+## Transcription audit
+
+`npm run audio:verify` transcribes every line and expression with ElevenLabs speech to text and compares the words with the script. Both sides are normalized first (numbers and times, punctuation, hyphens, and US/UK spellings), so formatting choices are not reported. Empty or non-Latin transcripts are retried and never cached, because speech to text occasionally returns them for clear English. The report lists what is left; review it, because many remaining differences are name spellings ("Sophia" for Sofia) or natural weak forms ("you'd just" heard as "you just").
+
+The full catalog was audited this way. The only real defects were ten expressions that begin with "…" (as in "… it is"): voices rendered the ellipsis as a stray syllable, so the pipeline now drops a leading ellipsis before synthesis and those ten were re-voiced and re-checked.
+
+## Word timings
+
+`npm run audio:timings` force-aligns each line file and the full dialogue against their text and writes `timings.json` next to the audio. Alignment costs about one credit per file and is cached by file content. Each entry stores the text fingerprint and the audio file hash, so `audio:check` and the tests catch timings that no longer match; `audio:generate` rebuilds them for any lesson it changes.
 
 ## Licensing
 

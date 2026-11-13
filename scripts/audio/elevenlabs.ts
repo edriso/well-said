@@ -64,6 +64,16 @@ export function createClient(apiKey: string) {
       return Buffer.from(await response.arrayBuffer());
     },
 
+    /** Plain transcript of an audio file (speech to text). */
+    async transcribe(audio: Buffer): Promise<string> {
+      const form = new FormData();
+      form.append('model_id', 'scribe_v1');
+      form.append('language_code', 'en');
+      form.append('tag_audio_events', 'false');
+      form.append('file', new Blob([new Uint8Array(audio)], { type: 'audio/mpeg' }), 'clip.mp3');
+      return ((await (await request('/speech-to-text', { method: 'POST', body: form })).json()) as { text: string }).text.trim();
+    },
+
     /** Word timings for known text in an audio file (forced alignment; about one credit per call). */
     async align(audio: Buffer, text: string): Promise<AlignedWord[]> {
       const form = new FormData();

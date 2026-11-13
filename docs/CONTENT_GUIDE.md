@@ -48,9 +48,9 @@ These keep dialogue consistent for learners and for model audio:
 
 The catalog interleaves situation families by lesson number, so consecutive days vary; tests enforce this. Speaking focus also rotates within each family, so every family practices most of the ten focuses. Keep the `focus` of an existing lesson unless you rebalance deliberately.
 
-## Future timing metadata
+## Word timing metadata
 
-Word-level highlighting should only be added after studio audio has reviewed timestamps. Store timings with content, in seconds from the beginning of each final file. Do not infer timing from text length in the UI.
+Follow-along highlighting reads `public/audio/lessons/<lesson-id>/timings.json`: one `[start, end]` pair in seconds per whitespace-separated word, measured from the beginning of each final file, for every line and for the full dialogue. Timings come from forced alignment of the final audio (`npm run audio:timings`), never from text length. Each entry records the text fingerprint and audio hash it was made from; edited text or new audio makes it stale, `npm run audio:check` reports it, and the app shows no highlight for that line until timings are rebuilt. `audio:generate` rebuilds timings for every lesson it changes.
 
 ## After editing a voiced lesson
 

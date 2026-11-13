@@ -10,6 +10,8 @@ export const REJECTED_STRESS_PATH = resolve(ROOT, 'content/stress-audio-rejected
 export const RAW_CACHE_DIR = resolve(ROOT, '.cache/audio-raw');
 export const ALIGNMENT_CACHE_DIR = resolve(ROOT, '.cache/alignments');
 export const STRESS_SCREEN_REPORT = resolve(ROOT, '.cache/stress-screen.json');
+export const TRANSCRIPT_CACHE_DIR = resolve(ROOT, '.cache/transcripts');
+export const VERIFY_REPORT = resolve(ROOT, '.cache/speech-verify.json');
 
 /** Shell variables win over .env.local, which wins over .env. Nothing is written back. */
 function loadEnv() {

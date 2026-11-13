@@ -13,12 +13,12 @@
  * the word is no more prominent than when unstressed; below about -0.3 it is
  * clearly less prominent. This is a screen, not a substitute for listening.
  */
-import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { stressSlug, stressWordKey } from '../../src/content/audio';
 import type { Lesson } from '../../src/content/types';
-import type { AlignedWord, ElevenLabsClient } from './elevenlabs';
+import { alignedWords } from './alignment';
+import type { ElevenLabsClient } from './elevenlabs';
 import { decodePcm, PCM_RATE } from './ffmpeg';
 
 export type StressScreenResult = { lessonId: string; slug: string; score: number; loudnessDb: number; durationPct: number };
@@ -43,17 +43,6 @@ export function prominenceScore(own: WordFeatures[], siblings: WordFeatures[][],
     loudnessDb: Math.round(loudnessDb * 10) / 10,
     durationPct: Math.round((Math.exp(logDuration) - 1) * 100),
   };
-}
-
-/** Word timings for a take, cached by file content so each take is aligned once. */
-async function alignedWords(file: string, sentence: string, cacheDir: string, client: ElevenLabsClient | undefined) {
-  const audio = readFileSync(file);
-  const cached = join(cacheDir, `${createHash('sha1').update(audio).digest('hex').slice(0, 16)}.json`);
-  if (existsSync(cached)) return (JSON.parse(readFileSync(cached, 'utf8')) as AlignedWord[]).filter((word) => word.text.trim());
-  if (!client) throw new Error('Uncached alignments need ELEVENLABS_API_KEY.');
-  const words = await client.align(audio, sentence);
-  writeFileSync(cached, JSON.stringify(words));
-  return words;
 }
 
 /** Loudness and duration of each sentence word relative to its take, or undefined if alignment does not match. */

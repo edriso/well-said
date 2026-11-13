@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import rejectedStress from '../../content/stress-audio-rejected.json';
-import { attachAudio, audioManifest, audioPaths, canPerformStress, fingerprint, fullDialogueText, hasModelAudio, requestedStressTake, stressPerformanceText, stressSlug, stressTakeFingerprint, type AudioManifest, type StressReview } from './audio';
+import { attachAudio, audioManifest, audioPaths, canPerformStress, currentTimings, fingerprint, fullDialogueText, hasModelAudio, requestedStressTake, spokenWordIndex, stressPerformanceText, stressSlug, stressTakeFingerprint, type AudioManifest, type LessonTimings, type StressReview } from './audio';
 import { getLessonById, lessons } from './lessons';
 
 const filesOnDisk = new Set(Object.keys(import.meta.glob('/public/audio/lessons/**/*.mp3')));
 const onDisk = (path: string) => filesOnDisk.has(path);
 const publicFile = (path: string) => `/public/${path}`;
 const review = rejectedStress.lessons as StressReview;
+const timingFiles = import.meta.glob<LessonTimings>('/public/audio/lessons/*/timings.json', { eager: true, import: 'default' });
 
 describe('audio contract', () => {
   it('fingerprints text deterministically', () => {
@@ -54,6 +55,39 @@ describe('audio contract', () => {
     const options = attachAudio(lesson, manifest).stressExercise.options;
     expect(options.find((option) => option.word === 'I')!.audio).toBeUndefined();
     expect(options.find((option) => option.word === 'small')!.audio).toBe(audioPaths.stress(lesson.id, 'small'));
+  });
+
+  it('finds the spoken word, holding it briefly through the following pause', () => {
+    const words: [number, number][] = [[0.2, 0.5], [0.6, 0.9], [1.5, 1.8]];
+    expect(spokenWordIndex(words, 0.1)).toBe(-1);
+    expect(spokenWordIndex(words, 0.3)).toBe(0);
+    expect(spokenWordIndex(words, 0.55)).toBe(0);
+    expect(spokenWordIndex(words, 0.7)).toBe(1);
+    expect(spokenWordIndex(words, 1.3)).toBe(-1);
+    expect(spokenWordIndex(words, 1.6)).toBe(2);
+  });
+
+  it('uses only timings that still match the text', () => {
+    const lesson = getLessonById('ordering-coffee')!;
+    const [first, second] = lesson.lines;
+    const wordsFor = (text: string) => text.split(/\s+/).map((_, index): [number, number] => [index, index + 0.5]);
+    const timings: LessonTimings = {
+      version: 1,
+      lines: {
+        [first!.id]: { fingerprint: fingerprint(first!.text), audio: 'hash', words: wordsFor(first!.text) },
+        [second!.id]: { fingerprint: fingerprint('an older version'), audio: 'hash', words: wordsFor(second!.text) },
+      },
+      full: { fingerprint: fingerprint(fullDialogueText(lesson)), audio: 'hash', lines: Object.fromEntries(lesson.lines.map((line) => [line.id, wordsFor(line.text)])) },
+    };
+    const valid = currentTimings(lesson, timings);
+    expect(valid.lines.has(first!.id)).toBe(true);
+    expect(valid.lines.has(second!.id)).toBe(false);
+    expect(valid.full.size).toBe(lesson.lines.length);
+
+    const wrongCount = { ...timings, lines: { [first!.id]: { ...timings.lines[first!.id]!, words: [[0, 1]] as [number, number][] } } };
+    expect(currentTimings(lesson, wrongCount).lines.size).toBe(0);
+    expect(currentTimings(lesson, { ...timings, full: { ...timings.full!, fingerprint: 'stale' } }).full.size).toBe(0);
+    expect(currentTimings(lesson, undefined).lines.size).toBe(0);
   });
 
   it('tracks stress re-takes without breaking existing takes', () => {
@@ -122,6 +156,18 @@ describe('audio contract', () => {
     expect(withAudio.expressions[0]!.audio).toBe('audio/lessons/ordering-coffee/expression-01.mp3');
     expect(withAudio.expressions[1]!.audio).toBeUndefined();
     expect(hasModelAudio(withAudio)).toBe(false);
+  });
+
+  it('has current word timings for every voiced line and full dialogue', () => {
+    for (const lesson of lessons.filter(hasModelAudio)) {
+      const timings = timingFiles[`/public/${audioPaths.timings(lesson.id)}`];
+      expect(timings, `${lesson.id} has no timings.json; run npm run audio:timings`).toBeDefined();
+      const valid = currentTimings(lesson, timings);
+      for (const line of lesson.lines) {
+        expect(valid.lines.has(line.id), `${lesson.id}/${line.id} timings are missing or stale; run npm run audio:timings`).toBe(true);
+        if (lesson.fullAudio) expect(valid.full.has(line.id), `${lesson.id} full-dialogue timings are missing or stale`).toBe(true);
+      }
+    }
   });
 
   it('has a current file on disk for every manifest entry', () => {

@@ -8,6 +8,8 @@
  *                                                    rejected, or whose lesson is gone
  *   npm run audio:retakes                            bring Stress Mode takes in line with the review file
  *   npm run audio:screen   -- [selection]            score how clearly each Stress Mode take stresses its word
+ *   npm run audio:verify   -- [selection]            transcribe lines and expressions; report wording mismatches
+ *   npm run audio:timings  -- [selection]            word timings for follow-along highlighting (timings.json)
  *   npm run audio:voices                             list voices available to your API key
  *
  * Selection (default: the Start Here collection):
@@ -29,14 +31,16 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { audioPaths, canPerformStress, fingerprint, fullDialogueText, requestedStressTake, stressPerformanceText, stressSlug, stressTakeFingerprint, stressTextFingerprint, type AudioManifest, type LessonAudioEntry, type StressReview } from '../../src/content/audio';
+import { attachAudio, audioPaths, canPerformStress, fingerprint, fullDialogueText, requestedStressTake, stressPerformanceText, stressSlug, stressTakeFingerprint, stressTextFingerprint, type AudioManifest, type LessonAudioEntry, type StressReview } from '../../src/content/audio';
 import { lessons } from '../../src/content/lessons';
 import type { Lesson } from '../../src/content/types';
 import { castLesson, type Voice, type VoicePools } from './cast';
-import { ALIGNMENT_CACHE_DIR, config, MANIFEST_PATH, STRESS_SCREEN_REPORT, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJECTED_STRESS_PATH, requireApiKey } from './config';
+import { ALIGNMENT_CACHE_DIR, config, MANIFEST_PATH, STRESS_SCREEN_REPORT, TRANSCRIPT_CACHE_DIR, VERIFY_REPORT, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJECTED_STRESS_PATH, requireApiKey } from './config';
 import { createClient, ElevenLabsError, type ElevenLabsClient } from './elevenlabs';
 import { assertFfmpeg, concatDialogue, LOUDNESS, measure, processClip } from './ffmpeg';
 import { screenStress } from './screen';
+import { buildTimings, staleTimings, writeTimings } from './timings';
+import { verifySpeech } from './verify';
 
 /** Stress takes a reviewer heard and rejected (reason) or asked to re-take ({ reason, take }). */
 type RejectedStress = { version: 1; lessons: StressReview };
@@ -180,7 +184,7 @@ function lessonJobs(lesson: Lesson, cast: Map<string, Voice>, withStress: boolea
   lesson.expressions.forEach((expression, index) => jobs.push({
     slot: { kind: 'expressions', key: index },
     path: audioPaths.expression(lesson.id, index),
-    text: expression.phrase.replace(/…/g, '...'),
+    text: expressionSpeechText(expression.phrase),
     fingerprint: fingerprint(expression.phrase),
     voice: voiceFor(lesson.speakers[index % lesson.speakers.length]!.id),
     modelId: config.modelId,
@@ -218,6 +222,13 @@ const speechRequest = (job: Job) => ({
 /** Cache file for a job's raw API response, keyed by everything that shapes the performance. */
 const rawPath = (job: Job) => join(RAW_CACHE_DIR, `${fingerprint(JSON.stringify(speechRequest(job)))}.mp3`);
 
+/**
+ * What the voice performs for an expression. A leading "…" (as in "… it is") is
+ * dropped, with any comma after it: voices render it as a stray syllable
+ * ("Hi somewhere"). Other ellipses become "..." for a natural pause.
+ */
+const expressionSpeechText = (phrase: string) => phrase.replace(/^\s*…\s*,?\s*/, '').replace(/…/g, '...');
+
 const isCurrent = (job: Job, entry: LessonAudioEntry | undefined) =>
   readSlot(entry, job.slot) === job.fingerprint && existsSync(publicPath(job.path));
 
@@ -249,6 +260,7 @@ function removeUnreferenced(lessonId: string, entry: LessonAudioEntry) {
   const dir = publicPath(audioPaths.dir(lessonId));
   if (!existsSync(dir)) return;
   const keep = referencedFiles(lessonId, entry);
+  keep.add(audioPaths.timings(lessonId));
   for (const file of readdirSync(dir)) {
     if (!keep.has(`${audioPaths.dir(lessonId)}/${file}`)) rmSync(join(dir, file));
   }
@@ -395,6 +407,14 @@ async function generate() {
     provenance.lessons = sortByCatalog(provenance.lessons);
     writeJson(MANIFEST_PATH, manifest);
     writeJson(PROVENANCE_PATH, provenance);
+
+    // Keep follow-along timings in step with the audio that was just written.
+    const voiced = attachAudio(lesson, manifest);
+    if (staleTimings(voiced, PUBLIC_DIR).length) {
+      const { timings, problems } = await buildTimings(voiced, PUBLIC_DIR, ALIGNMENT_CACHE_DIR, client);
+      writeTimings(voiced, PUBLIC_DIR, timings);
+      for (const problem of problems) process.stdout.write(`\n  timings: ${problem}`);
+    }
     process.stdout.write(' ✓\n');
   }
   console.log(`Done. Synthesized ${synthesized.toLocaleString()} characters. Run \`npm run audio:check\` next.`);
@@ -430,6 +450,8 @@ async function check() {
     for (const line of lesson.lines) {
       if (entry.lines[line.id] && entry.lines[line.id] !== fingerprint(line.text)) problems.push(`${lessonId}/${line.id}: text changed since recording; regenerate`);
     }
+    expected.add(audioPaths.timings(lessonId));
+    for (const problem of staleTimings(lesson, PUBLIC_DIR)) problems.push(`${audioPaths.timings(lessonId)}: ${problem}; run npm run audio:timings`);
     const expectedTakes = expectedStress(lesson);
     for (const [slug, recorded] of Object.entries(entry.stress)) {
       const value = expectedTakes.get(slug);
@@ -534,6 +556,38 @@ async function screen() {
   console.log(`\nFull report: ${STRESS_SCREEN_REPORT}. Request re-takes in content/stress-audio-rejected.json, then run npm run audio:retakes.`);
 }
 
+/** Transcribes recorded lines and expressions and reports any that do not say their script. */
+async function verify() {
+  const client = config.apiKey ? createClient(requireApiKey()) : undefined;
+  const { checked, mismatches } = await verifySpeech(selectLessons(), PUBLIC_DIR, TRANSCRIPT_CACHE_DIR, client, config.concurrency);
+  mismatches.sort((a, b) => a.item.localeCompare(b.item));
+  writeJson(VERIFY_REPORT, mismatches);
+  console.log(`Transcribed ${checked} recordings · ${mismatches.length} differ from their script.`);
+  for (const result of mismatches) {
+    console.log(`\n  ${result.item}\n    script: ${result.script}\n    heard:  ${result.heard}`);
+    if (result.missing.length) console.log(`    missing: ${result.missing.join(' ')}`);
+    if (result.extra.length) console.log(`    extra:   ${result.extra.join(' ')}`);
+  }
+  if (mismatches.length) console.log(`\nFull report: ${VERIFY_REPORT}`);
+}
+
+/** Writes word timings for lessons whose timings are missing or out of date. */
+async function timingsCommand() {
+  const client = config.apiKey ? createClient(requireApiKey()) : undefined;
+  const voiced = selectLessons().filter((lesson) => lesson.lines.some((line) => line.audio));
+  let written = 0;
+  const problems: string[] = [];
+  for (const lesson of voiced) {
+    if (!flags.force && !staleTimings(lesson, PUBLIC_DIR).length) continue;
+    const result = await buildTimings(lesson, PUBLIC_DIR, ALIGNMENT_CACHE_DIR, client);
+    writeTimings(lesson, PUBLIC_DIR, result.timings);
+    problems.push(...result.problems);
+    written += 1;
+  }
+  console.log(`Timings written for ${written} of ${voiced.length} voiced lessons.`);
+  if (problems.length) console.log(`\nNot aligned (these words get no highlight):\n${problems.map((problem) => `  - ${problem}`).join('\n')}`);
+}
+
 async function listVoices() {
   const voices = await createClient(requireApiKey()).voices();
   for (const voice of voices) {
@@ -542,7 +596,7 @@ async function listVoices() {
   }
 }
 
-const commands: Record<string, () => Promise<void>> = { plan, generate, check, prune, screen, voices: listVoices };
+const commands: Record<string, () => Promise<void>> = { plan, generate, check, prune, screen, verify, timings: timingsCommand, voices: listVoices };
 const command = commands[positionals[0] ?? ''];
 
 if (!command) {

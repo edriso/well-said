@@ -50,7 +50,59 @@ export const audioPaths = {
   line: (lessonId: string, lineId: string) => `audio/lessons/${lessonId}/${lineId}.mp3`,
   expression: (lessonId: string, index: number) => `audio/lessons/${lessonId}/expression-${pad(index + 1)}.mp3`,
   stress: (lessonId: string, word: string) => `audio/lessons/${lessonId}/stress-${stressSlug(word)}.mp3`,
+  timings: (lessonId: string) => `audio/lessons/${lessonId}/timings.json`,
 };
+
+/** [start, end] in seconds from the beginning of the audio file, one per whitespace-separated word. */
+export type WordTiming = [number, number];
+
+/**
+ * Word timings for a lesson's model audio (`timings.json`, made by forced
+ * alignment). Each entry records the fingerprint of the text it was aligned to
+ * and a hash of the audio file, so stale timings are never used.
+ */
+export type LessonTimings = {
+  version: 1;
+  lines: Record<string, { fingerprint: string; audio: string; words: WordTiming[] }>;
+  full?: { fingerprint: string; audio: string; lines: Record<string, WordTiming[]> };
+};
+
+/** The words a timing array is aligned with: the text split on whitespace, punctuation attached. */
+export const timedWords = (text: string) => text.split(/\s+/).filter(Boolean);
+
+const wellFormed = (words: WordTiming[] | undefined, text: string) =>
+  Array.isArray(words) && words.length === timedWords(text).length
+  && words.every((word, index) => word[0] <= word[1] && (index === 0 || word[0] >= words[index - 1]![0]));
+
+/** Timings that still match the lesson's text, by line, for line files and for the full dialogue. */
+export function currentTimings(lesson: Lesson, timings: LessonTimings | undefined) {
+  const lines = new Map<string, WordTiming[]>();
+  const full = new Map<string, WordTiming[]>();
+  if (timings?.version !== 1) return { lines, full };
+  for (const line of lesson.lines) {
+    const entry = timings.lines[line.id];
+    if (entry?.fingerprint === fingerprint(line.text) && wellFormed(entry.words, line.text)) lines.set(line.id, entry.words);
+  }
+  if (timings.full?.fingerprint === fingerprint(fullDialogueText(lesson))) {
+    for (const line of lesson.lines) {
+      const words = timings.full.lines[line.id];
+      if (wellFormed(words, line.text)) full.set(line.id, words!);
+    }
+  }
+  return { lines, full };
+}
+
+/**
+ * The word being spoken at `time`, or -1 between words. A word stays active
+ * through the short pause after it, so the highlight does not flicker.
+ */
+export function spokenWordIndex(words: WordTiming[], time: number, hold = 0.25): number {
+  for (let index = words.length - 1; index >= 0; index -= 1) {
+    const [start, end] = words[index]!;
+    if (time >= start) return time <= end + hold ? index : -1;
+  }
+  return -1;
+}
 
 /** Returns the lesson with every audio field whose recording still matches its text. */
 export function attachAudio(lesson: Lesson, manifest: AudioManifest = audioManifest): Lesson {
