@@ -6,6 +6,7 @@ export const ROOT = resolve(import.meta.dirname, '../..');
 export const PUBLIC_DIR = resolve(ROOT, 'public');
 export const MANIFEST_PATH = resolve(ROOT, 'src/content/audio-manifest.json');
 export const PROVENANCE_PATH = resolve(ROOT, 'content/audio-provenance.json');
+export const REJECTED_STRESS_PATH = resolve(ROOT, 'content/stress-audio-rejected.json');
 export const RAW_CACHE_DIR = resolve(ROOT, '.cache/audio-raw');
 
 /** Shell variables win over .env.local, which wins over .env. Nothing is written back. */

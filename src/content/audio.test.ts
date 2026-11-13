@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { attachAudio, audioManifest, audioPaths, fingerprint, fullDialogueText, hasModelAudio, stressPerformanceText, stressSlug, type AudioManifest } from './audio';
+import rejectedStress from '../../content/stress-audio-rejected.json';
+import { attachAudio, audioManifest, audioPaths, canPerformStress, fingerprint, fullDialogueText, hasModelAudio, stressPerformanceText, stressSlug, type AudioManifest } from './audio';
 import { getLessonById, lessons } from './lessons';
 
 const filesOnDisk = new Set(Object.keys(import.meta.glob('/public/audio/lessons/**/*.mp3')));
@@ -18,6 +19,40 @@ describe('audio contract', () => {
     expect(stressPerformanceText('Could I get a small latte?', 'small')).toBe('Could I get a SMALL latte?');
     expect(stressPerformanceText('I thought the meeting was tomorrow.', 'tomorrow')).toBe('I thought the meeting was TOMORROW.');
     expect(stressSlug('Café?')).toBe('cafe');
+  });
+
+  it('quotes words that capitalization cannot mark', () => {
+    expect(stressPerformanceText('Could I get a small latte?', 'I')).toBe('Could "I" get a small latte?');
+    expect(stressPerformanceText('I said I would.', 'I')).toBe('"I" said "I" would.');
+    expect(stressPerformanceText('Gate C, not B.', 'C')).toBe('Gate "C", not B.');
+    expect(stressPerformanceText("I'm sure.", "I'm")).toBe("I'M sure.");
+  });
+
+  it('only attaches stress audio for words the sentence contains', () => {
+    expect(canPerformStress('Could I get a small latte?', 'small')).toBe(true);
+    expect(canPerformStress('Could I get a small latte?', 'I')).toBe(true);
+    expect(canPerformStress('Could I get a small latte?', 'mocha')).toBe(false);
+
+    const attached = getLessonById('ordering-coffee')!;
+    const lesson = {
+      ...attached,
+      stressExercise: { ...attached.stressExercise, options: attached.stressExercise.options.map((option) => ({ ...option, audio: undefined })) },
+    };
+    const { sentence } = lesson.stressExercise;
+    const manifest: AudioManifest = {
+      version: 1,
+      lessons: {
+        [lesson.id]: {
+          lines: {},
+          expressions: [],
+          // A take recorded from the unmarked sentence is not a stressed performance.
+          stress: { i: fingerprint(sentence), small: fingerprint(stressPerformanceText(sentence, 'small')) },
+        },
+      },
+    };
+    const options = attachAudio(lesson, manifest).stressExercise.options;
+    expect(options.find((option) => option.word === 'I')!.audio).toBeUndefined();
+    expect(options.find((option) => option.word === 'small')!.audio).toBe(audioPaths.stress(lesson.id, 'small'));
   });
 
   it('attaches only recordings whose text still matches', () => {
@@ -65,6 +100,16 @@ describe('audio contract', () => {
         expect(recorded, `${lessonId} expression ${index + 1} changed after recording`).toBe(fingerprint(expression.phrase));
         expect(onDisk(publicFile(audioPaths.expression(lessonId, index)))).toBe(true);
       });
+      const rejected = (rejectedStress.lessons as Record<string, Record<string, string>>)[lessonId] ?? {};
+      for (const [slug, recorded] of Object.entries(entry.stress)) {
+        const option = lesson!.stressExercise.options.find((item) => stressSlug(item.word) === slug);
+        expect(option, `${lessonId}/stress-${slug} has no matching stress option`).toBeDefined();
+        const { sentence } = lesson!.stressExercise;
+        expect(canPerformStress(sentence, option!.word), `${lessonId}/stress-${slug} names a word the sentence does not contain`).toBe(true);
+        expect(rejected[slug], `${lessonId}/stress-${slug} was rejected on review; run npm run audio:prune`).toBeUndefined();
+        expect(recorded, `${lessonId}/stress-${slug} changed after recording`).toBe(fingerprint(stressPerformanceText(sentence, option!.word)));
+        expect(onDisk(publicFile(audioPaths.stress(lessonId, option!.word))), `${lessonId}/stress-${slug}.mp3 is missing`).toBe(true);
+      }
       if (entry.full) {
         expect(entry.full, `${lessonId} full dialogue is stale`).toBe(fingerprint(fullDialogueText(lesson!)));
         expect(onDisk(publicFile(audioPaths.full(lessonId)))).toBe(true);

@@ -34,7 +34,7 @@ public/audio/lessons/<lesson-id>/
   <line-id>.mp3        one clean file per dialogue line (e.g. coffee-1.mp3)
   full.mp3             the lines joined with natural turn gaps
   expression-01.mp3    one file per reusable expression
-  stress-<word>.mp3    opt-in, see below
+  stress-<word>.mp3    one per performable Stress Mode option (opt-in, see below)
 ```
 
 Files are named by durable line IDs, so reordering lines never mismatches audio. Paths are relative to `public/`; the playback adapter adds `import.meta.env.BASE_URL`.
@@ -66,7 +66,9 @@ The full dialogue concatenates the processed lines with a short conversational g
 
 ## Stress Mode audio (opt-in)
 
-`--with-stress` performs each Stress Mode option with the contrasted word capitalized, using `ELEVENLABS_STRESS_MODEL_ID` (default `eleven_v3`, which responds best to emphasis). Synthetic contrastive stress is not always convincing, so it is off by default. Listen to every file and delete any that do not clearly perform the named contrast before committing.
+`--with-stress` performs each Stress Mode option with the contrasted word capitalized (or, for a word that is already upper case such as "I", in quotation marks), using `ELEVENLABS_STRESS_MODEL_ID` (default `eleven_v3`, which responds best to emphasis). Synthetic contrastive stress is not always convincing, so it is off by default. Listen to every file before committing.
+
+- To reject a take that does not clearly perform the named contrast, add it to `content/stress-audio-rejected.json` (`"<lesson-id>": { "<stress-slug>": "<reason>" }`) and run `npm run audio:prune`. Do not just delete the file: the seed comes from the text, so the next `--with-stress` run would rebuild the same take from the raw cache. Rejected takes stay listed, and `npm test` and `audio:check` fail if one is registered again. Remove an entry to restore a take; the raw cache re-processes it without spending credits.
 
 ## Licensing
 

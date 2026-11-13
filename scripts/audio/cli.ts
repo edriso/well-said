@@ -11,7 +11,8 @@
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
  *   --non-commercial       lessons whose audio came from a free/pay-as-you-go plan (re-voice with --force --fresh)
  * Options:
- *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear)
+ *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear;
+ *                   takes listed in content/stress-audio-rejected.json are never registered)
  *   --force         re-process files even when the recorded text is unchanged (uses the raw cache)
  *   --fresh         with --force, ignore the raw cache and synthesize again (spends credits)
  *
@@ -21,13 +22,16 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { audioPaths, fingerprint, fullDialogueText, stressPerformanceText, stressSlug, type AudioManifest, type LessonAudioEntry } from '../../src/content/audio';
+import { audioPaths, canPerformStress, fingerprint, fullDialogueText, stressPerformanceText, stressSlug, type AudioManifest, type LessonAudioEntry } from '../../src/content/audio';
 import { lessons } from '../../src/content/lessons';
 import type { Lesson } from '../../src/content/types';
 import { castLesson, type Voice, type VoicePools } from './cast';
-import { config, MANIFEST_PATH, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, requireApiKey } from './config';
+import { config, MANIFEST_PATH, RAW_CACHE_DIR, PROVENANCE_PATH, PUBLIC_DIR, REJECTED_STRESS_PATH, requireApiKey } from './config';
 import { createClient, ElevenLabsError, type ElevenLabsClient } from './elevenlabs';
 import { assertFfmpeg, concatDialogue, LOUDNESS, measure, processClip } from './ffmpeg';
+
+/** Stress takes a reviewer heard and rejected: lesson id → stress slug → reason. */
+type RejectedStress = { version: 1; lessons: Record<string, Record<string, string>> };
 
 type Provenance = {
   version: 1;
@@ -69,6 +73,16 @@ const sortByCatalog = <T>(record: Record<string, T>) =>
   Object.fromEntries(Object.entries(record).sort(([a], [b]) => (order.get(a) ?? 1e9) - (order.get(b) ?? 1e9)));
 const formatBytes = (bytes: number) => `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 
+const rejectedStress = existsSync(REJECTED_STRESS_PATH) ? readJson<RejectedStress>(REJECTED_STRESS_PATH).lessons : {};
+
+/**
+ * Stress options that may have model audio: the word must be in the sentence,
+ * and the take must not have been rejected on review. The seed is derived from
+ * the text, so synthesizing a rejected take again reproduces it.
+ */
+const stressOptions = (lesson: Lesson) => lesson.stressExercise.options.filter((option) =>
+  canPerformStress(lesson.stressExercise.sentence, option.word) && !rejectedStress[lesson.id]?.[stressSlug(option.word)]);
+
 function selectLessons(): Lesson[] {
   let selected: Lesson[];
   if (flags.lesson) {
@@ -92,7 +106,7 @@ function selectLessons(): Lesson[] {
 
 function speechText(lesson: Lesson, withStress: boolean) {
   const texts = [...lesson.lines.map((line) => line.text), ...lesson.expressions.map((expression) => expression.phrase)];
-  if (withStress) texts.push(...lesson.stressExercise.options.map((option) => stressPerformanceText(lesson.stressExercise.sentence, option.word)));
+  if (withStress) texts.push(...stressOptions(lesson).map((option) => stressPerformanceText(lesson.stressExercise.sentence, option.word)));
   return texts;
 }
 
@@ -127,7 +141,7 @@ function lessonJobs(lesson: Lesson, cast: Map<string, Voice>, withStress: boolea
     modelId: config.modelId,
   }));
   if (withStress) {
-    for (const option of lesson.stressExercise.options) {
+    for (const option of stressOptions(lesson)) {
       const text = stressPerformanceText(lesson.stressExercise.sentence, option.word);
       jobs.push({
         slot: { kind: 'stress', key: stressSlug(option.word) },
@@ -220,6 +234,8 @@ async function generate() {
     const entry: LessonAudioEntry = existing
       ? { ...existing, lines: { ...existing.lines }, expressions: [...existing.expressions], stress: { ...existing.stress } }
       : { lines: {}, expressions: [], stress: {} };
+    const allowedStress = new Set(stressOptions(lesson).map((option) => stressSlug(option.word)));
+    for (const slug of Object.keys(entry.stress)) if (!allowedStress.has(slug)) delete entry.stress[slug];
     const pending = lessonJobs(lesson, cast, flags['with-stress']).filter((job) => !isCurrent(job, existing));
 
     // Never start a lesson the remaining credits cannot finish, so no lesson is left half-voiced.
@@ -300,6 +316,12 @@ async function check() {
     for (const line of lesson.lines) {
       if (entry.lines[line.id] && entry.lines[line.id] !== fingerprint(line.text)) problems.push(`${lessonId}/${line.id}: text changed since recording; regenerate`);
     }
+    const allowedStress = new Map(stressOptions(lesson).map((option) => [stressSlug(option.word), stressPerformanceText(lesson.stressExercise.sentence, option.word)]));
+    for (const [slug, recorded] of Object.entries(entry.stress)) {
+      const text = allowedStress.get(slug);
+      if (text === undefined) problems.push(`${lessonId}/stress-${slug}: rejected or not performable; run npm run audio:prune`);
+      else if (recorded !== fingerprint(text)) problems.push(`${lessonId}/stress-${slug}: text changed since recording; regenerate`);
+    }
   }
 
   const lessonsDir = publicPath('audio/lessons');
@@ -345,7 +367,7 @@ async function prune() {
       // Expression fingerprints are positional; stop at the first gap so indexes stay aligned with file names.
       const firstGap = kept.expressions.findIndex((value) => value === undefined);
       if (firstGap >= 0) kept.expressions = kept.expressions.slice(0, firstGap);
-      for (const option of lesson.stressExercise.options) {
+      for (const option of stressOptions(lesson)) {
         const slug = stressSlug(option.word);
         if (entry.stress[slug] === fingerprint(stressPerformanceText(lesson.stressExercise.sentence, option.word))) kept.stress[slug] = entry.stress[slug]!;
       }

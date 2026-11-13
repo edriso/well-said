@@ -72,6 +72,7 @@ export function attachAudio(lesson: Lesson, manifest: AudioManifest = audioManif
     stressExercise: {
       ...lesson.stressExercise,
       options: lesson.stressExercise.options.map((option) =>
+        canPerformStress(lesson.stressExercise.sentence, option.word) &&
         matches(entry.stress[stressSlug(option.word)], stressPerformanceText(lesson.stressExercise.sentence, option.word))
           ? { ...option, audio: audioPaths.stress(lesson.id, option.word) }
           : option,
@@ -80,14 +81,26 @@ export function attachAudio(lesson: Lesson, manifest: AudioManifest = audioManif
   };
 }
 
-/** The sentence with the contrasted word capitalized, which is what the voice performs. */
+/**
+ * The sentence as the voice performs it, with the contrasted word marked. The
+ * cue is capitalization; a word that is already upper case ("I", a gate letter
+ * such as "C") is put in quotation marks instead, which the stress model reads
+ * as emphasis without speaking the marks.
+ */
 export function stressPerformanceText(sentence: string, word: string): string {
   const target = word.toLocaleLowerCase('en');
   return sentence
     .split(/(\s+)/)
-    .map((part) => (part.toLocaleLowerCase('en').replace(/[^\p{L}\p{N}']/gu, '') === target ? part.toLocaleUpperCase('en') : part))
+    .map((part) => {
+      if (part.toLocaleLowerCase('en').replace(/[^\p{L}\p{N}']/gu, '') !== target) return part;
+      const upper = part.toLocaleUpperCase('en');
+      return upper !== part ? upper : part.replace(/[\p{L}\p{N}']+/u, (core) => `"${core}"`);
+    })
     .join('');
 }
+
+/** False when the word is not in the sentence, so there is nothing to perform. */
+export const canPerformStress = (sentence: string, word: string) => stressPerformanceText(sentence, word) !== sentence;
 
 /** True when every dialogue line has a matching model recording. */
 export const hasModelAudio = (lesson: Lesson) => lesson.lines.length > 0 && lesson.lines.every((line) => Boolean(line.audio));

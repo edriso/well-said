@@ -54,4 +54,4 @@ Word-level highlighting should only be added after studio audio has reviewed tim
 
 ## After editing a voiced lesson
 
-Changing a line, expression, or stress sentence in a lesson that has model audio makes its recording stale. The app falls back to the browser voice for that item and `npm test` fails until you run `npm run audio:generate -- --lesson=<id>` and commit the updated files and manifest.
+Changing a line, expression, or stress sentence in a lesson that has model audio makes its recording stale. The app falls back to the browser voice for that item and `npm test` fails until you run `npm run audio:generate -- --lesson=<id> --with-stress` and commit the updated files and manifest.
