@@ -7,7 +7,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - One uncluttered daily workout plus a searchable library of 184 hand-written dialogues across ten everyday situation families
 - More than six calendar months of daily practice without a repeated workout, with speaking focus and difficulty (A2–C1) rotating through the catalog
 - A guided Start Here path: new learners meet 14 gentle, fully voiced workouts first
-- Model audio, generated with ElevenLabs and loudness-normalized, labeled “Model audio” in the library
+- Model audio for every line, full dialogue, and expression in all 184 workouts, generated with ElevenLabs and loudness-normalized
 - Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
@@ -19,7 +19,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - Responsive WCAG-conscious UI, reduced-motion support, and an installable web manifest
 - Typed lesson content, tests, CI, Pages deployment, and audio-production guidance
 
-Every workout is an individually written, independently reviewed conversation with its own coach notes, reusable expressions, and contrastive-stress challenge. The Start Here collection has model audio for every line, the full dialogue, and every expression. The rest of the catalog uses a clearly labeled browser speech demo until its audio is generated (about 66,000 ElevenLabs characters for the full catalog; see [audio production](docs/AUDIO_PRODUCTION.md)). Audio is wired in by a manifest, so new or human-studio recordings never require UI changes.
+Every workout is an individually written, independently reviewed conversation with its own coach notes, reusable expressions, and contrastive-stress challenge. Every workout has model audio. If a line is edited later, the app falls back to a clearly labeled browser speech demo for that item until it is regenerated (see [audio production](docs/AUDIO_PRODUCTION.md)). Audio is wired in by a manifest, so new or human-studio recordings never require UI changes.
 
 ## Start locally
 

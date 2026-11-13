@@ -9,4 +9,4 @@ Atkinson Hyperlegible Next is the interface and body face, selected for distingu
 
 ## Model audio
 
-Files in `public/audio/lessons/` are synthetic speech generated with [ElevenLabs](https://elevenlabs.io) text-to-speech using ElevenLabs premade voices. Per-lesson model and voice details are recorded in `content/audio-provenance.json`. Audio generated on the ElevenLabs free plan is used non-commercially with attribution, which the app shows in the home-page footer. Commercial use requires regenerating the audio on a paid ElevenLabs plan.
+Files in `public/audio/lessons/` are synthetic speech generated with [ElevenLabs](https://elevenlabs.io) text-to-speech using ElevenLabs premade voices. Per-lesson model, voices, plan, and commercial-use status are recorded in `content/audio-provenance.json`. The app credits ElevenLabs in the home-page footer.

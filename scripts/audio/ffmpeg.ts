@@ -35,7 +35,7 @@ async function normalize(inputArgs: string[], preFilter: string, output: string)
 
   // Limiting can pull very peaky phrases below target, so verify and correct (bounded).
   let gain = LOUDNESS.integrated - Number(stats.input_i);
-  for (let attempt = 0; attempt < 3; attempt += 1) {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
     await render(gain);
     const shortfall = LOUDNESS.integrated - (await measure(output)).integrated;
     if (!Number.isFinite(shortfall) || Math.abs(shortfall) <= 0.5) return;

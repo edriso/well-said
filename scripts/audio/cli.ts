@@ -9,6 +9,7 @@
  *
  * Selection (default: the reviewed Start Here collection):
  *   --lesson=<id>[,<id>]   --collection="<name>"   --all   --limit=<n>
+ *   --non-commercial       lessons whose audio came from a free/pay-as-you-go plan (re-voice with --force --fresh)
  * Options:
  *   --with-stress   also perform each Stress Mode option (opt-in; review every file by ear)
  *   --force         re-process files even when the recorded text is unchanged (uses the raw cache)
@@ -30,7 +31,7 @@ import { assertFfmpeg, concatDialogue, LOUDNESS, measure, processClip } from './
 
 type Provenance = {
   version: 1;
-  lessons: Record<string, { generatedAt: string; provider: 'ElevenLabs'; model: string; stressModel?: string; voices: Record<string, string> }>;
+  lessons: Record<string, { generatedAt: string; provider: 'ElevenLabs'; model: string; stressModel?: string; voices: Record<string, string>; plan?: string; commercialUse?: boolean }>;
 };
 
 /** Where a file's fingerprint lives in the manifest entry. */
@@ -52,6 +53,7 @@ const { positionals, values: flags } = parseArgs({
     lesson: { type: 'string' },
     collection: { type: 'string' },
     all: { type: 'boolean', default: false },
+    'non-commercial': { type: 'boolean', default: false },
     limit: { type: 'string' },
     force: { type: 'boolean', default: false },
     fresh: { type: 'boolean', default: false },
@@ -76,6 +78,9 @@ function selectLessons(): Lesson[] {
     selected = lessons.filter((lesson) => ids.includes(lesson.id));
   } else if (flags.all) {
     selected = lessons;
+  } else if (flags['non-commercial']) {
+    const provenance = readJson<Provenance>(PROVENANCE_PATH);
+    selected = lessons.filter((lesson) => provenance.lessons[lesson.id]?.commercialUse === false);
   } else {
     const collection = flags.collection ?? 'Start Here';
     selected = lessons.filter((lesson) => lesson.collection === collection);
@@ -183,7 +188,7 @@ async function plan() {
   const characters = selected.reduce((sum, lesson) => sum + speechText(lesson, flags['with-stress']).join('').length, 0);
   const files = selected.reduce((sum, lesson) => sum + speechText(lesson, flags['with-stress']).length + 1, 0);
   console.log(`Lessons: ${selected.length}  ·  files: ${files}  ·  characters: ${characters.toLocaleString()}`);
-  console.log(`Estimated repository size: ~${formatBytes(selected.length * 0.45 * 1024 * 1024)} (about 0.45 MB per lesson)`);
+  console.log(`Estimated repository size: ~${formatBytes(selected.length * 0.65 * 1024 * 1024)} (about 0.65 MB per lesson)`);
   if (config.apiKey) {
     const subscription = await createClient(requireApiKey()).subscription();
     const remaining = subscription.character_limit - subscription.character_count;
@@ -257,6 +262,9 @@ async function generate() {
       model: config.modelId,
       stressModel: Object.keys(entry.stress).length ? (flags['with-stress'] ? config.stressModelId : previous?.stressModel) : undefined,
       voices,
+      // Free and pay-as-you-go audio is licensed for non-commercial use with attribution only.
+      plan: pending.length || !previous?.plan ? subscription.tier : previous.plan,
+      commercialUse: pending.length || previous?.commercialUse === undefined ? !['free', 'payg'].includes(subscription.tier) : previous.commercialUse,
     };
     provenance.lessons = sortByCatalog(provenance.lessons);
     writeJson(MANIFEST_PATH, manifest);

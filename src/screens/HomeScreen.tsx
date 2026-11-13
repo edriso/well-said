@@ -121,7 +121,7 @@ export function HomeScreen({ progress, onOpenLesson, preferencesApi, themeApi }:
             return (
               <button className="lesson-card" key={lesson.id} onClick={() => onOpenLesson(lesson)}>
                 <span className="lesson-card-index">{complete ? <Check size={17} /> : String(lesson.number).padStart(2, '0')}</span>
-                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.category} · {lesson.focus} · {lesson.estimatedMinutes} min{hasModelAudio(lesson) ? ' · Model audio' : ''}</small></span>
+                <span className="lesson-card-copy"><strong>{lesson.title}</strong><small>{lesson.category} · {lesson.focus} · {lesson.estimatedMinutes} min{hasModelAudio(lesson) ? '' : ' · Demo voice'}</small></span>
                 <ArrowRight className="card-arrow" size={19} />
               </button>
             );

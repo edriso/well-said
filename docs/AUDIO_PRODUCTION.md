@@ -62,7 +62,7 @@ Every clip is:
 4. Given ~150 ms of clean head and tail room.
 5. Encoded as mono MP3, 44.1 kHz, 96 kbps, with metadata stripped.
 
-The full dialogue concatenates the processed lines with a short conversational gap (~0.5 s) and is normalized again. Budget roughly 0.4 MB of repository space per lesson.
+The full dialogue concatenates the processed lines with a short conversational gap (~0.5 s) and is normalized again. Budget roughly 0.65 MB of repository space per lesson (about 120 MB for the full catalog).
 
 ## Stress Mode audio (opt-in)
 
@@ -70,7 +70,16 @@ The full dialogue concatenates the processed lines with a short conversational g
 
 ## Licensing
 
-Audio generated on the ElevenLabs **free** plan may be used non-commercially with attribution. The app credits ElevenLabs in the home-page footer whenever model audio is present. Commercial use requires audio generated while on a paid plan; rights are not retroactive, so regenerate (`--force --fresh`) after upgrading if the product becomes commercial.
+ElevenLabs licenses generated audio by the plan it was made on. Audio from a paid plan (Starter and up) may be used commercially. Audio from the free or pay-as-you-go tier is for non-commercial use with attribution. Rights are not retroactive, so upgrading later does not change audio already generated.
+
+`content/audio-provenance.json` records the `plan` and a `commercialUse` flag for every lesson; the generator fills them in from the API key's subscription. To re-voice any non-commercial lessons on a paid key:
+
+```bash
+npm run audio:plan -- --non-commercial
+npm run audio:generate -- --non-commercial --force --fresh
+```
+
+The app credits ElevenLabs in the home-page footer. That credit is required for non-commercial audio and is good practice either way.
 
 ## Review before merge
 
