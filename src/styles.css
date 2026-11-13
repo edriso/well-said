@@ -164,6 +164,8 @@ footer p { margin: 0; color: var(--muted); font-family: var(--font-reading); fon
 .speaker-name { margin: 0 0 4px; text-transform: uppercase; letter-spacing: .1em; font-size: 11px; font-weight: 760; color: var(--muted); }.transcript-line p:last-child { margin: 0; line-height: 1.55; }
 .transcript-compact .transcript-line p:last-child { font-size: 14px; }
 .stress-word { font-weight: 780; text-decoration: underline; text-decoration-color: var(--purple); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+/* Follow-along: the word model audio is speaking. Dark text on lime keeps AA contrast in both themes; no animation. */
+.spoken-word { border-radius: 4px; background: var(--lime); box-shadow: 0 0 0 2px var(--lime); color: #171512; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .focus-note, .coach-note { padding: 18px 20px; border-radius: 16px; display: flex; align-items: flex-start; gap: 14px; }
 .focus-note { background: #eff4db; border: 1px solid #dce5b8; }.focus-note svg { width: 19px; flex: none; color: #536d08; }
 .focus-note strong, .coach-note strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .07em; }

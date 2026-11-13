@@ -13,6 +13,7 @@ const audioController = (): AudioController => ({
   play: vi.fn(),
   playLines: vi.fn(),
   stop: vi.fn(),
+  currentTime: () => undefined,
 });
 
 const lesson = getLessonById('ordering-coffee')!;

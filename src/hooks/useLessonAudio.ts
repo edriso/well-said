@@ -147,5 +147,8 @@ export function useLessonAudio() {
 
   useEffect(() => stop, [stop]);
 
-  return { activeId, isPlaying, unavailable, speechAvailable, play, playLines, stop };
+  /** Playback position of the model audio file now playing, in seconds; undefined for speech fallback or silence. */
+  const currentTime = useCallback(() => audioRef.current?.currentTime, []);
+
+  return { activeId, isPlaying, unavailable, speechAvailable, play, playLines, stop, currentTime };
 }

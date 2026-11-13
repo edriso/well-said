@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { HighlightedText } from '../components/HighlightedText';
 import type { useProgress } from '../hooks/useProgress';
 import { useRecorder } from '../hooks/useRecorder';
+import { useSpokenWord } from '../hooks/useSpokenWord';
 import { speakerVoiceIndex, type StepProps } from './types';
 
 type Props = StepProps & { progressApi: ReturnType<typeof useProgress> };
 
-export function PracticeStep({ lesson, audio, onNext, progressApi }: Props) {
+export function PracticeStep({ lesson, audio, timings, onNext, progressApi }: Props) {
   const storedLine = progressApi.progress.lessons[lesson.id]?.lastLineIndex ?? 0;
   const [lineIndex, setLineIndex] = useState(Math.min(storedLine, lesson.lines.length - 1));
   const [rate, setRate] = useState(1);
@@ -22,6 +23,7 @@ export function PracticeStep({ lesson, audio, onNext, progressApi }: Props) {
   const playing = audio.activeId === line.id && audio.isPlaying;
   const lastLine = lineIndex === lesson.lines.length - 1;
   const minePlaying = audio.activeId === 'my-recording' && audio.isPlaying;
+  const spoken = useSpokenWord(audio, line.id, timings?.line(line.id));
 
   useEffect(() => {
     if (!focusMode) return;
@@ -52,7 +54,7 @@ export function PracticeStep({ lesson, audio, onNext, progressApi }: Props) {
       <div className="line-toolbar"><span>Line {lineIndex + 1} of {lesson.lines.length}</span><span className={`speaker-chip ${speaker.color}`}><i /> {speaker.name}</span></div>
 
       <article className="practice-card">
-        <p className={`practice-sentence ${sentenceVisible ? '' : 'sentence-hidden'}`}>{sentenceVisible ? <HighlightedText text={line.text} stressWords={line.stressWords} /> : <span>Listen first. Then say it from memory.</span>}</p>
+        <p className={`practice-sentence ${sentenceVisible ? '' : 'sentence-hidden'}`}>{sentenceVisible ? <HighlightedText text={line.text} stressWords={line.stressWords} spokenIndex={spoken?.index} /> : <span>Listen first. Then say it from memory.</span>}</p>
         {sentenceVisible && <div className="phrase-groups" aria-label="Phrase groups">
           {line.phraseGroups.map((group, index) => (
             <span key={group}><HighlightedText text={group} stressWords={line.stressWords} />{index < line.phraseGroups.length - 1 && <b aria-label="brief pause">/</b>}</span>

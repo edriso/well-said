@@ -32,6 +32,8 @@ Recommendations first walk new learners through the reviewed Start Here collecti
 
 Audio fields on lessons are filled in by `attachAudio` (`src/content/audio.ts`) from the generated `audio-manifest.json`. A file is attached only when the fingerprint of the text it was recorded from matches the current text, so edited content can never play outdated audio. Stress Mode takes follow the same rule, and the manifest also records which reviewed take is registered (see `content/stress-audio-rejected.json`). See `AUDIO_PRODUCTION.md`.
 
+Each voiced lesson also has `timings.json` next to its audio: per-word start and end times for every line file and for the full dialogue, made by forced alignment. The workout loads it once (`useLessonTimings`), keeps only entries whose text fingerprint still matches, and `useSpokenWord` follows the playing file to highlight the word being spoken. The highlight is visual only, adds no motion, and never replaces the stress marks.
+
 `useLessonAudio` is the single playback adapter. It accepts an optional repository-relative source and otherwise uses browser speech synthesis as an explicit demo fallback. It can play dialogue lines as a sequence so fallback voices and conversational gaps are preserved. Only one source plays at a time, and route/step changes stop it. Do not invoke `Audio`, `speechSynthesis`, or autoplay from presentation components outside this adapter.
 
 `useRecorder` uses `getUserMedia` and `MediaRecorder`. Its object URL lives only in memory; nothing is uploaded or persisted. Permission refusal is an expected state, not an error that blocks a workout.
@@ -68,7 +70,7 @@ Tailwind 4 supplies the CSS pipeline, while the branded design is expressed as s
 ## Deliberate constraints
 
 - No pronunciation scoring without a validated feedback model and transparent uncertainty.
-- No inaccurate word-level karaoke without approved timing metadata.
+- No estimated word timing. Follow-along highlighting uses only forced-alignment timings that match the current text and audio file; anything else shows no highlight.
 - No rigid repetition gate; three reps is guidance.
 - No remote analytics, auth, or recording upload in this version.
 - No router dependency while the app has only Home and Workout.

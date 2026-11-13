@@ -1,11 +1,16 @@
 import type { DialogueLine, Lesson } from '../content/types';
 import type { PlayableLine, useLessonAudio } from '../hooks/useLessonAudio';
+import type { useLessonTimings } from '../hooks/useLessonTimings';
 
 export type AudioController = ReturnType<typeof useLessonAudio>;
+
+export type LessonTimingsApi = ReturnType<typeof useLessonTimings>;
 
 export type StepProps = {
   lesson: Lesson;
   audio: AudioController;
+  /** Word timings for follow-along highlighting; absent or partial when timings are unavailable. */
+  timings?: LessonTimingsApi;
   onNext: () => void;
 };
 

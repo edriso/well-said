@@ -2,11 +2,12 @@ import { ArrowLeft, ArrowRight, Mic, Pause, Play, RotateCcw, Users } from 'lucid
 import { useState } from 'react';
 import { DialogueTranscript } from '../components/DialogueTranscript';
 import { HighlightedText } from '../components/HighlightedText';
+import { useSpokenWord } from '../hooks/useSpokenWord';
 import { dialoguePlayables, speakerVoiceIndex, type StepProps } from './types';
 
 type TranscriptMode = 'full' | 'cues' | 'hidden';
 
-export function ShadowStep({ lesson, audio, onNext }: StepProps) {
+export function ShadowStep({ lesson, audio, timings, onNext }: StepProps) {
   const [transcriptMode, setTranscriptMode] = useState<TranscriptMode>('full');
   const [role, setRole] = useState<'together' | string>('together');
   const [turnIndex, setTurnIndex] = useState(0);
@@ -34,6 +35,8 @@ export function ShadowStep({ lesson, audio, onNext }: StepProps) {
   const isYourTurn = line.speakerId === role;
   const lastTurn = turnIndex === lesson.lines.length - 1;
   const linePlaying = audio.activeId === `turn-${line.id}` && audio.isPlaying;
+  const spokenTogether = useSpokenWord(audio, 'shadow', lesson.fullAudio ? timings?.full : undefined);
+  const spokenTurn = useSpokenWord(audio, `turn-${line.id}`, timings?.line(line.id));
 
   const moveTurn = (next: number) => {
     audio.stop();
@@ -86,7 +89,7 @@ export function ShadowStep({ lesson, audio, onNext }: StepProps) {
             </button>
           </div>
 
-          {transcriptMode === 'full' && <DialogueTranscript lesson={lesson} />}
+          {transcriptMode === 'full' && <DialogueTranscript lesson={lesson} spoken={spokenTogether} />}
           {transcriptMode === 'cues' && (
             <div className="cue-transcript">
               {lesson.lines.map((item) => {
@@ -110,7 +113,7 @@ export function ShadowStep({ lesson, audio, onNext }: StepProps) {
             {transcriptMode !== 'hidden' && (
               <p className="turn-text">
                 {transcriptMode === 'full'
-                  ? <HighlightedText text={line.text} stressWords={line.stressWords} />
+                  ? <HighlightedText text={line.text} stressWords={line.stressWords} spokenIndex={spokenTurn?.index} />
                   : cueText(line.text)}
               </p>
             )}

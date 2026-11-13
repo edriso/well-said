@@ -1,11 +1,13 @@
 import { ArrowRight, Eye, EyeOff, Pause, Play, Sparkles, VolumeX } from 'lucide-react';
 import { useState } from 'react';
 import { DialogueTranscript } from '../components/DialogueTranscript';
+import { useSpokenWord } from '../hooks/useSpokenWord';
 import { dialoguePlayables, type StepProps } from './types';
 
-export function ListenStep({ lesson, audio, onNext }: StepProps) {
+export function ListenStep({ lesson, audio, timings, onNext }: StepProps) {
   const [revealed, setRevealed] = useState(false);
   const isPlaying = audio.activeId === 'full-dialogue' && audio.isPlaying;
+  const spoken = useSpokenWord(audio, 'full-dialogue', lesson.fullAudio ? timings?.full : undefined);
 
   const playDialogue = () => {
     if (lesson.fullAudio) {
@@ -45,7 +47,7 @@ export function ListenStep({ lesson, audio, onNext }: StepProps) {
           {revealed ? <EyeOff /> : <Eye />} {revealed ? 'Hide transcript' : 'Reveal transcript'}
           <small>{revealed ? 'Listen once more without reading' : 'Use it when you need support'}</small>
         </button>
-        {revealed && <DialogueTranscript lesson={lesson} compact />}
+        {revealed && <DialogueTranscript lesson={lesson} compact spoken={spoken} />}
       </div>
 
       <aside className="focus-note"><Sparkles aria-hidden="true" /><div><strong>Today’s focus</strong><p>{lesson.intention}</p></div></aside>

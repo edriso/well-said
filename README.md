@@ -8,7 +8,7 @@ A calm daily gym for natural English speaking. Well Said turns one short, realis
 - More than six calendar months of daily practice without a repeated workout, with speaking focus and difficulty (A2–C1) rotating through the catalog
 - A guided Start Here path: new learners meet 14 gentle, fully voiced workouts first
 - Model audio for every line, full dialogue, and expression in all 184 workouts, generated with ElevenLabs and loudness-normalized
-- Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping
+- Full-dialogue and line-level playback with 0.75×, 1×, 1.25×, and looping, and the word being spoken highlighted as model audio plays
 - Optional transcript, phrase grouping, structural stress marks, and coaching notes
 - Browser-only microphone recording for private A/B listening
 - Full shadowing, hidden/first-word transcript modes, and turn-by-turn role practice
@@ -49,6 +49,8 @@ npm run audio:plan             # pending files, credits needed, and credits rema
 npm run audio:generate         # Start Here by default; see the guide for options
 npm run audio:check            # files, fingerprints, loudness, and size
 npm run audio:screen           # score how clearly each Stress Mode take stresses its word
+npm run audio:verify           # transcribe every recording and compare it with the script
+npm run audio:timings          # word timings for follow-along highlighting
 npm run audio:retakes          # apply Stress Mode re-take decisions
 ```
 

@@ -4,6 +4,7 @@ import type { Lesson } from '../content/types';
 import { Brand } from '../components/Brand';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useLessonAudio } from '../hooks/useLessonAudio';
+import { useLessonTimings } from '../hooks/useLessonTimings';
 import { scrollToTop } from '../lib/motion';
 import type { useProgress } from '../hooks/useProgress';
 import type { useTheme } from '../hooks/useTheme';
@@ -27,6 +28,7 @@ export function WorkoutScreen({ lesson, onClose, progressApi, themeApi }: Props)
   const existing = progressApi.progress.lessons[lesson.id];
   const [step, setStep] = useState(existing?.completedAt ? 0 : Math.min(existing?.lastStep ?? 0, 4));
   const audio = useLessonAudio();
+  const timings = useLessonTimings(lesson);
 
   const moveTo = (next: number) => {
     audio.stop();
@@ -41,7 +43,7 @@ export function WorkoutScreen({ lesson, onClose, progressApi, themeApi }: Props)
     return () => { document.title = 'Well Said — Daily English speaking practice'; };
   }, [lesson.title, step]);
 
-  const shared = { lesson, audio, onNext: () => moveTo(Math.min(step + 1, 4)) };
+  const shared = { lesson, audio, timings, onNext: () => moveTo(Math.min(step + 1, 4)) };
 
   return (
     <main className="workout-shell">
