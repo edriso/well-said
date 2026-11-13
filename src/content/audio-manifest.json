@@ -3,19 +3,23 @@
   "lessons": {
     "small-talk-at-work": {
       "lines": {
-        "work-2": "a6480fa2",
         "work-1": "5b71fed7",
-        "work-4": "19542979",
+        "work-2": "a6480fa2",
         "work-3": "88104c45",
-        "work-6": "1ddecec2",
-        "work-5": "4d927f55"
+        "work-4": "19542979",
+        "work-5": "4d927f55",
+        "work-6": "1ddecec2"
       },
       "expressions": [
         "986ad666",
         "88fab4ae",
         "7aa8c476"
       ],
-      "stress": {},
+      "stress": {
+        "meeting": "e9692ef9",
+        "tomorrow": "128a6c19",
+        "i": "bcaff9e3"
+      },
       "full": "fa9c4c81"
     },
     "ordering-coffee": {
@@ -30,7 +34,11 @@
         "d2e10c72",
         "93d0250d"
       ],
-      "stress": {},
+      "stress": {
+        "small": "48811188",
+        "latte": "a1345b08",
+        "i": "78bca00a"
+      },
       "full": "6c8e8c16"
     },
     "moving-a-meeting": {
@@ -46,7 +54,11 @@
         "8345ec00",
         "589b91e3"
       ],
-      "stress": {},
+      "stress": {
+        "we": "3feba931",
+        "meet": "b05b7971",
+        "four": "d46442f1"
+      },
       "full": "69528962"
     },
     "catching-up": {
@@ -63,17 +75,21 @@
         "a000c93f",
         "d16253a0"
       ],
-      "stress": {},
+      "stress": {
+        "started": "49931f65",
+        "job": "951bf465",
+        "i": "4ee53dd3"
+      },
       "full": "fc91a03c"
     },
     "finding-pharmacy-item": {
       "lines": {
-        "daily-005-2": "f1794924",
         "daily-005-1": "97fee600",
+        "daily-005-2": "f1794924",
         "daily-005-3": "5a62be8a",
         "daily-005-4": "b80c91fe",
-        "daily-005-6": "ec669c97",
         "daily-005-5": "f128b198",
+        "daily-005-6": "ec669c97",
         "daily-005-7": "589dc2b0"
       },
       "expressions": [
@@ -81,7 +97,11 @@
         "4853bd2f",
         "4df29062"
       ],
-      "stress": {},
+      "stress": {
+        "small": "9959e43e",
+        "bottle": "457ce79e",
+        "i": "c02fa568"
+      },
       "full": "2b8fb9bb"
     },
     "todays-priorities": {
@@ -90,15 +110,19 @@
         "daily-006-2": "bdfc1ece",
         "daily-006-3": "8fd0fb21",
         "daily-006-4": "b20c3d9e",
-        "daily-006-6": "ec05cc1e",
-        "daily-006-5": "20a4dbd5"
+        "daily-006-5": "20a4dbd5",
+        "daily-006-6": "ec05cc1e"
       },
       "expressions": [
         "b1d9c4b5",
         "d5d974c5",
         "d65ffa88"
       ],
-      "stress": {},
+      "stress": {
+        "summary": "4cda3559",
+        "due": "e8797719",
+        "today": "2d2a4a99"
+      },
       "full": "c98bf9df"
     },
     "seat-free": {
@@ -115,7 +139,11 @@
         "570c2120",
         "7b296ec2"
       ],
-      "stress": {},
+      "stress": {
+        "i-m": "56a269fe",
+        "going": "4a6ac27e",
+        "leeds": "f034835e"
+      },
       "full": "b452f973"
     },
     "right-platform": {
@@ -131,32 +159,40 @@
         "4c891c6a",
         "461db6ac"
       ],
-      "stress": {},
+      "stress": {
+        "you": "9acf7699",
+        "platform": "129e9ed9",
+        "six": "30270a39"
+      },
       "full": "f729166c"
     },
     "quick-lunch-order": {
       "lines": {
-        "daily-009-2": "5cc8d34c",
         "daily-009-1": "d5383816",
+        "daily-009-2": "5cc8d34c",
         "daily-009-3": "b248722d",
         "daily-009-4": "adc11a43",
-        "daily-009-6": "306eb6de",
-        "daily-009-5": "54163651"
+        "daily-009-5": "54163651",
+        "daily-009-6": "306eb6de"
       },
       "expressions": [
         "52409eff",
         "4c828939",
         "d2dec341"
       ],
-      "stress": {},
+      "stress": {
+        "cucumber": "b26937bb",
+        "asked": "0d53bd5b",
+        "i": "36e3b99d"
+      },
       "full": "a848ab0d"
     },
     "bathroom-schedule": {
       "lines": {
         "daily-010-1": "58892311",
         "daily-010-2": "acdc986e",
-        "daily-010-4": "417a5c00",
         "daily-010-3": "e4b7c0d0",
+        "daily-010-4": "417a5c00",
         "daily-010-5": "397226be",
         "daily-010-6": "b5ad0b64",
         "daily-010-7": "19e40484"
@@ -166,7 +202,11 @@
         "08b90e94",
         "db92c712"
       ],
-      "stress": {},
+      "stress": {
+        "seven": "f855e80a",
+        "leave": "7621a50a",
+        "i": "43216cf8"
+      },
       "full": "6af922ac"
     },
     "phone-plans": {
@@ -175,8 +215,8 @@
         "daily-011-2": "7e3bdf58",
         "daily-011-3": "f40b4060",
         "daily-011-4": "97dcb2fb",
-        "daily-011-6": "d0d3e7ca",
         "daily-011-5": "1e00b33a",
+        "daily-011-6": "d0d3e7ca",
         "daily-011-7": "2c83acbc"
       },
       "expressions": [
@@ -184,7 +224,11 @@
         "dc9c41fb",
         "0912ce00"
       ],
-      "stress": {},
+      "stress": {
+        "need": "560551c2",
+        "data": "ddf475c2",
+        "i": "373bbe78"
+      },
       "full": "4c079d98"
     },
     "community-picnic": {
@@ -202,7 +246,11 @@
         "370ab281",
         "ff3a64a3"
       ],
-      "stress": {},
+      "stress": {
+        "neighborhood": "990e44e3",
+        "sunday": "5f6f8703",
+        "ninth": "59e41103"
+      },
       "full": "095b45a6"
     },
     "doctor-appointment": {
@@ -219,7 +267,11 @@
         "4cd2c062",
         "2eae0387"
       ],
-      "stress": {},
+      "stress": {
+        "asked": "466bf984",
+        "afternoon": "12b2f084",
+        "i": "517a691e"
+      },
       "full": "12476bc1"
     },
     "choosing-movie": {
@@ -237,13 +289,17 @@
         "f7332f99",
         "85669c61"
       ],
-      "stress": {},
+      "stress": {
+        "space": "c3a18ac1",
+        "movie": "269b5701",
+        "long": "281e73a1"
+      },
       "full": "8bfbe9af"
     },
     "paying-at-supermarket": {
       "lines": {
-        "daily-015-2": "9dbe06a4",
         "daily-015-1": "54741682",
+        "daily-015-2": "9dbe06a4",
         "daily-015-3": "673117d2",
         "daily-015-4": "512ec918",
         "daily-015-5": "402ab857",
@@ -255,7 +311,11 @@
         "2356e2d9",
         "e7e3cb85"
       ],
-      "stress": {},
+      "stress": {
+        "printed": "8faa3860",
+        "wanted": "6b0ed540",
+        "receipt": "12d37ba0"
+      },
       "full": "50ac603e"
     },
     "stand-up-update": {
@@ -272,7 +332,11 @@
         "fba7f744",
         "34b0f1e9"
       ],
-      "stress": {},
+      "stress": {
+        "test": "3ca63ea9",
+        "get": "662fc3c9",
+        "account": "dacb5209"
+      },
       "full": "18216acc"
     },
     "ending-hallway-chat": {
@@ -290,7 +354,11 @@
         "68f8e0fc",
         "afbd900f"
       ],
-      "stress": {},
+      "stress": {
+        "saturday": "d3349dfe",
+        "coffee": "c83f471e",
+        "morning": "df7d953e"
+      },
       "full": "f42e3b08"
     },
     "missed-stop": {
@@ -307,17 +375,21 @@
         "f0e2df7d",
         "19a1e6eb"
       ],
-      "stress": {},
+      "stress": {
+        "museum": "275468f5",
+        "wanted": "b92d5535",
+        "i": "b2ba70db"
+      },
       "full": "44a4e6fc"
     },
     "table-for-two": {
       "lines": {
         "daily-019-1": "7057efcc",
         "daily-019-2": "97168b49",
-        "daily-019-4": "9e48bc62",
         "daily-019-3": "52567405",
-        "daily-019-6": "a9f8e84c",
+        "daily-019-4": "9e48bc62",
         "daily-019-5": "9cd3157d",
+        "daily-019-6": "a9f8e84c",
         "daily-019-7": "03df91e1"
       },
       "expressions": [
@@ -325,7 +397,11 @@
         "81e75bf7",
         "f64f514c"
       ],
-      "stress": {},
+      "stress": {
+        "twenty": "8f518c6b",
+        "wait": "e1430f6b",
+        "minutes": "744af28b"
+      },
       "full": "66b2d09d"
     },
     "dividing-chores": {
@@ -343,7 +419,11 @@
         "5ff7f17a",
         "5fd7ccdd"
       ],
-      "stress": {},
+      "stress": {
+        "kitchen": "10b3b9ec",
+        "you": "16d8f8ec",
+        "floors": "fdaeb2cc"
+      },
       "full": "cf399a34"
     },
     "explaining-haircut": {
@@ -361,7 +441,11 @@
         "505ceb95",
         "17637c53"
       ],
-      "stress": {},
+      "stress": {
+        "three": "b39c511a",
+        "asked": "58af0f5a",
+        "i": "89174ca4"
+      },
       "full": "c91f1fd5"
     },
     "volunteer-shift": {
@@ -370,8 +454,8 @@
         "daily-022-2": "05a61890",
         "daily-022-3": "eff8f486",
         "daily-022-4": "6b75177f",
-        "daily-022-6": "141f2aa6",
         "daily-022-5": "8b19d247",
+        "daily-022-6": "141f2aa6",
         "daily-022-7": "ce03b465"
       },
       "expressions": [
@@ -379,7 +463,11 @@
         "7c8401ea",
         "c3af66fd"
       ],
-      "stress": {},
+      "stress": {
+        "left": "fb7761c6",
+        "cans": "13bad106",
+        "shelf": "7ca0dd66"
+      },
       "full": "a4d3181d"
     },
     "mild-symptom": {
@@ -397,7 +485,11 @@
         "4962ec18",
         "3a18c33d"
       ],
-      "stress": {},
+      "stress": {
+        "usually": "caa3effa",
+        "headache": "8a21f89a",
+        "afternoon": "04b7933a"
+      },
       "full": "472761b5"
     },
     "weather-plan": {
@@ -415,7 +507,11 @@
         "a5471e66",
         "3c4d44fe"
       ],
-      "stress": {},
+      "stress": {
+        "picnic": "39e70afd",
+        "moving": "1da38cfd",
+        "indoors": "ea1a505d"
+      },
       "full": "dd205f51"
     },
     "sharing-gym-equipment": {
@@ -431,7 +527,11 @@
         "e41a8c11",
         "31fd4218"
       ],
-      "stress": {},
+      "stress": {
+        "one": "78b7b843",
+        "set": "54c86643",
+        "i": "08f0fc11"
+      },
       "full": "88e2009e"
     },
     "renegotiating-deadline": {
@@ -449,7 +549,11 @@
         "a16f916b",
         "29c4e3a6"
       ],
-      "stress": {},
+      "stress": {
+        "charts": "4ab56644",
+        "ready": "046af3a4",
+        "friday": "811738e4"
+      },
       "full": "39faba6a"
     },
     "lunch-invitation": {
@@ -466,17 +570,21 @@
         "ffd58ba9",
         "6c4ae81c"
       ],
-      "stress": {},
+      "stress": {
+        "love": "0f4366ad",
+        "come": "1d4633ed",
+        "thursday": "38f81d4d"
+      },
       "full": "e4db039a"
     },
     "rideshare-pickup": {
       "lines": {
-        "daily-028-2": "d01be381",
         "daily-028-1": "ebadcb27",
-        "daily-028-4": "b5e4a768",
+        "daily-028-2": "d01be381",
         "daily-028-3": "dcbfe1e5",
-        "daily-028-6": "6b037449",
+        "daily-028-4": "b5e4a768",
         "daily-028-5": "90fedeb8",
+        "daily-028-6": "6b037449",
         "daily-028-7": "815bbbb8"
       },
       "expressions": [
@@ -484,7 +592,11 @@
         "cedbb452",
         "2762fb27"
       ],
-      "stress": {},
+      "stress": {
+        "pickup": "0d7322ec",
+        "upstairs": "34e63cec",
+        "now": "bfd8cecc"
+      },
       "full": "a67b1b38"
     },
     "asking-ingredients": {
@@ -494,15 +606,19 @@
         "daily-029-3": "5087eb0d",
         "daily-029-4": "8db8afb2",
         "daily-029-5": "079703da",
-        "daily-029-7": "fe9a5cbb",
-        "daily-029-6": "d99f4e0e"
+        "daily-029-6": "d99f4e0e",
+        "daily-029-7": "fe9a5cbb"
       },
       "expressions": [
         "44fecee2",
         "801b129d",
         "f87ed1b0"
       ],
-      "stress": {},
+      "stress": {
+        "lentil": "7e018353",
+        "said": "8df3b293",
+        "i": "cc700f9d"
+      },
       "full": "a502c07b"
     },
     "music-down": {
@@ -519,7 +635,11 @@
         "f51a023f",
         "fbc508db"
       ],
-      "stress": {},
+      "stress": {
+        "morning": "ebee5b9c",
+        "start": "f99b5c5c",
+        "i": "f57345be"
+      },
       "full": "61fd1fcd"
     },
     "worth-repairing": {
@@ -529,25 +649,29 @@
         "daily-031-3": "afe59197",
         "daily-031-4": "91443cb7",
         "daily-031-5": "feda016a",
-        "daily-031-7": "3f3ddeac",
-        "daily-031-6": "f2d771b3"
+        "daily-031-6": "f2d771b3",
+        "daily-031-7": "3f3ddeac"
       },
       "expressions": [
         "34fba394",
         "e35c2137",
         "b0051bb9"
       ],
-      "stress": {},
+      "stress": {
+        "repaired": "9595688c",
+        "it": "6caf56cc",
+        "i": "da8111f6"
+      },
       "full": "d58a12bf"
     },
     "damaged-streetlight": {
       "lines": {
-        "daily-032-2": "c9d515c6",
         "daily-032-1": "cc7dec62",
-        "daily-032-4": "34446879",
+        "daily-032-2": "c9d515c6",
         "daily-032-3": "9d6e986f",
-        "daily-032-6": "50fc2a23",
+        "daily-032-4": "34446879",
         "daily-032-5": "59033e8b",
+        "daily-032-6": "50fc2a23",
         "daily-032-7": "56acc584"
       },
       "expressions": [
@@ -555,7 +679,11 @@
         "5281e51f",
         "736619fd"
       ],
-      "stress": {},
+      "stress": {
+        "light": "6250350e",
+        "broken": "bce48cee",
+        "north": "bf8fdace"
+      },
       "full": "1fc43417"
     },
     "dentist-change": {
@@ -572,34 +700,42 @@
         "8894a815",
         "8b6025db"
       ],
-      "stress": {},
+      "stress": {
+        "friday": "dfe91311",
+        "move": "8ced1271",
+        "i": "548d7427"
+      },
       "full": "a7fc12a5"
     },
     "restaurant-decision": {
       "lines": {
         "daily-034-1": "16056423",
         "daily-034-2": "fc0016f1",
-        "daily-034-4": "32216407",
         "daily-034-3": "731c66dc",
-        "daily-034-6": "32d8b659",
-        "daily-034-5": "3e2142ac"
+        "daily-034-4": "32216407",
+        "daily-034-5": "3e2142ac",
+        "daily-034-6": "32d8b659"
       },
       "expressions": [
         "3edec1c1",
         "75ce789d",
         "7e8d6fd6"
       ],
-      "stress": {},
+      "stress": {
+        "thai": "a3bcced2",
+        "cheaper": "b96e20d2",
+        "closer": "c7f8a6b2"
+      },
       "full": "a1bd2502"
     },
     "delivery-handoff": {
       "lines": {
-        "daily-035-2": "a76c02d0",
         "daily-035-1": "4adb20d6",
-        "daily-035-4": "746af0d2",
+        "daily-035-2": "a76c02d0",
         "daily-035-3": "c3f072ef",
-        "daily-035-6": "355aa0a9",
+        "daily-035-4": "746af0d2",
         "daily-035-5": "7ee92ad3",
+        "daily-035-6": "355aa0a9",
         "daily-035-7": "dec4bd17"
       },
       "expressions": [
@@ -607,7 +743,11 @@
         "3defed41",
         "8f6237d5"
       ],
-      "stress": {},
+      "stress": {
+        "green": "7d2c15fa",
+        "door": "14af7e9a",
+        "left": "9040ce9a"
+      },
       "full": "08b2e7e9"
     },
     "clarifying-the-brief": {
@@ -625,34 +765,42 @@
         "de9bbe64",
         "a8ddeec4"
       ],
-      "stress": {},
+      "stress": {
+        "need": "1e4e14b3",
+        "simpler": "dd019b13",
+        "now": "1b569453"
+      },
       "full": "5d6c63aa"
     },
     "declining-warmly": {
       "lines": {
         "daily-037-1": "4b55f532",
         "daily-037-2": "5c8d2f14",
-        "daily-037-4": "dc2d44f6",
         "daily-037-3": "389d0f51",
-        "daily-037-6": "abca83d1",
-        "daily-037-5": "74ac5101"
+        "daily-037-4": "dc2d44f6",
+        "daily-037-5": "74ac5101",
+        "daily-037-6": "abca83d1"
       },
       "expressions": [
         "f3eecaeb",
         "b8409e79",
         "4a552275"
       ],
-      "stress": {},
+      "stress": {
+        "i-m": "8158edde",
+        "free": "2024507e",
+        "twentieth": "ee0770de"
+      },
       "full": "cc5dbe2f"
     },
     "hotel-check-in": {
       "lines": {
         "daily-038-1": "81709f35",
         "daily-038-2": "26f244eb",
-        "daily-038-4": "dd8c9b53",
         "daily-038-3": "93475dd4",
-        "daily-038-6": "e3c2cd6f",
+        "daily-038-4": "dd8c9b53",
         "daily-038-5": "589b1b1d",
+        "daily-038-6": "e3c2cd6f",
         "daily-038-7": "d8e11847"
       },
       "expressions": [
@@ -660,7 +808,11 @@
         "8dcd22b7",
         "7f31e35e"
       ],
-      "stress": {},
+      "stress": {
+        "breakfast": "ec855d18",
+        "starts": "a1a0cfd8",
+        "seven": "519fa8b8"
+      },
       "full": "f234546b"
     },
     "server-recommendation": {
@@ -678,7 +830,11 @@
         "7976bc1a",
         "a1a09a70"
       ],
-      "stress": {},
+      "stress": {
+        "asked": "2c6d7c47",
+        "sauce": "a186b087",
+        "side": "5eac8167"
+      },
       "full": "24478927"
     },
     "borrowing-tool": {
@@ -696,15 +852,19 @@
         "7b7e1237",
         "375b12d8"
       ],
-      "stress": {},
+      "stress": {
+        "needed": "855164ad",
+        "screwdriver": "7a778dcd",
+        "i": "fbb635d7"
+      },
       "full": "60e87da6"
     },
     "where-is-package": {
       "lines": {
-        "daily-041-2": "78f60592",
         "daily-041-1": "0f00bffe",
-        "daily-041-4": "93bd5074",
+        "daily-041-2": "78f60592",
         "daily-041-3": "987c2fda",
+        "daily-041-4": "93bd5074",
         "daily-041-5": "6e4a3b3b",
         "daily-041-6": "2b44f68d",
         "daily-041-7": "7bd4bf43"
@@ -713,7 +873,11 @@
         "0e165533",
         "d96027e9"
       ],
-      "stress": {},
+      "stress": {
+        "wrong": "42f55cb3",
+        "it": "d8982153",
+        "house": "8f2f0293"
+      },
       "full": "591f0018"
     },
     "welcoming-club-member": {
@@ -731,17 +895,21 @@
         "5c7928b3",
         "ea793326"
       ],
-      "stress": {},
+      "stress": {
+        "meet": "4f7957e9",
+        "first": "5bd14889",
+        "tuesday": "8a3bd6e9"
+      },
       "full": "93c22382"
     },
     "pharmacy-directions": {
       "lines": {
         "daily-043-1": "c9ae4c09",
         "daily-043-2": "38430af4",
-        "daily-043-4": "fef70478",
         "daily-043-3": "4db5a167",
-        "daily-043-6": "6af5a76b",
+        "daily-043-4": "fef70478",
         "daily-043-5": "4e43aca2",
+        "daily-043-6": "6af5a76b",
         "daily-043-7": "2f820c22"
       },
       "expressions": [
@@ -749,7 +917,11 @@
         "587c6686",
         "fb5837ac"
       ],
-      "stress": {},
+      "stress": {
+        "twice": "cf193ee0",
+        "label": "c7cbf320",
+        "day": "3ba98420"
+      },
       "full": "34bb66a7"
     },
     "subscriptions": {
@@ -758,8 +930,8 @@
         "daily-044-2": "3ea8f773",
         "daily-044-3": "817a0505",
         "daily-044-4": "eec13d29",
-        "daily-044-6": "bed14248",
         "daily-044-5": "f81f3802",
+        "daily-044-6": "bed14248",
         "daily-044-7": "e4bcc48d"
       },
       "expressions": [
@@ -767,15 +939,19 @@
         "e51822c7",
         "5808b472"
       ],
-      "stress": {},
+      "stress": {
+        "care": "a412adc4",
+        "offline": "b389e924",
+        "i": "e091164e"
+      },
       "full": "cc55c726"
     },
     "confirming-appointment": {
       "lines": {
         "daily-045-1": "e0e3800c",
         "daily-045-2": "e228593b",
-        "daily-045-4": "ff9a6e8e",
         "daily-045-3": "ab99df99",
+        "daily-045-4": "ff9a6e8e",
         "daily-045-5": "809e5a52",
         "daily-045-6": "e4385ec5",
         "daily-045-7": "42ac7964"
@@ -785,13 +961,17 @@
         "deadb34e",
         "658a1a2e"
       ],
-      "stress": {},
+      "stress": {
+        "appointment": "d8b2f3f9",
+        "my": "6d3bc479",
+        "tuesday": "dc856ed9"
+      },
       "full": "ce61dc6d"
     },
     "asking-specific-help": {
       "lines": {
-        "daily-046-2": "927c7dbe",
         "daily-046-1": "495bae04",
+        "daily-046-2": "927c7dbe",
         "daily-046-3": "6d4ffc99",
         "daily-046-4": "d833ce46",
         "daily-046-5": "d39ece77",
@@ -802,17 +982,21 @@
         "2bbe8e8b",
         "f3a3cf08"
       ],
-      "stress": {},
+      "stress": {
+        "names": "9d31e4e7",
+        "wrong": "6a3e1967",
+        "column": "1d326f47"
+      },
       "full": "582da66c"
     },
     "weekend-recap": {
       "lines": {
         "daily-047-1": "2a3c96a3",
         "daily-047-2": "f2b972ad",
-        "daily-047-4": "1a8a64bb",
         "daily-047-3": "47e565dd",
-        "daily-047-6": "384f6635",
+        "daily-047-4": "1a8a64bb",
         "daily-047-5": "02533c7a",
+        "daily-047-6": "384f6635",
         "daily-047-7": "1f7ef290"
       },
       "expressions": [
@@ -820,34 +1004,42 @@
         "6ae6f84e",
         "83369468"
       ],
-      "stress": {},
+      "stress": {
+        "four": "f31f0ed6",
+        "left": "b645e3d6",
+        "thirty": "943ef2d6"
+      },
       "full": "411fc07e"
     },
     "noisy-room": {
       "lines": {
-        "daily-048-2": "914aa766",
         "daily-048-1": "ce2550b5",
+        "daily-048-2": "914aa766",
         "daily-048-3": "43b44adf",
         "daily-048-4": "55bf59d9",
-        "daily-048-6": "b4862239",
-        "daily-048-5": "42d737ae"
+        "daily-048-5": "42d737ae",
+        "daily-048-6": "b4862239"
       },
       "expressions": [
         "fd00cbe3",
         "ab11b019",
         "ed8ba32f"
       ],
-      "stress": {},
+      "stress": {
+        "need": "ebc4aedf",
+        "room": "66c85b1f",
+        "farther": "ec73d23f"
+      },
       "full": "a961eea0"
     },
     "wrong-dish": {
       "lines": {
         "daily-049-1": "8569fac4",
         "daily-049-2": "4c2312bb",
-        "daily-049-4": "0ab48da8",
         "daily-049-3": "93b8432b",
-        "daily-049-6": "c10eb5b1",
+        "daily-049-4": "0ab48da8",
         "daily-049-5": "431091a5",
+        "daily-049-6": "c10eb5b1",
         "daily-049-7": "ffab72e1"
       },
       "expressions": [
@@ -855,17 +1047,21 @@
         "fb9363e5",
         "03bcfde5"
       ],
-      "stress": {},
+      "stress": {
+        "mushroom": "eda737e2",
+        "ordered": "c31c2342",
+        "i": "49bb60a8"
+      },
       "full": "22f24e35"
     },
     "broken-tap": {
       "lines": {
-        "daily-050-2": "31d517ff",
         "daily-050-1": "46261a08",
+        "daily-050-2": "31d517ff",
         "daily-050-3": "3b6452be",
         "daily-050-4": "0aa1ebb5",
-        "daily-050-6": "4c93ebfa",
         "daily-050-5": "e13fd311",
+        "daily-050-6": "4c93ebfa",
         "daily-050-7": "ce7bfc81"
       },
       "expressions": [
@@ -873,7 +1069,11 @@
         "29aebbe8",
         "6e434d68"
       ],
-      "stress": {},
+      "stress": {
+        "tap": "0d3d435e",
+        "broken": "9c84b6fe",
+        "kitchen": "8633d91e"
+      },
       "full": "d9e286d5"
     },
     "return-policy": {
@@ -890,7 +1090,11 @@
         "4f13c687",
         "e0a0f897"
       ],
-      "stress": {},
+      "stress": {
+        "you-ll": "4946f065",
+        "refund": "8ac9d025",
+        "credit": "534053a5"
+      },
       "full": "c5f37cb0"
     },
     "meeting-someones-dog": {
@@ -900,15 +1104,19 @@
         "daily-052-3": "f629a8ed",
         "daily-052-4": "68ee2ad0",
         "daily-052-5": "91ef1839",
-        "daily-052-7": "5bf1e121",
-        "daily-052-6": "c67d8285"
+        "daily-052-6": "c67d8285",
+        "daily-052-7": "5bf1e121"
       },
       "expressions": [
         "d6e39b51",
         "7287ef88",
         "afbe11fc"
       ],
-      "stress": {},
+      "stress": {
+        "pet": "0439cf1e",
+        "her": "b92892be",
+        "i": "a5c9ce68"
+      },
       "full": "f55fb8cc"
     },
     "taking-sick-day": {
@@ -925,17 +1133,21 @@
         "46786a33",
         "7e65b5dd"
       ],
-      "stress": {},
+      "stress": {
+        "send": "ced6e320",
+        "notes": "41886a00",
+        "now": "4f823a40"
+      },
       "full": "1ebefe95"
     },
     "earlier-preference": {
       "lines": {
-        "daily-054-2": "dfb7210d",
         "daily-054-1": "2b5c4575",
+        "daily-054-2": "dfb7210d",
         "daily-054-3": "0b7be5d4",
         "daily-054-4": "46657d01",
-        "daily-054-6": "e2b982c9",
         "daily-054-5": "0222364d",
+        "daily-054-6": "e2b982c9",
         "daily-054-7": "64078aa2"
       },
       "expressions": [
@@ -943,15 +1155,19 @@
         "5b434add",
         "6666dfff"
       ],
-      "stress": {},
+      "stress": {
+        "rather": "493a48e7",
+        "i-d": "21ddac47",
+        "two": "8ca596c7"
+      },
       "full": "a70d6b45"
     },
     "running-ten-minutes-late": {
       "lines": {
-        "daily-055-2": "19dfe97c",
         "daily-055-1": "f4be820e",
-        "daily-055-4": "782d729d",
+        "daily-055-2": "19dfe97c",
         "daily-055-3": "b30ef304",
+        "daily-055-4": "782d729d",
         "daily-055-5": "6ff6e504",
         "daily-055-6": "640040c0",
         "daily-055-7": "99b839b8"
@@ -961,7 +1177,11 @@
         "864a429f",
         "7e436e36"
       ],
-      "stress": {},
+      "stress": {
+        "wait": "1c042e79",
+        "inside": "ff201719",
+        "restaurant": "ba1a6fd9"
+      },
       "full": "0d47e1f8"
     },
     "giving-useful-feedback": {
@@ -979,7 +1199,11 @@
         "6ba26596",
         "0ff215a8"
       ],
-      "stress": {},
+      "stress": {
+        "ending": "9daf18da",
+        "shorten": "f5472c7a",
+        "i": "55ab7eac"
+      },
       "full": "dafa155f"
     },
     "introducing-people": {
@@ -996,7 +1220,11 @@
         "127ad186",
         "149edc15"
       ],
-      "stress": {},
+      "stress": {
+        "green": "150697f4",
+        "she-s": "58d806b4",
+        "jacket": "50b19ed4"
+      },
       "full": "8dfb9da6"
     },
     "afternoon-in-town": {
@@ -1014,13 +1242,17 @@
         "a7c21df7",
         "8fc7c876"
       ],
-      "stress": {},
+      "stress": {
+        "go": "a52fc7a3",
+        "i-d": "39145203",
+        "market": "3cc0e123"
+      },
       "full": "a702d3dc"
     },
     "splitting-bill": {
       "lines": {
-        "daily-059-2": "2c59a84e",
         "daily-059-1": "db601e58",
+        "daily-059-2": "2c59a84e",
         "daily-059-3": "c3f697fb",
         "daily-059-4": "41256187",
         "daily-059-5": "6c13c91e",
@@ -1032,17 +1264,21 @@
         "7ae13629",
         "505ceb95"
       ],
-      "stress": {},
+      "stress": {
+        "own": "6fd71eec",
+        "said": "6cdc600c",
+        "drinks": "fc247fcc"
+      },
       "full": "6550ac54"
     },
     "taking-parcel": {
       "lines": {
         "daily-060-1": "5f7b4d94",
         "daily-060-2": "9334eb46",
-        "daily-060-4": "38f2fe36",
         "daily-060-3": "9e184f1b",
-        "daily-060-6": "6f8ee85b",
+        "daily-060-4": "38f2fe36",
         "daily-060-5": "59f99130",
+        "daily-060-6": "6f8ee85b",
         "daily-060-7": "a1d04d62"
       },
       "expressions": [
@@ -1050,7 +1286,11 @@
         "53a3769c",
         "004d8d3b"
       ],
-      "stress": {},
+      "stress": {
+        "you": "cb8fe5bf",
+        "sign": "1271bcdf",
+        "door": "962d6c9f"
+      },
       "full": "cbf5304d"
     },
     "unfamiliar-charge": {
@@ -1068,7 +1308,11 @@
         "c8948f6e",
         "893f44a8"
       ],
-      "stress": {},
+      "stress": {
+        "charge": "098471b7",
+        "twelve": "991a79f7",
+        "dollars": "37bbfc17"
+      },
       "full": "1d49569c"
     },
     "announcing-event": {
@@ -1086,15 +1330,19 @@
         "39ca7823",
         "d2fad73a"
       ],
-      "stress": {},
+      "stress": {
+        "courtyard": "8e879c72",
+        "movie": "6525c1b2",
+        "friday": "1c08da32"
+      },
       "full": "796eb924"
     },
     "walk-invitation": {
       "lines": {
         "daily-063-1": "16d9bd89",
         "daily-063-2": "d1b4a9fd",
-        "daily-063-4": "2c11547a",
         "daily-063-3": "3cebbad8",
+        "daily-063-4": "2c11547a",
         "daily-063-5": "81d95605",
         "daily-063-6": "790f92d2"
       },
@@ -1103,7 +1351,11 @@
         "370ab281",
         "8591c63f"
       ],
-      "stress": {},
+      "stress": {
+        "walk": "7fa66afd",
+        "we": "6d71a41d",
+        "river": "35a0859d"
+      },
       "full": "3e1159e3"
     },
     "meeting-middle": {
@@ -1121,24 +1373,32 @@
         "5ad3b5f5",
         "d6ce3d01"
       ],
-      "stress": {},
+      "stress": {
+        "one": "ed980559",
+        "we": "d599f579",
+        "saturday": "ee073299"
+      },
       "full": "1aa129e6"
     },
     "spelling-a-name": {
       "lines": {
-        "daily-065-2": "a2234ef1",
         "daily-065-1": "679c79d8",
-        "daily-065-4": "5b96f0e6",
+        "daily-065-2": "a2234ef1",
         "daily-065-3": "a8d4dde4",
-        "daily-065-6": "92f11c6e",
-        "daily-065-5": "21985272"
+        "daily-065-4": "5b96f0e6",
+        "daily-065-5": "21985272",
+        "daily-065-6": "92f11c6e"
       },
       "expressions": [
         "01e54b45",
         "33626b90",
         "93d08599"
       ],
-      "stress": {},
+      "stress": {
+        "booking": "6a75015d",
+        "noura": "e0dfb9bd",
+        "under": "d954eddd"
+      },
       "full": "fb52aa2b"
     },
     "wrapping-up-meeting": {
@@ -1156,7 +1416,11 @@
         "6fb64813",
         "bbd4e92f"
       ],
-      "stress": {},
+      "stress": {
+        "updating": "10f7be51",
+        "aisha": "6efe6f51",
+        "guest": "3e4c9b71"
+      },
       "full": "e07724fd"
     },
     "forgot-your-name": {
@@ -1165,25 +1429,29 @@
         "daily-067-2": "d17dbb31",
         "daily-067-3": "c101f31c",
         "daily-067-4": "85a4d0af",
-        "daily-067-6": "d5300801",
-        "daily-067-5": "e4bf3659"
+        "daily-067-5": "e4bf3659",
+        "daily-067-6": "d5300801"
       },
       "expressions": [
         "81c49394",
         "396a24a6",
         "14b4061e"
       ],
-      "stress": {},
+      "stress": {
+        "your": "8098e5a8",
+        "forgot": "3b13a728",
+        "name": "b734a9a8"
+      },
       "full": "bf8a8314"
     },
     "return-trip": {
       "lines": {
         "daily-068-1": "19b8fe70",
         "daily-068-2": "108420cf",
-        "daily-068-4": "456282ac",
         "daily-068-3": "2521bff2",
-        "daily-068-6": "43403c6d",
+        "daily-068-4": "456282ac",
         "daily-068-5": "361a90fd",
+        "daily-068-6": "43403c6d",
         "daily-068-7": "1e34b01d"
       },
       "expressions": [
@@ -1191,17 +1459,21 @@
         "0fd91f72",
         "573d8dac"
       ],
-      "stress": {},
+      "stress": {
+        "buses": "4fa4dc6e",
+        "late": "9469e8ce",
+        "weekdays": "dbeb9f8e"
+      },
       "full": "9e6a6ef8"
     },
     "welcoming-guest": {
       "lines": {
         "daily-069-1": "7e77c72a",
         "daily-069-2": "233c5a20",
-        "daily-069-4": "fb6ff867",
         "daily-069-3": "57a8c2af",
-        "daily-069-6": "57042d0a",
+        "daily-069-4": "fb6ff867",
         "daily-069-5": "d3f6c94b",
+        "daily-069-6": "57042d0a",
         "daily-069-7": "f7e94b2e"
       },
       "expressions": [
@@ -1209,17 +1481,21 @@
         "c1bf0424",
         "2d8a5065"
       ],
-      "stress": {},
+      "stress": {
+        "mint": "f79191b9",
+        "love": "2603a8b9",
+        "tea": "e8ff4f39"
+      },
       "full": "ba23dfa9"
     },
     "recycling-bin": {
       "lines": {
-        "daily-070-2": "c80ed19c",
         "daily-070-1": "f571aecc",
+        "daily-070-2": "c80ed19c",
         "daily-070-3": "8091712c",
         "daily-070-4": "defda8a5",
-        "daily-070-6": "bdb4afce",
         "daily-070-5": "e0a6f02e",
+        "daily-070-6": "bdb4afce",
         "daily-070-7": "99035d9c"
       },
       "expressions": [
@@ -1227,17 +1503,21 @@
         "ab04b1ad",
         "6dfeec1e"
       ],
-      "stress": {},
+      "stress": {
+        "goes": "ecb20435",
+        "glass": "0108f475",
+        "green": "2b9e5d95"
+      },
       "full": "b03b8617"
     },
     "troubleshooting-step": {
       "lines": {
-        "daily-071-2": "2c254138",
         "daily-071-1": "f6df4e0f",
-        "daily-071-4": "e2afc642",
+        "daily-071-2": "2c254138",
         "daily-071-3": "cb55caa4",
-        "daily-071-6": "283f76bc",
+        "daily-071-4": "e2afc642",
         "daily-071-5": "540eb665",
+        "daily-071-6": "283f76bc",
         "daily-071-7": "4c79bb21"
       },
       "expressions": [
@@ -1245,17 +1525,21 @@
         "9e7416af",
         "8ce73933"
       ],
-      "stress": {},
+      "stress": {
+        "reset": "a4461935",
+        "button": "7f7c2155",
+        "hold": "a71faff5"
+      },
       "full": "5be833a2"
     },
     "pronouncing-name": {
       "lines": {
-        "daily-072-2": "7027095c",
         "daily-072-1": "1ef45835",
+        "daily-072-2": "7027095c",
         "daily-072-3": "ca24b5b3",
         "daily-072-4": "bf1763a1",
-        "daily-072-6": "8497cc8d",
         "daily-072-5": "43ee6a9b",
+        "daily-072-6": "8497cc8d",
         "daily-072-7": "9701fdec"
       },
       "expressions": [
@@ -1263,7 +1547,11 @@
         "246d143a",
         "f49a63e8"
       ],
-      "stress": {},
+      "stress": {
+        "first": "e9a1b2bc",
+        "stress": "6f5e4c5c",
+        "syllable": "11eaa15c"
+      },
       "full": "5b22abbb"
     },
     "evening-routine": {
@@ -1281,7 +1569,11 @@
         "4928c9b1",
         "97dc191c"
       ],
-      "stress": {},
+      "stress": {
+        "kitchen": "1875482d",
+        "phone": "55b463ad",
+        "i": "d1321463"
+      },
       "full": "bfa510e6"
     },
     "reconsidering": {
@@ -1299,7 +1591,11 @@
         "b5ad5ea7",
         "ecbb4145"
       ],
-      "stress": {},
+      "stress": {
+        "smaller": "8d30dabf",
+        "book": "4340915f",
+        "room": "17af381f"
+      },
       "full": "cb306501"
     },
     "fifteen-or-fifty": {
@@ -1307,27 +1603,31 @@
         "daily-075-1": "d93d3138",
         "daily-075-2": "602156ae",
         "daily-075-3": "c861ebd7",
-        "daily-075-5": "1d55b0e3",
         "daily-075-4": "0e35c86a",
-        "daily-075-7": "a7dbe358",
-        "daily-075-6": "5cc4214c"
+        "daily-075-5": "1d55b0e3",
+        "daily-075-6": "5cc4214c",
+        "daily-075-7": "a7dbe358"
       },
       "expressions": [
         "3af82ad3",
         "769e7a5f",
         "0ceb7deb"
       ],
-      "stress": {},
+      "stress": {
+        "cost": "a418f787",
+        "brakes": "968efb47",
+        "eighteen": "5cae1007"
+      },
       "full": "1f352b47"
     },
     "audio-problem-call": {
       "lines": {
         "daily-076-1": "fdb4dc52",
         "daily-076-2": "0ff9dcf5",
-        "daily-076-4": "01d2cd5a",
         "daily-076-3": "95e92631",
-        "daily-076-6": "8d81d4a8",
+        "daily-076-4": "01d2cd5a",
         "daily-076-5": "6e930698",
+        "daily-076-6": "8d81d4a8",
         "daily-076-7": "411df03b"
       },
       "expressions": [
@@ -1335,7 +1635,11 @@
         "a930af14",
         "b6bb513c"
       ],
-      "stress": {},
+      "stress": {
+        "camera": "f76a2e6f",
+        "your": "2a29112f",
+        "off": "9c5c874f"
+      },
       "full": "c37438ba"
     },
     "specific-compliment": {
@@ -1352,7 +1656,11 @@
         "e09bc6ed",
         "2065498a"
       ],
-      "stress": {},
+      "stress": {
+        "story": "12bca9d2",
+        "meant": "df2c5652",
+        "i": "c52d018c"
+      },
       "full": "bb398958"
     },
     "transit-card": {
@@ -1370,7 +1678,11 @@
         "af4866aa",
         "074225ff"
       ],
-      "stress": {},
+      "stress": {
+        "take": "337125c4",
+        "i-ll": "433d3784",
+        "weekly": "7a3c9b04"
+      },
       "full": "7681b45d"
     },
     "asking-recipe": {
@@ -1378,8 +1690,8 @@
         "daily-079-1": "bb246cf0",
         "daily-079-2": "56189b6c",
         "daily-079-3": "752abf0c",
-        "daily-079-5": "31c08551",
         "daily-079-4": "f5836222",
+        "daily-079-5": "31c08551",
         "daily-079-6": "e652e93b"
       },
       "expressions": [
@@ -1387,7 +1699,11 @@
         "d02f584c",
         "eb8b0304"
       ],
-      "stress": {},
+      "stress": {
+        "spices": "2445ca66",
+        "toast": "d910e3c6",
+        "before": "90e115e6"
+      },
       "full": "e4b64322"
     },
     "locked-out": {
@@ -1405,7 +1721,11 @@
         "0b0a69bf",
         "19399a45"
       ],
-      "stress": {},
+      "stress": {
+        "keys": "cc7a5279",
+        "my": "88ccfed9",
+        "counter": "844f24d9"
+      },
       "full": "fbb107c6"
     },
     "wrong-reservation-date": {
@@ -1415,15 +1735,19 @@
         "daily-081-3": "db1beb68",
         "daily-081-4": "47a36c49",
         "daily-081-5": "074ab305",
-        "daily-081-7": "fa63b984",
-        "daily-081-6": "d786e2be"
+        "daily-081-6": "d786e2be",
+        "daily-081-7": "fa63b984"
       },
       "expressions": [
         "fe8ba8e5",
         "d580c25d",
         "3af82ad3"
       ],
-      "stress": {},
+      "stress": {
+        "friday": "bd604f0a",
+        "arrive": "dd92da6a",
+        "fourteenth": "c74587aa"
+      },
       "full": "36b92256"
     },
     "local-custom": {
@@ -1441,7 +1765,11 @@
         "8c5a1235",
         "5b12cc35"
       ],
-      "stress": {},
+      "stress": {
+        "bring": "54fc16b1",
+        "polite": "c0759ad1",
+        "small": "a6f47c31"
+      },
       "full": "2d97fbb6"
     },
     "morning-stretch": {
@@ -1458,17 +1786,21 @@
         "fbe5be03",
         "14c048af"
       ],
-      "stress": {},
+      "stress": {
+        "before": "3489f409",
+        "stretch": "416de9a9",
+        "breakfast": "2f6d3de9"
+      },
       "full": "b6a4a870"
     },
     "different-view": {
       "lines": {
         "daily-084-1": "9decec13",
         "daily-084-2": "d011ac36",
-        "daily-084-4": "31db9bd2",
         "daily-084-3": "9f9e3488",
-        "daily-084-6": "fea18ac2",
+        "daily-084-4": "31db9bd2",
         "daily-084-5": "3cecc367",
+        "daily-084-6": "fea18ac2",
         "daily-084-7": "8c086ab5"
       },
       "expressions": [
@@ -1476,17 +1808,21 @@
         "c22e4729",
         "2a5d5777"
       ],
-      "stress": {},
+      "stress": {
+        "plan": "003cca5e",
+        "support": "fb0093be",
+        "parking": "2af9ba7e"
+      },
       "full": "fb0e29e6"
     },
     "checking-the-route": {
       "lines": {
-        "daily-085-2": "00347f21",
         "daily-085-1": "f114517f",
+        "daily-085-2": "00347f21",
         "daily-085-3": "9594babf",
         "daily-085-4": "cbc80ef8",
-        "daily-085-6": "a0fd9e56",
         "daily-085-5": "e71d7545",
+        "daily-085-6": "a0fd9e56",
         "daily-085-7": "57cff75b"
       },
       "expressions": [
@@ -1494,7 +1830,11 @@
         "fdab7e34",
         "3dcfcc9f"
       ],
-      "stress": {},
+      "stress": {
+        "after": "89400a9a",
+        "left": "1783b67a",
+        "bridge": "e8de773a"
+      },
       "full": "0500e26c"
     },
     "sorry-to-interrupt": {
@@ -1511,13 +1851,17 @@
         "d1e42672",
         "b81e5667"
       ],
-      "stress": {},
+      "stress": {
+        "out": "5ab7737e",
+        "email": "be2b7f7e",
+        "thirteenth": "1e7e089e"
+      },
       "full": "5aa49e1f"
     },
     "accepting-compliment": {
       "lines": {
-        "daily-087-2": "87d36e75",
         "daily-087-1": "91c3431b",
+        "daily-087-2": "87d36e75",
         "daily-087-3": "f7a5393d",
         "daily-087-4": "a5d7161c",
         "daily-087-5": "64334b9d",
@@ -1529,15 +1873,19 @@
         "e3a32d0b",
         "8afe21ce"
       ],
-      "stress": {},
+      "stress": {
+        "recipe": "327dd94b",
+        "aunt": "0207d60b",
+        "i": "1521ce3d"
+      },
       "full": "8ae8597e"
     },
     "cancelled-train": {
       "lines": {
         "daily-088-1": "358af022",
         "daily-088-2": "eae17760",
-        "daily-088-4": "8546f158",
         "daily-088-3": "cbb05b82",
+        "daily-088-4": "8546f158",
         "daily-088-5": "9f6756f7",
         "daily-088-6": "2753f2be",
         "daily-088-7": "eb126ec4"
@@ -1547,7 +1895,11 @@
         "5b8ce15d",
         "a2c23ea2"
       ],
-      "stress": {},
+      "stress": {
+        "coach": "ddc70002",
+        "i-m": "6eb2c9c2",
+        "nine": "ab09f0e2"
+      },
       "full": "a02e50d8"
     },
     "cafe-closing-early": {
@@ -1564,15 +1916,19 @@
         "e7027b9a",
         "c9d6cf92"
       ],
-      "stress": {},
+      "stress": {
+        "four": "1fdae106",
+        "close": "3fe5f5e6",
+        "today": "df709ee6"
+      },
       "full": "ea2188b7"
     },
     "water-under-sink": {
       "lines": {
-        "daily-090-2": "ad52c835",
         "daily-090-1": "03c9c4fe",
-        "daily-090-4": "ec449497",
+        "daily-090-2": "ad52c835",
         "daily-090-3": "089742dd",
+        "daily-090-4": "ec449497",
         "daily-090-5": "060292a6",
         "daily-090-6": "90ad1664",
         "daily-090-7": "835b48c0"
@@ -1582,15 +1938,19 @@
         "932932fa",
         "2ed74f07"
       ],
-      "stress": {},
+      "stress": {
+        "behind": "bcc1eb7e",
+        "valve": "f2581c9e",
+        "bin": "2d05851e"
+      },
       "full": "7c58eea2"
     },
     "following-up": {
       "lines": {
-        "daily-091-2": "b54faae4",
         "daily-091-1": "ce09df71",
-        "daily-091-4": "cfa0ed84",
+        "daily-091-2": "b54faae4",
         "daily-091-3": "d24e1ddf",
+        "daily-091-4": "cfa0ed84",
         "daily-091-5": "80917058",
         "daily-091-6": "96286b37",
         "daily-091-7": "cac94ac9"
@@ -1600,7 +1960,11 @@
         "066a46e2",
         "46d59a63"
       ],
-      "stress": {},
+      "stress": {
+        "three": "90ab92e7",
+        "told": "dafb2327",
+        "days": "97d6d027"
+      },
       "full": "c57c0152"
     },
     "food-tradition": {
@@ -1609,15 +1973,19 @@
         "daily-092-2": "62b5ef7e",
         "daily-092-3": "9efd84d4",
         "daily-092-4": "763d52c3",
-        "daily-092-6": "cbb83530",
-        "daily-092-5": "ef54c8db"
+        "daily-092-5": "ef54c8db",
+        "daily-092-6": "cbb83530"
       },
       "expressions": [
         "13d10dd6",
         "d748cd1d",
         "2c96187b"
       ],
-      "stress": {},
+      "stress": {
+        "grandmother": "e8a41401",
+        "taught": "4ad6ace1",
+        "me": "85b775a1"
+      },
       "full": "becfacee"
     },
     "work-break": {
@@ -1626,8 +1994,8 @@
         "daily-093-2": "420678c4",
         "daily-093-3": "95a41d62",
         "daily-093-4": "46993ad1",
-        "daily-093-6": "2eee709e",
         "daily-093-5": "544350ac",
+        "daily-093-6": "2eee709e",
         "daily-093-7": "b81cbccb"
       },
       "expressions": [
@@ -1635,15 +2003,19 @@
         "f5d70e41",
         "09376098"
       ],
-      "stress": {},
+      "stress": {
+        "fifteen": "be1c83d2",
+        "said": "f0420372",
+        "i": "c82cb0e0"
+      },
       "full": "575d9aa8"
     },
     "final-plan": {
       "lines": {
-        "daily-094-2": "6061b718",
         "daily-094-1": "f901e70c",
-        "daily-094-4": "33a686d3",
+        "daily-094-2": "6061b718",
         "daily-094-3": "d0b245f4",
+        "daily-094-4": "33a686d3",
         "daily-094-5": "bbdcea7b",
         "daily-094-6": "0acd917d",
         "daily-094-7": "2245d4f8"
@@ -1653,15 +2025,19 @@
         "4b735b25",
         "29aebbe8"
       ],
-      "stress": {},
+      "stress": {
+        "booking": "2f77eff0",
+        "we-re": "121614f0",
+        "nine": "e3f386d0"
+      },
       "full": "f778f626"
     },
     "wrong-order-correction": {
       "lines": {
         "daily-095-1": "beef007a",
         "daily-095-2": "990a6b6a",
-        "daily-095-4": "ca749252",
         "daily-095-3": "14e4d86f",
+        "daily-095-4": "ca749252",
         "daily-095-5": "d1421d9b"
       },
       "expressions": [
@@ -1669,7 +2045,11 @@
         "c5993b60",
         "52eea1c1"
       ],
-      "stress": {},
+      "stress": {
+        "ordered": "2ca8ae25",
+        "vegetable": "c0dc3fe5",
+        "i": "2e39745f"
+      },
       "full": "56652549"
     },
     "sharing-right-screen": {
@@ -1678,8 +2058,8 @@
         "daily-096-2": "e93d46e6",
         "daily-096-3": "b5d8b7df",
         "daily-096-4": "0ebc25b3",
-        "daily-096-6": "7765436b",
         "daily-096-5": "35123143",
+        "daily-096-6": "7765436b",
         "daily-096-7": "641bcd44"
       },
       "expressions": [
@@ -1687,7 +2067,11 @@
         "375b12d8",
         "04b96809"
       ],
-      "stress": {},
+      "stress": {
+        "window": "1268275c",
+        "share": "198e7efc",
+        "whole": "d5e2e73c"
+      },
       "full": "d169d931"
     },
     "late-apology": {
@@ -1703,15 +2087,19 @@
         "48118a17",
         "bc91267e"
       ],
-      "stress": {},
+      "stress": {
+        "should": "c44663c2",
+        "earlier": "05a44ce2",
+        "i": "cac1c334"
+      },
       "full": "fc37f1c7"
     },
     "disrupted-travel-day": {
       "lines": {
-        "daily-098-2": "d546efdb",
         "daily-098-1": "785400a2",
-        "daily-098-4": "618ff298",
+        "daily-098-2": "d546efdb",
         "daily-098-3": "53f4c611",
+        "daily-098-4": "618ff298",
         "daily-098-5": "b94a763f",
         "daily-098-6": "0011e494",
         "daily-098-7": "11892355"
@@ -1721,7 +2109,11 @@
         "c27a848f",
         "04892e0a"
       ],
-      "stress": {},
+      "stress": {
+        "direct": "87a97629",
+        "booked": "ca6273e9",
+        "i": "d3aa078b"
+      },
       "full": "2e8e33f7"
     },
     "bakery-sold-out": {
@@ -1739,7 +2131,11 @@
         "121d226a",
         "216f869e"
       ],
-      "stress": {},
+      "stress": {
+        "come": "a8d13d51",
+        "i-ll": "169c8411",
+        "tomorrow": "7e9da791"
+      },
       "full": "0ebe484b"
     },
     "internet-down-home": {
@@ -1757,7 +2153,11 @@
         "d1bd5abf",
         "3af82ad3"
       ],
-      "stress": {},
+      "stress": {
+        "flashing": "28f542b4",
+        "light": "f0d08f94",
+        "orange": "6893f734"
+      },
       "full": "56c42227"
     },
     "thanking-support": {
@@ -1775,7 +2175,11 @@
         "d6df6e6d",
         "4945afde"
       ],
-      "stress": {},
+      "stress": {
+        "old": "2d20cdc1",
+        "browser": "a7c4aac1",
+        "password": "23aa6de1"
+      },
       "full": "b640ecb9"
     },
     "holiday-plans": {
@@ -1792,7 +2196,11 @@
         "71106f01",
         "4e3aa6c9"
       ],
-      "stress": {},
+      "stress": {
+        "play": "e315928e",
+        "we": "0f19626e",
+        "cards": "9dcc58ae"
+      },
       "full": "4a39a477"
     },
     "hydration-reminder": {
@@ -1810,7 +2218,11 @@
         "a7d259b7",
         "61f8658b"
       ],
-      "stress": {},
+      "stress": {
+        "four": "1dec0ca9",
+        "bottles": "f5a99709",
+        "day": "03a7e409"
+      },
       "full": "d7c1abe6"
     },
     "home-or-office": {
@@ -1828,17 +2240,21 @@
         "c690e0b2",
         "68bcbeb2"
       ],
-      "stress": {},
+      "stress": {
+        "i-m": "ebe5e28a",
+        "in": "bf35022a",
+        "thursdays": "0b019bea"
+      },
       "full": "24e8a82d"
     },
     "another-size": {
       "lines": {
-        "daily-105-2": "41542e7f",
         "daily-105-1": "a16fe673",
-        "daily-105-4": "e42ac97c",
+        "daily-105-2": "41542e7f",
         "daily-105-3": "4e4e84a8",
-        "daily-105-6": "1b26019d",
+        "daily-105-4": "e42ac97c",
         "daily-105-5": "7e6999b3",
+        "daily-105-6": "1b26019d",
         "daily-105-7": "68c3b0b4"
       },
       "expressions": [
@@ -1846,7 +2262,11 @@
         "2bdfb573",
         "b68d9f7a"
       ],
-      "stress": {},
+      "stress": {
+        "medium": "b85be88e",
+        "asked": "63973aae",
+        "i": "e6969b9c"
+      },
       "full": "3b62ac77"
     },
     "async-update": {
@@ -1864,17 +2284,21 @@
         "cdd2b3e6",
         "1210ecd7"
       ],
-      "stress": {},
+      "stress": {
+        "decision": "62c4f472",
+        "post": "0e29e132",
+        "channel": "b15db212"
+      },
       "full": "1cb20660"
     },
     "quiet-evening": {
       "lines": {
-        "daily-107-2": "fd4352cb",
         "daily-107-1": "42afd6da",
+        "daily-107-2": "fd4352cb",
         "daily-107-3": "d3e37300",
         "daily-107-4": "a2ff3623",
-        "daily-107-6": "15a885c9",
         "daily-107-5": "215ba1e4",
+        "daily-107-6": "15a885c9",
         "daily-107-7": "d826a683"
       },
       "expressions": [
@@ -1882,7 +2306,11 @@
         "659ca70b",
         "485cdaa1"
       ],
-      "stress": {},
+      "stress": {
+        "breakfast": "c44d91ab",
+        "we": "88da3f8b",
+        "tomorrow": "938c4d4b"
+      },
       "full": "96aac8f3"
     },
     "airport-gate-change": {
@@ -1892,25 +2320,29 @@
         "daily-108-3": "41c9fd56",
         "daily-108-4": "12e2ee7e",
         "daily-108-5": "02afa530",
-        "daily-108-7": "deb073ec",
-        "daily-108-6": "34492d4a"
+        "daily-108-6": "34492d4a",
+        "daily-108-7": "deb073ec"
       },
       "expressions": [
         "615320b4",
         "e545ea72",
         "dee45824"
       ],
-      "stress": {},
+      "stress": {
+        "us": "122b6035",
+        "moved": "6db44c55",
+        "c": "81ccbf0b"
+      },
       "full": "d7fe1ea2"
     },
     "booking-brunch": {
       "lines": {
-        "daily-109-2": "25b747e8",
         "daily-109-1": "00265448",
-        "daily-109-4": "f3ee8ef2",
+        "daily-109-2": "25b747e8",
         "daily-109-3": "4189a0f4",
-        "daily-109-6": "d136199e",
+        "daily-109-4": "f3ee8ef2",
         "daily-109-5": "6baec9e8",
+        "daily-109-6": "d136199e",
         "daily-109-7": "9a07288c"
       },
       "expressions": [
@@ -1918,17 +2350,21 @@
         "bbc6f9f1",
         "d9aa88f4"
       ],
-      "stress": {},
+      "stress": {
+        "five": "ad4b8824",
+        "need": "8b0418e4",
+        "saturday": "820ebe44"
+      },
       "full": "f0236eea"
     },
     "thermostat-setting": {
       "lines": {
-        "daily-110-2": "ff6e997b",
         "daily-110-1": "0e313ec5",
-        "daily-110-4": "e082a691",
+        "daily-110-2": "ff6e997b",
         "daily-110-3": "3a52e31d",
-        "daily-110-6": "a8caf63a",
+        "daily-110-4": "e082a691",
         "daily-110-5": "3ea65ee7",
+        "daily-110-6": "a8caf63a",
         "daily-110-7": "093424b2"
       },
       "expressions": [
@@ -1936,17 +2372,21 @@
         "801b129d",
         "9a8f6e44"
       ],
-      "stress": {},
+      "stress": {
+        "nineteen": "99128ea7",
+        "set": "c3dd9bc7",
+        "night": "2a712e87"
+      },
       "full": "1a07b8eb"
     },
     "bank-card-replacement": {
       "lines": {
-        "daily-111-2": "974bd819",
         "daily-111-1": "4b44164b",
-        "daily-111-4": "e68c0e9f",
+        "daily-111-2": "974bd819",
         "daily-111-3": "827b46fb",
-        "daily-111-6": "0ec32a08",
+        "daily-111-4": "e68c0e9f",
         "daily-111-5": "36669bfd",
+        "daily-111-6": "0ec32a08",
         "daily-111-7": "3d9a2bf8"
       },
       "expressions": [
@@ -1954,13 +2394,17 @@
         "6897fb63",
         "f9f979ba"
       ],
-      "stress": {},
+      "stress": {
+        "card": "64fd45c3",
+        "my": "aeb20da3",
+        "damaged": "613d23e3"
+      },
       "full": "aac2ad13"
     },
     "avoiding-assumption": {
       "lines": {
-        "daily-112-2": "933f76ca",
         "daily-112-1": "f9975412",
+        "daily-112-2": "933f76ca",
         "daily-112-3": "168a1cc3",
         "daily-112-4": "d2896693",
         "daily-112-5": "b1401399",
@@ -1972,15 +2416,19 @@
         "ecbb4145",
         "3a7c2de5"
       ],
-      "stress": {},
+      "stress": {
+        "six": "d859dec6",
+        "thursday": "6ce46c06",
+        "thirty": "dac25866"
+      },
       "full": "2cb27cd9"
     },
     "gym-first-session": {
       "lines": {
         "daily-113-1": "f14d7c80",
         "daily-113-2": "762dccfd",
-        "daily-113-4": "e82b00b2",
         "daily-113-3": "e4ae5af2",
+        "daily-113-4": "e82b00b2",
         "daily-113-5": "f32bd002",
         "daily-113-6": "ff7c83eb",
         "daily-113-7": "92d0313e"
@@ -1990,15 +2438,19 @@
         "44bb147e",
         "bd63ad95"
       ],
-      "stress": {},
+      "stress": {
+        "free": "a2ff5ffc",
+        "i-m": "73755f1c",
+        "eleven": "34f2327c"
+      },
       "full": "e9efa511"
     },
     "city-transport": {
       "lines": {
         "daily-114-1": "ed12f8de",
         "daily-114-2": "77354c01",
-        "daily-114-4": "e9341657",
         "daily-114-3": "d788b0b9",
+        "daily-114-4": "e9341657",
         "daily-114-5": "bfe27009",
         "daily-114-6": "15b2e8fd",
         "daily-114-7": "e2f88290"
@@ -2008,17 +2460,21 @@
         "7ae13629",
         "18bc5529"
       ],
-      "stress": {},
+      "stress": {
+        "screens": "c4fe4705",
+        "asking": "e1c3a5a5",
+        "stops": "f2137c45"
+      },
       "full": "06d42d61"
     },
     "exchanging-a-gift": {
       "lines": {
-        "daily-115-2": "1c3c3752",
         "daily-115-1": "48d2ac7e",
+        "daily-115-2": "1c3c3752",
         "daily-115-3": "9369ab06",
         "daily-115-4": "fc759e3d",
-        "daily-115-6": "4394b58a",
         "daily-115-5": "2bb3810a",
+        "daily-115-6": "4394b58a",
         "daily-115-7": "e7aefec0"
       },
       "expressions": [
@@ -2026,7 +2482,11 @@
         "f81eb35b",
         "23f2a681"
       ],
-      "stress": {},
+      "stress": {
+        "wireless": "148b8b63",
+        "want": "7bb0bae3",
+        "model": "be90d143"
+      },
       "full": "92917c07"
     },
     "across-time-zones": {
@@ -2044,15 +2504,19 @@
         "74a1e860",
         "9c8c7ec4"
       ],
-      "stress": {},
+      "stress": {
+        "four": "762eff41",
+        "call": "c7b60a41",
+        "cairo": "70e1fec1"
+      },
       "full": "63a5bcea"
     },
     "repairing-misunderstanding": {
       "lines": {
-        "daily-117-2": "75388c12",
         "daily-117-1": "33fbe780",
-        "daily-117-4": "2c1e389b",
+        "daily-117-2": "75388c12",
         "daily-117-3": "1887e292",
+        "daily-117-4": "2c1e389b",
         "daily-117-5": "c755a6f8"
       },
       "expressions": [
@@ -2060,7 +2524,11 @@
         "31fd4218",
         "1b564f46"
       ],
-      "stress": {},
+      "stress": {
+        "worried": "a5a0dc20",
+        "timeline": "46fbc500",
+        "i": "3340f02a"
+      },
       "full": "122611a4"
     },
     "baggage-allowance": {
@@ -2078,15 +2546,19 @@
         "fa0df06c",
         "f6149f92"
       ],
-      "stress": {},
+      "stress": {
+        "bag": "38a9fb9a",
+        "my": "9fefb75a",
+        "eleven": "3265eaba"
+      },
       "full": "3080df5f"
     },
     "takeaway-delay": {
       "lines": {
         "daily-119-1": "cccc0900",
         "daily-119-2": "0e77a92e",
-        "daily-119-4": "7561e741",
         "daily-119-3": "1cc2a7bf",
+        "daily-119-4": "7561e741",
         "daily-119-5": "10920ccd",
         "daily-119-6": "6d513798",
         "daily-119-7": "6eabd1fe"
@@ -2096,7 +2568,11 @@
         "cb34c551",
         "a3b25acf"
       ],
-      "stress": {},
+      "stress": {
+        "lamb": "bf985cc8",
+        "ordered": "dc0306e8",
+        "curry": "5bbc85a8"
+      },
       "full": "86ca2623"
     },
     "guest-staying-over": {
@@ -2114,13 +2590,17 @@
         "16187911",
         "e08cd497"
       ],
-      "stress": {},
+      "stress": {
+        "two": "c1b697dc",
+        "staying": "ee99c8dc",
+        "nights": "cafb4b7c"
+      },
       "full": "19630909"
     },
     "changing-utility-name": {
       "lines": {
-        "daily-121-2": "734febe1",
         "daily-121-1": "24ab21c4",
+        "daily-121-2": "734febe1",
         "daily-121-3": "224685da",
         "daily-121-4": "09c25b42",
         "daily-121-5": "3278d538",
@@ -2132,17 +2612,21 @@
         "596f28e6",
         "d9634afc"
       ],
-      "stress": {},
+      "stress": {
+        "park": "96b921e7",
+        "we": "f6222e07",
+        "lane": "ee5de947"
+      },
       "full": "a833c595"
     },
     "community-garden": {
       "lines": {
         "daily-122-1": "23804af8",
         "daily-122-2": "38a2c849",
-        "daily-122-4": "b24b322f",
         "daily-122-3": "af89460c",
-        "daily-122-6": "edd3b649",
+        "daily-122-4": "b24b322f",
         "daily-122-5": "532bc98e",
+        "daily-122-6": "edd3b649",
         "daily-122-7": "42b28db2"
       },
       "expressions": [
@@ -2150,17 +2634,21 @@
         "fe437025",
         "f4503f86"
       ],
-      "stress": {},
+      "stress": {
+        "gloves": "a397fd23",
+        "spare": "892608c3",
+        "shed": "3b77e363"
+      },
       "full": "d99613dc"
     },
     "rest-day": {
       "lines": {
         "daily-123-1": "ef4ee135",
         "daily-123-2": "78951b4e",
-        "daily-123-4": "3e41e0fe",
         "daily-123-3": "6f23cfb7",
-        "daily-123-6": "880f6679",
+        "daily-123-4": "3e41e0fe",
         "daily-123-5": "f3445c60",
+        "daily-123-6": "880f6679",
         "daily-123-7": "80e251f8"
       },
       "expressions": [
@@ -2168,7 +2656,11 @@
         "c15a70f6",
         "994b569a"
       ],
-      "stress": {},
+      "stress": {
+        "saturday": "cee76f36",
+        "rest": "6216a196",
+        "i": "3f7b9274"
+      },
       "full": "2c9c227f"
     },
     "phone-away": {
@@ -2186,7 +2678,11 @@
         "e8969df1",
         "5b397599"
       ],
-      "stress": {},
+      "stress": {
+        "phones": "948b795a",
+        "we": "00afdd3a",
+        "basket": "3e339a5a"
+      },
       "full": "3600a175"
     },
     "street-market-purchase": {
@@ -2195,8 +2691,8 @@
         "daily-125-2": "550660d1",
         "daily-125-3": "e171a00a",
         "daily-125-4": "371d7841",
-        "daily-125-6": "dbadd200",
         "daily-125-5": "86ce1101",
+        "daily-125-6": "dbadd200",
         "daily-125-7": "13281611"
       },
       "expressions": [
@@ -2204,7 +2700,11 @@
         "0622345f",
         "8591c63f"
       ],
-      "stress": {},
+      "stress": {
+        "kilo": "c3fb7c4e",
+        "half": "c24f7b8e",
+        "apricots": "d2e2ce4e"
+      },
       "full": "4ef1fa35"
     },
     "moving-video-call": {
@@ -2221,7 +2721,11 @@
         "2dc9fbbb",
         "998a217a"
       ],
-      "stress": {},
+      "stress": {
+        "ten": "3ea87551",
+        "said": "293c07f1",
+        "i": "5c031e27"
+      },
       "full": "fe02ce06"
     },
     "checking-in": {
@@ -2230,8 +2734,8 @@
         "daily-127-2": "b4cdb5a4",
         "daily-127-3": "2ae2e82d",
         "daily-127-4": "5063fd04",
-        "daily-127-6": "f954adb2",
         "daily-127-5": "ba7349b0",
+        "daily-127-6": "f954adb2",
         "daily-127-7": "3f4fe938"
       },
       "expressions": [
@@ -2239,17 +2743,21 @@
         "fac75d32",
         "7e8d6fd6"
       ],
-      "stress": {},
+      "stress": {
+        "advice": "6084e5bb",
+        "need": "7155e7fb",
+        "company": "f7e1675b"
+      },
       "full": "b0adf593"
     },
     "asking-window-seat": {
       "lines": {
-        "daily-128-2": "1613be31",
         "daily-128-1": "56fc8a48",
+        "daily-128-2": "1613be31",
         "daily-128-3": "87ea4888",
         "daily-128-4": "7f1e83bd",
-        "daily-128-6": "390e2425",
         "daily-128-5": "f67dd30b",
+        "daily-128-6": "390e2425",
         "daily-128-7": "9f266faf"
       },
       "expressions": [
@@ -2257,7 +2765,11 @@
         "505ceb95",
         "48a273fd"
       ],
-      "stress": {},
+      "stress": {
+        "window": "513c3ac4",
+        "asked": "1cf25ba4",
+        "i": "36523442"
+      },
       "full": "68b6b15a"
     },
     "coffee-too-sweet": {
@@ -2266,8 +2778,8 @@
         "daily-129-2": "368e41bb",
         "daily-129-3": "bc6dfb07",
         "daily-129-4": "8e183229",
-        "daily-129-6": "b0ab506a",
         "daily-129-5": "def6b823",
+        "daily-129-6": "b0ab506a",
         "daily-129-7": "6df5bf74"
       },
       "expressions": [
@@ -2275,7 +2787,11 @@
         "7c1e7247",
         "1e9fea73"
       ],
-      "stress": {},
+      "stress": {
+        "half": "780a3fc2",
+        "asked": "f30c2d22",
+        "pump": "a9e93582"
+      },
       "full": "ad18c966"
     },
     "laundry-timing": {
@@ -2284,21 +2800,25 @@
         "daily-130-2": "bbc02cc2",
         "daily-130-3": "1758168a",
         "daily-130-4": "ff5fbd9b",
-        "daily-130-6": "aa896b18",
-        "daily-130-5": "0795ab02"
+        "daily-130-5": "0795ab02",
+        "daily-130-6": "aa896b18"
       },
       "expressions": [
         "da3e6a8f",
         "231a2cd8",
         "f97beea9"
       ],
-      "stress": {},
+      "stress": {
+        "dryer": "0badae61",
+        "use": "c07587e1",
+        "four": "720f1ca1"
+      },
       "full": "4fe476f4"
     },
     "booking-bike-repair": {
       "lines": {
-        "daily-131-2": "738c47dc",
         "daily-131-1": "69bbdf9d",
+        "daily-131-2": "738c47dc",
         "daily-131-3": "d1d6c2a7",
         "daily-131-4": "fd9b7a50",
         "daily-131-5": "7aa5f3d2",
@@ -2310,7 +2830,11 @@
         "521b73f6",
         "044138d8"
       ],
-      "stress": {},
+      "stress": {
+        "brake": "afaa1c0a",
+        "back": "61e448ea",
+        "front": "8eba984a"
+      },
       "full": "83ef4a80"
     },
     "school-fundraiser": {
@@ -2328,24 +2852,32 @@
         "eeec3aa5",
         "73b4700f"
       ],
-      "stress": {},
+      "stress": {
+        "table": "cf3ed4db",
+        "prizes": "b48ee3fb",
+        "stage": "5ececb5b"
+      },
       "full": "4acdcca7"
     },
     "healthy-lunch-plan": {
       "lines": {
-        "daily-133-2": "424f1a6e",
         "daily-133-1": "751252f1",
-        "daily-133-4": "fc688566",
+        "daily-133-2": "424f1a6e",
         "daily-133-3": "2a043536",
-        "daily-133-6": "adb1f408",
-        "daily-133-5": "61a22252"
+        "daily-133-4": "fc688566",
+        "daily-133-5": "61a22252",
+        "daily-133-6": "adb1f408"
       },
       "expressions": [
         "005ed18d",
         "ae3f60cb",
         "35c9a360"
       ],
-      "stress": {},
+      "stress": {
+        "making": "f8668725",
+        "ben": "af819f65",
+        "soup": "376713e5"
+      },
       "full": "84b3d555"
     },
     "cooking-or-ordering": {
@@ -2363,7 +2895,11 @@
         "786f3d86",
         "074225ff"
       ],
-      "stress": {},
+      "stress": {
+        "cook": "f475a1e4",
+        "let-s": "c189fb84",
+        "tonight": "3852b584"
+      },
       "full": "03b2133e"
     },
     "collecting-dry-cleaning": {
@@ -2381,13 +2917,17 @@
         "7f31e35e",
         "e35c2137"
       ],
-      "stress": {},
+      "stress": {
+        "three": "86fb27be",
+        "brought": "fef3de7e",
+        "shirts": "34acf99e"
+      },
       "full": "e2cd66e6"
     },
     "pitching-improvement": {
       "lines": {
-        "daily-136-2": "94d3988f",
         "daily-136-1": "98195d12",
+        "daily-136-2": "94d3988f",
         "daily-136-3": "297c2dd2",
         "daily-136-4": "764a3168",
         "daily-136-5": "39ddf853",
@@ -2399,7 +2939,11 @@
         "62492bc9",
         "fbc508db"
       ],
-      "stress": {},
+      "stress": {
+        "drop": "7fa23603",
+        "second": "bcaedcc3",
+        "form": "66c4f1c3"
+      },
       "full": "53c82f2c"
     },
     "responding-good-news": {
@@ -2408,8 +2952,8 @@
         "daily-137-2": "88a629f6",
         "daily-137-3": "0224f05e",
         "daily-137-4": "fdd2985f",
-        "daily-137-6": "3eb9b9cf",
         "daily-137-5": "657cfda3",
+        "daily-137-6": "3eb9b9cf",
         "daily-137-7": "976808d1"
       },
       "expressions": [
@@ -2417,7 +2961,11 @@
         "850eecbc",
         "272845db"
       ],
-      "stress": {},
+      "stress": {
+        "full": "c143bbb5",
+        "got": "4ab95295",
+        "scholarship": "d19eecd5"
+      },
       "full": "20ba683d"
     },
     "rental-car-return": {
@@ -2435,35 +2983,43 @@
         "b1aa20bb",
         "701fa3f0"
       ],
-      "stress": {},
+      "stress": {
+        "parked": "90831191",
+        "b": "693f260d",
+        "i": "0fcd7023"
+      },
       "full": "ff8a2cfc"
     },
     "sharing-dessert": {
       "lines": {
-        "daily-139-2": "6b02c52f",
         "daily-139-1": "3ffbf8e4",
-        "daily-139-4": "77337990",
+        "daily-139-2": "6b02c52f",
         "daily-139-3": "50f784e3",
+        "daily-139-4": "77337990",
         "daily-139-5": "3d126781",
-        "daily-139-7": "cd0645fe",
-        "daily-139-6": "121d3dd2"
+        "daily-139-6": "121d3dd2",
+        "daily-139-7": "cd0645fe"
       },
       "expressions": [
         "408fbf68",
         "a5395d4b",
         "0a2bd8e4"
       ],
-      "stress": {},
+      "stress": {
+        "nine": "f98464fe",
+        "brownie": "76a6279e",
+        "twenty": "429748fe"
+      },
       "full": "9a373d52"
     },
     "plant-watering": {
       "lines": {
         "daily-140-1": "37a635fb",
         "daily-140-2": "a7aae8f5",
-        "daily-140-4": "ffc72473",
         "daily-140-3": "246afbc2",
-        "daily-140-6": "94aee78a",
+        "daily-140-4": "ffc72473",
         "daily-140-5": "d2abb6bd",
+        "daily-140-6": "94aee78a",
         "daily-140-7": "97867199"
       },
       "expressions": [
@@ -2471,17 +3027,21 @@
         "14019576",
         "4320702c"
       ],
-      "stress": {},
+      "stress": {
+        "twice": "d2071972",
+        "watered": "abd25cf2",
+        "i": "35ad1b40"
+      },
       "full": "24197489"
     },
     "canceling-subscription": {
       "lines": {
-        "daily-141-2": "2fd5da58",
         "daily-141-1": "d5a51425",
+        "daily-141-2": "2fd5da58",
         "daily-141-3": "3086c740",
         "daily-141-4": "dcb299a1",
-        "daily-141-6": "2e449a02",
         "daily-141-5": "401bfd47",
+        "daily-141-6": "2e449a02",
         "daily-141-7": "36abb27f"
       },
       "expressions": [
@@ -2489,7 +3049,11 @@
         "330ab658",
         "94e4a7d4"
       ],
-      "stress": {},
+      "stress": {
+        "today": "a5a7ef50",
+        "renewal": "eb16ea50",
+        "access": "96f135f0"
+      },
       "full": "f5b17323"
     },
     "neighborhood-watch": {
@@ -2507,7 +3071,11 @@
         "6987a7df",
         "f3012450"
       ],
-      "stress": {},
+      "stress": {
+        "park": "9c74ddbd",
+        "buses": "425c2bbd",
+        "closure": "8b8a5e7d"
+      },
       "full": "96ee54b3"
     },
     "screen-break": {
@@ -2516,8 +3084,8 @@
         "daily-143-2": "a2494fb4",
         "daily-143-3": "71995ade",
         "daily-143-4": "0ebe2efe",
-        "daily-143-6": "8f766693",
         "daily-143-5": "b94134bf",
+        "daily-143-6": "8f766693",
         "daily-143-7": "adf20ec4"
       },
       "expressions": [
@@ -2525,13 +3093,17 @@
         "d8beaa95",
         "cccc1861"
       ],
-      "stress": {},
+      "stress": {
+        "urgent": "fad48d3d",
+        "call": "e08c52fd",
+        "me": "fc60ed3d"
+      },
       "full": "c250a7a5"
     },
     "exercise-time": {
       "lines": {
-        "daily-144-2": "0e614ff1",
         "daily-144-1": "626e9fc3",
+        "daily-144-2": "0e614ff1",
         "daily-144-3": "6cb7eef3",
         "daily-144-4": "cba57dda",
         "daily-144-5": "a14c40fe",
@@ -2543,15 +3115,19 @@
         "e805e217",
         "695cc582"
       ],
-      "stress": {},
+      "stress": {
+        "evening": "d1f51556",
+        "run": "6e845016",
+        "now": "1bf5c716"
+      },
       "full": "dc5ddad1"
     },
     "lost-wallet": {
       "lines": {
         "daily-145-1": "3491a301",
         "daily-145-2": "ea8c9fdf",
-        "daily-145-4": "cc677010",
         "daily-145-3": "45b3d572",
+        "daily-145-4": "cc677010",
         "daily-145-5": "dfccbb02",
         "daily-145-6": "574b550a",
         "daily-145-7": "ae844497"
@@ -2561,15 +3137,19 @@
         "8e3903ba",
         "711c90c2"
       ],
-      "stress": {},
+      "stress": {
+        "bookstore": "30674f11",
+        "paid": "d36ac571",
+        "i": "b63605ab"
+      },
       "full": "1c41a478"
     },
     "responding-pushback": {
       "lines": {
         "daily-146-1": "d61815d7",
         "daily-146-2": "dfb77930",
-        "daily-146-4": "27afd630",
         "daily-146-3": "914896a5",
+        "daily-146-4": "27afd630",
         "daily-146-5": "b7716cac",
         "daily-146-6": "cd0f47a7",
         "daily-146-7": "d9e13e84"
@@ -2579,17 +3159,21 @@
         "005ed18d",
         "b749c231"
       ],
-      "stress": {},
+      "stress": {
+        "ten": "182cb1f8",
+        "start": "ecceafb8",
+        "users": "27b1a9b8"
+      },
       "full": "0d100f5b"
     },
     "acknowledging-setback": {
       "lines": {
         "daily-147-1": "2becec36",
         "daily-147-2": "1d0ec1c1",
-        "daily-147-4": "4d9489ec",
         "daily-147-3": "65517bb6",
-        "daily-147-6": "4273b425",
+        "daily-147-4": "4d9489ec",
         "daily-147-5": "f73a27f1",
+        "daily-147-6": "4273b425",
         "daily-147-7": "bcca6398"
       },
       "expressions": [
@@ -2597,7 +3181,11 @@
         "c8297bb1",
         "6d267ad1"
       ],
-      "stress": {},
+      "stress": {
+        "close": "484df445",
+        "said": "29d658e5",
+        "bad": "d4a94a85"
+      },
       "full": "55f3e9e3"
     },
     "walking-directions": {
@@ -2615,7 +3203,11 @@
         "78364505",
         "4c891c6a"
       ],
-      "stress": {},
+      "stress": {
+        "turn": "70e4ee48",
+        "right": "75929808",
+        "fountain": "0a4c9f68"
+      },
       "full": "2b54cfda"
     },
     "picnic-shopping": {
@@ -2633,7 +3225,11 @@
         "f513a0bd",
         "b1b57562"
       ],
-      "stress": {},
+      "stress": {
+        "sami": "dd86fd5f",
+        "bringing": "1e9e6a7f",
+        "bread": "e7c0bd1f"
+      },
       "full": "f5ccea67"
     },
     "furniture-delivery": {
@@ -2651,7 +3247,11 @@
         "9e339e98",
         "9d1c10ca"
       ],
-      "stress": {},
+      "stress": {
+        "old": "5cb8a4b5",
+        "taking": "cecb78d5",
+        "sofa": "d0a8a9d5"
+      },
       "full": "fc21d5c4"
     },
     "printing-documents": {
@@ -2661,32 +3261,40 @@
         "daily-151-3": "87c47554",
         "daily-151-4": "eb67db84",
         "daily-151-5": "820e1c57",
-        "daily-151-7": "994285a2",
-        "daily-151-6": "d3d62b0a"
+        "daily-151-6": "d3d62b0a",
+        "daily-151-7": "994285a2"
       },
       "expressions": [
         "cd5b8060",
         "496603d7",
         "5895a3a6"
       ],
-      "stress": {},
+      "stress": {
+        "cover": "2b5b13a7",
+        "color": "b3eed1a7",
+        "report": "6ca95dc7"
+      },
       "full": "89971493"
     },
     "sports-club-trial": {
       "lines": {
-        "daily-152-2": "e4df912b",
         "daily-152-1": "41afb801",
+        "daily-152-2": "e4df912b",
         "daily-152-3": "acc8d812",
         "daily-152-4": "cc6b3e67",
-        "daily-152-6": "ac164386",
-        "daily-152-5": "e5d98ebb"
+        "daily-152-5": "e5d98ebb",
+        "daily-152-6": "ac164386"
       },
       "expressions": [
         "801b129d",
         "0d6abdac",
         "3faab19f"
       ],
-      "stress": {},
+      "stress": {
+        "indoor": "49f34ee3",
+        "bring": "57a2e363",
+        "wednesday": "bac006a3"
+      },
       "full": "c29f4af4"
     },
     "stressful-week": {
@@ -2704,7 +3312,11 @@
         "a59c5a30",
         "05263e9e"
       ],
-      "stress": {},
+      "stress": {
+        "you": "f4b7b5ec",
+        "listen": "e12da24c",
+        "today": "6d5d5d2c"
+      },
       "full": "d4838013"
     },
     "spoiler-etiquette": {
@@ -2713,8 +3325,8 @@
         "daily-154-2": "9eddac63",
         "daily-154-3": "9e03bbd4",
         "daily-154-4": "6444b9e9",
-        "daily-154-6": "ad513f3a",
         "daily-154-5": "32c80f99",
+        "daily-154-6": "ad513f3a",
         "daily-154-7": "4cbf695c"
       },
       "expressions": [
@@ -2722,7 +3334,11 @@
         "6d09de43",
         "935479ac"
       ],
-      "stress": {},
+      "stress": {
+        "i-m": "68fee039",
+        "two": "79f202f9",
+        "behind": "6e2662d9"
+      },
       "full": "f36ddb46"
     },
     "wrong-address": {
@@ -2740,7 +3356,11 @@
         "eff2afb0",
         "3d594cb1"
       ],
-      "stress": {},
+      "stress": {
+        "king": "4e2c4bed",
+        "party": "cc84288d",
+        "road": "69b0690d"
+      },
       "full": "1e2e4b7e"
     },
     "communicating-uncertainty": {
@@ -2758,7 +3378,11 @@
         "634edb38",
         "c4315d95"
       ],
-      "stress": {},
+      "stress": {
+        "said": "8e27e136",
+        "around": "dda4fdb6",
+        "thousand": "f076b2b6"
+      },
       "full": "a79d216e"
     },
     "practical-support": {
@@ -2767,8 +3391,8 @@
         "daily-157-2": "c081ce05",
         "daily-157-3": "313d509b",
         "daily-157-4": "0e3a55c3",
-        "daily-157-6": "720818da",
         "daily-157-5": "1d2b831b",
+        "daily-157-6": "720818da",
         "daily-157-7": "8cce5d37"
       },
       "expressions": [
@@ -2776,7 +3400,11 @@
         "3d7c522b",
         "11b2b2ed"
       ],
-      "stress": {},
+      "stress": {
+        "leave": "2ca373b4",
+        "them": "425a23f4",
+        "door": "e7c1bef4"
+      },
       "full": "494ad75d"
     },
     "ferry-timetable": {
@@ -2785,8 +3413,8 @@
         "daily-158-2": "ee771812",
         "daily-158-3": "61a358a9",
         "daily-158-4": "b97209cb",
-        "daily-158-6": "e10dfcb8",
         "daily-158-5": "a7082858",
+        "daily-158-6": "e10dfcb8",
         "daily-158-7": "f7d4714d"
       },
       "expressions": [
@@ -2794,7 +3422,11 @@
         "005ee0ae",
         "e35c2137"
       ],
-      "stress": {},
+      "stress": {
+        "ferry": "9957dbcb",
+        "last": "a84f4aeb",
+        "seven": "dda7660b"
+      },
       "full": "9f5087f3"
     },
     "leftovers-plan": {
@@ -2812,17 +3444,21 @@
         "d3a42cbf",
         "4f96520c"
       ],
-      "stress": {},
+      "stress": {
+        "my": "07256c59",
+        "rice": "763fbe19",
+        "lunch": "ac46e979"
+      },
       "full": "429d8230"
     },
     "smoke-alarm": {
       "lines": {
-        "daily-160-2": "ceb13f48",
         "daily-160-1": "3bad27de",
-        "daily-160-4": "0a15459d",
+        "daily-160-2": "ceb13f48",
         "daily-160-3": "c4dceeb9",
-        "daily-160-6": "858cd06c",
+        "daily-160-4": "0a15459d",
         "daily-160-5": "c5c9d2e0",
+        "daily-160-6": "858cd06c",
         "daily-160-7": "00edade6"
       },
       "expressions": [
@@ -2830,15 +3466,19 @@
         "6781a950",
         "d96027e9"
       ],
-      "stress": {},
+      "stress": {
+        "i-ll": "1c01223f",
+        "bring": "15ec3e9f",
+        "battery": "b0261bdf"
+      },
       "full": "65b8d5ec"
     },
     "passport-photo": {
       "lines": {
-        "daily-161-2": "cd62582d",
         "daily-161-1": "a958b007",
-        "daily-161-4": "0c2dcb74",
+        "daily-161-2": "cd62582d",
         "daily-161-3": "10d622bd",
+        "daily-161-4": "0c2dcb74",
         "daily-161-5": "686a629d",
         "daily-161-6": "607bd500",
         "daily-161-7": "8eb43531"
@@ -2848,7 +3488,11 @@
         "0e0828d0",
         "d6203216"
       ],
-      "stress": {},
+      "stress": {
+        "two": "99dad999",
+        "prints": "eb061779",
+        "i": "47700e4b"
+      },
       "full": "b65aad05"
     },
     "public-meeting-question": {
@@ -2866,7 +3510,11 @@
         "722ef334",
         "cab40008"
       ],
-      "stress": {},
+      "stress": {
+        "buses": "e901fe01",
+        "first": "6ce0e3c1",
+        "april": "f51da661"
+      },
       "full": "86ccb4ab"
     },
     "weekend-recharge": {
@@ -2884,7 +3532,11 @@
         "b8a23746",
         "960b9f21"
       ],
-      "stress": {},
+      "stress": {
+        "prefer": "8d7dc5f9",
+        "i-d": "52a02cd9",
+        "breakfast": "1d6ab219"
+      },
       "full": "e1745212"
     },
     "social-media-break": {
@@ -2902,17 +3554,21 @@
         "22a1f741",
         "65e54e33"
       ],
-      "stress": {},
+      "stress": {
+        "i-m": "c30f2aec",
+        "off": "76b8ebec",
+        "monday": "eb669b2c"
+      },
       "full": "d17824ec"
     },
     "lost-property": {
       "lines": {
         "daily-165-1": "f4423a83",
         "daily-165-2": "066bc69e",
-        "daily-165-4": "2f2137b9",
         "daily-165-3": "b7200cc6",
-        "daily-165-6": "fee1bfeb",
+        "daily-165-4": "2f2137b9",
         "daily-165-5": "217e9ab8",
+        "daily-165-6": "fee1bfeb",
         "daily-165-7": "acfa7b76"
       },
       "expressions": [
@@ -2920,7 +3576,11 @@
         "2b2ccba0",
         "f06d4912"
       ],
-      "stress": {},
+      "stress": {
+        "green": "afbc6ed9",
+        "lost": "8ef51979",
+        "backpack": "870f0d39"
+      },
       "full": "8d529334"
     },
     "taking-ownership": {
@@ -2938,7 +3598,11 @@
         "a0c15c6c",
         "f0095e06"
       ],
-      "stress": {},
+      "stress": {
+        "old": "f8dd0973",
+        "used": "234e6f53",
+        "rate": "b75aab53"
+      },
       "full": "4b41f525"
     },
     "checking-later": {
@@ -2956,13 +3620,17 @@
         "f2edceae",
         "6fb64813"
       ],
-      "stress": {},
+      "stress": {
+        "interview": "5cf1b86a",
+        "second": "2004680a",
+        "friday": "bd4bf2ea"
+      },
       "full": "f276e315"
     },
     "hostel-quiet-hours": {
       "lines": {
-        "daily-168-2": "c3f4a00b",
         "daily-168-1": "3bcad1d2",
+        "daily-168-2": "c3f4a00b",
         "daily-168-3": "a3a04fa1",
         "daily-168-4": "8bceeaec",
         "daily-168-5": "a3298508",
@@ -2974,7 +3642,11 @@
         "a885a97a",
         "658a1a2e"
       ],
-      "stress": {},
+      "stress": {
+        "are": "01ae2720",
+        "quiet": "3a0658c0",
+        "rooms": "ec4f81e0"
+      },
       "full": "517193b7"
     },
     "food-allergy-card": {
@@ -2992,32 +3664,40 @@
         "b5565368",
         "a4e6c72c"
       ],
-      "stress": {},
+      "stress": {
+        "peanuts": "beb45c37",
+        "are": "e9ed0d77",
+        "sauce": "38aee0f7"
+      },
       "full": "ecf05ac5"
     },
     "shared-fridge": {
       "lines": {
-        "daily-170-2": "dd92c4b2",
         "daily-170-1": "a12c5ade",
-        "daily-170-4": "3338c6dc",
+        "daily-170-2": "dd92c4b2",
         "daily-170-3": "e1876d6a",
-        "daily-170-6": "ecb831e9",
-        "daily-170-5": "2ba62360"
+        "daily-170-4": "3338c6dc",
+        "daily-170-5": "2ba62360",
+        "daily-170-6": "ecb831e9"
       },
       "expressions": [
         "cdb8c4ba",
         "395e55a7",
         "0fa0fcb4"
       ],
-      "stress": {},
+      "stress": {
+        "belongs": "bc0d8584",
+        "milk": "b4c47424",
+        "door": "01cd76e4"
+      },
       "full": "920b982f"
     },
     "repair-estimate": {
       "lines": {
         "daily-171-1": "720baf20",
         "daily-171-2": "2d60528a",
-        "daily-171-4": "770e30c8",
         "daily-171-3": "f32f43ff",
+        "daily-171-4": "770e30c8",
         "daily-171-5": "b549af70",
         "daily-171-6": "e7cac78e",
         "daily-171-7": "5aca1b3d"
@@ -3027,13 +3707,17 @@
         "fa29ca4b",
         "d1e42672"
       ],
-      "stress": {},
+      "stress": {
+        "before": "a6600c6e",
+        "call": "73c2beae",
+        "part": "caf736ee"
+      },
       "full": "f6236ab0"
     },
     "donation-dropoff": {
       "lines": {
-        "daily-172-2": "18842f17",
         "daily-172-1": "3ed19e90",
+        "daily-172-2": "18842f17",
         "daily-172-3": "b41e6313",
         "daily-172-4": "fbfc339e",
         "daily-172-5": "b5fd2b94",
@@ -3044,7 +3728,11 @@
         "f21ede2b",
         "3a56edc9"
       ],
-      "stress": {},
+      "stress": {
+        "boots": "8635bbcb",
+        "short": "f0c9fe8b",
+        "week": "3e3b74ab"
+      },
       "full": "d3693e20"
     },
     "new-habit-cue": {
@@ -3062,13 +3750,17 @@
         "3c4d44fe",
         "c19a4f8c"
       ],
-      "stress": {},
+      "stress": {
+        "headphones": "df6113de",
+        "leave": "49b6cc1e",
+        "mug": "1037837e"
+      },
       "full": "7bf802e1"
     },
     "partly-agreeing": {
       "lines": {
-        "daily-174-2": "385f9302",
         "daily-174-1": "7f08d103",
+        "daily-174-2": "385f9302",
         "daily-174-3": "152ec4e0",
         "daily-174-4": "43f4a674",
         "daily-174-5": "ded83558",
@@ -3080,7 +3772,11 @@
         "052575c3",
         "d8e823d9"
       ],
-      "stress": {},
+      "stress": {
+        "i-d": "3204c30e",
+        "support": "1263e64e",
+        "july": "c2d3d84e"
+      },
       "full": "d9d0f331"
     },
     "library-card": {
@@ -3098,7 +3794,11 @@
         "13897e71",
         "f016d112"
       ],
-      "stress": {},
+      "stress": {
+        "bill": "6cebb254",
+        "three": "b7956934",
+        "old": "ec4dbe34"
+      },
       "full": "70a2a96b"
     },
     "giving-credit": {
@@ -3108,15 +3808,19 @@
         "daily-176-3": "04737afc",
         "daily-176-4": "667ebdf6",
         "daily-176-5": "fb9c2fef",
-        "daily-176-7": "e14c9e23",
-        "daily-176-6": "e9106bbd"
+        "daily-176-6": "e9106bbd",
+        "daily-176-7": "e14c9e23"
       },
       "expressions": [
         "b1f1a08c",
         "9d1c10ca",
         "552ee970"
       ],
-      "stress": {},
+      "stress": {
+        "built": "3df6e874",
+        "mei": "264b62d4",
+        "prototype": "2a7394f4"
+      },
       "full": "6b60a440"
     },
     "specific-thanks": {
@@ -3134,17 +3838,21 @@
         "a62ca4ca",
         "d9c15d61"
       ],
-      "stress": {},
+      "stress": {
+        "you": "e00c720a",
+        "thanking": "86f21a2a",
+        "call": "77a0222a"
+      },
       "full": "263323d8"
     },
     "meeting-point-change": {
       "lines": {
         "daily-178-1": "07501619",
         "daily-178-2": "a0fdc0e9",
-        "daily-178-4": "5cbbaf22",
         "daily-178-3": "64a23b25",
-        "daily-178-6": "4a272bfd",
+        "daily-178-4": "5cbbaf22",
         "daily-178-5": "2457b3a7",
+        "daily-178-6": "4a272bfd",
         "daily-178-7": "da7a7ec6"
       },
       "expressions": [
@@ -3152,7 +3860,11 @@
         "8c00dcb5",
         "64b3cdd5"
       ],
-      "stress": {},
+      "stress": {
+        "me": "dda0f925",
+        "meet": "a5f21e05",
+        "information": "0b80e285"
+      },
       "full": "1322738e"
     },
     "market-produce": {
@@ -3170,7 +3882,11 @@
         "5e43e6d9",
         "8d7b3a90"
       ],
-      "stress": {},
+      "stress": {
+        "six": "e3af4880",
+        "wanted": "4c692180",
+        "soft": "3e3a0840"
+      },
       "full": "7bc3631a"
     },
     "moving-day-boxes": {
@@ -3188,7 +3904,11 @@
         "528946d0",
         "4638503c"
       ],
-      "stress": {},
+      "stress": {
+        "van": "191bea1b",
+        "kettle": "9fc11b7b",
+        "last": "6cc4067b"
+      },
       "full": "8bbfb7c9"
     },
     "service-appointment-window": {
@@ -3206,7 +3926,11 @@
         "2199601c",
         "af78c655"
       ],
-      "stress": {},
+      "stress": {
+        "call": "3b18c984",
+        "technician": "24560d04",
+        "you": "64cf3684"
+      },
       "full": "19a79db7"
     },
     "local-class-signup": {
@@ -3224,7 +3948,11 @@
         "06cd725b",
         "a28986ef"
       ],
-      "stress": {},
+      "stress": {
+        "tuesday": "b5ec23f7",
+        "join": "0433c0f7",
+        "evening": "57ea87d7"
+      },
       "full": "94ee09bc"
     },
     "celebrating-progress": {
@@ -3242,7 +3970,11 @@
         "bb6abf79",
         "ec9a3fdd"
       ],
-      "stress": {},
+      "stress": {
+        "long": "68852bad",
+        "rushing": "7b044b8d",
+        "words": "af78324d"
+      },
       "full": "4e91283f"
     },
     "complicated-choice": {
@@ -3259,7 +3991,11 @@
         "b497903a",
         "9812b1e2"
       ],
-      "stress": {},
+      "stress": {
+        "growth": "9adf9860",
+        "me": "31770100",
+        "now": "c4a373a0"
+      },
       "full": "8f0dcdc2"
     }
   }
